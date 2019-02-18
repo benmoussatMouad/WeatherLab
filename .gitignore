@@ -1,2 +1,8 @@
 .idea/
 .idea\
+*.csv
+bin/
+obj/
+.vs/
+Program.cs
+Weatheria/
