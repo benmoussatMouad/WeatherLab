@@ -1,4 +1,4 @@
-﻿namespace Weatheria
+﻿namespace WeatherLab
 {
     /// <summary>
     /// Interaction logic for App.xaml

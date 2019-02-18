@@ -1,7 +1,7 @@
-﻿<Application x:Class="Weatheria.App"
+﻿<Application x:Class="WeatherLab.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Weatheria"
+             xmlns:local="clr-namespace:WeatherLab"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Weatheria.Properties
+namespace WeatherLab.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
@@ -45,7 +45,7 @@ namespace Weatheria.Properties
                 if ((resourceMan == null))
                 {
                     global::System.Resources.ResourceManager temp =
-                        new global::System.Resources.ResourceManager("Weatheria.Properties.Resources",
+                        new global::System.Resources.ResourceManager("WeatherLab.Properties.Resources",
                             typeof(Resources).Assembly);
                     resourceMan = temp;
                 }

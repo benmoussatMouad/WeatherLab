@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weatheria", "Weatheria\Weatheria.csproj", "{E8A829DF-B5D5-4A84-8EF5-2C4A6B25D6B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherLab", "WeatherLab\WeatherLab.csproj", "{E8A829DF-B5D5-4A84-8EF5-2C4A6B25D6B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
