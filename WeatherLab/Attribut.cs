@@ -5,24 +5,25 @@ namespace WeatherLab.Data
 {
     class Attribut
     {
-        public const short NUMERIC = 0;
-        public const short ENUM = 1;
-        public const short BOOL = 2;
+        public const byte NUMERIC = 0;
+        public const byte ENUM = 1;
+        public const byte BOOL = 2;
 
-        private static Dictionary<string, short> attrs = new Dictionary<string, short>();
+        private static Dictionary<string, byte> attrs = new Dictionary<string, byte>();
         private string nom;
         private float val;
-        private short type;
+        private byte type;
 
         // should generate errors if the name doesn't exist
         public Attribut(string nom, float valeur)
         {
+            this.nom = nom;
             val = valeur;
             type = attrs[nom];
         }
 
         // should generate errors if the attr already exist
-        public static void addAttr(string nom, short type)
+        public static void addAttr(string nom, byte type)
         {
             attrs.Add(nom, type);
         }
