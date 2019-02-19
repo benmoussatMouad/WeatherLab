@@ -145,6 +145,11 @@ namespace WeatherLab.Data
         {
             if (Attribut.attrExists(ancien))
                 Attribut.renameAttr(ancien, nouveau);
+
+            for(int i = 0; i < Donnees.Count; i++)
+            {
+                Donnees[i].renameAttr(ancien, nouveau);
+            }
         }
 
     }
