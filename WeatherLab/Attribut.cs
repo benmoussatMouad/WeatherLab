@@ -61,7 +61,7 @@ namespace WeatherLab.Data
             return nom;
         }
 
-        public void setKey()
+        public void setKey(string nom)
         {
             this.nom = nom;
         }

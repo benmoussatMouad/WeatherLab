@@ -113,6 +113,18 @@ namespace WeatherLab.Data
             Console.WriteLine("}");
         }
 
+        public void renameAttr(string Old, string New)
+        {
+            for(int i=0;i<attrs.Count;i++)
+            {
+                if (attrs[i].getKey() == Old)
+                {
+                    attrs[i].setKey(New);
+                    break;
+                }
+            }
+        }
+
         public Saison GetSaison()
         {
             int i = (int)this.GetMonth();
@@ -121,17 +133,17 @@ namespace WeatherLab.Data
                 case 1:
                 case 2:
                 case 3:
-                    return (Saison)0;
+                    return Saison.hiver;
                 case 4:
                 case 5:
                 case 6:
-                    return (Saison)1;
+                    return Saison.pringtemps;
                 case 7:
                 case 8:
                 case 9:
-                    return (Saison)2;
+                    return Saison.été;
                 default:
-                    return (Saison)3;
+                    return Saison.automne;
             }
         }
 
