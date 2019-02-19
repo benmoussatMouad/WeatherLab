@@ -95,7 +95,7 @@ namespace WeatherLab.Data
          **/
         public virtual void Trier()
         {
-            Donnees.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear());
+            Donnees.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear()).ThenBy(l => l.GetDay());
         }
 
         /// <summary>
@@ -118,9 +118,33 @@ namespace WeatherLab.Data
             }
         }
 
-        public string[] GetAttrs()
+        public List<string> GetAttrs()
         {
-            return Attrs.ToArray();
+            return Attrs;
+        }
+
+        public List<Donnee> GetDonnees()
+        {
+            return Donnees;
+        }
+
+        public void ajouterDonnee(Donnee d)
+        {
+            Donnees.Add(d);
+        }
+
+        public void ajouterDonnee(Donnee[] ds)
+        {
+            foreach(Donnee d in ds)
+            {
+                Donnees.Add(d);
+            }
+        }
+
+        public void renommerAttr(string ancien, string nouveau)
+        {
+            if (Attribut.attrExists(ancien))
+                Attribut.renameAttr(ancien, nouveau);
         }
 
     }
