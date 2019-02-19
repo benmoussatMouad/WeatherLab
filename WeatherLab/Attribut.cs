@@ -33,6 +33,14 @@ namespace WeatherLab.Data
             return attrs.ContainsKey(nom);
         }
 
+        // ancien should exist and nouveau shouldn't
+        public static void renameAttr(string Old, string New)
+        {
+            byte val = attrs[Old];
+            attrs.Remove(Old);
+            attrs.Add(New, val);
+        }
+
         public bool isNumeric()
         {
             return type == NUMERIC;
@@ -48,9 +56,14 @@ namespace WeatherLab.Data
             return type == BOOL;
         }
 
-        public string getAttr()
+        public string getKey()
         {
             return nom;
+        }
+
+        public void setKey()
+        {
+            this.nom = nom;
         }
 
         public float getValeur()

@@ -73,7 +73,7 @@ namespace WeatherLab.Data
             {
                 foreach (Attribut i in attrs)
                 {
-                    if (i.getAttr() == attr)
+                    if (i.getKey() == attr)
                         return i.getValeur();
                 }
                 return 0;
@@ -92,7 +92,7 @@ namespace WeatherLab.Data
             if (Attribut.attrExists(key))
                 foreach (Attribut i in attrs)
                 {
-                    if (i.getAttr() == key)
+                    if (i.getKey() == key)
                     {
                         i.setValeur(value);
                         break;
@@ -107,7 +107,7 @@ namespace WeatherLab.Data
             Console.WriteLine("Donnees {");
             foreach(Attribut i in attrs)
             {
-                Console.WriteLine("\t{0} : {1},", i.getAttr(), i.getValeur());
+                Console.WriteLine("\t{0} : {1},", i.getKey(), i.getValeur());
             }
             Console.WriteLine("}");
         }
