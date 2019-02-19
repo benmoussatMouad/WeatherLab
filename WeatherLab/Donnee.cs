@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WeatherLab.Data
 {
+    public enum Saison { hiver, pringtemps, été, automne };
     public class Donnee
     {
         private DateTime date;
@@ -105,11 +106,33 @@ namespace WeatherLab.Data
         public void afficher()
         {
             Console.WriteLine("Donnees {");
-            foreach(Attribut i in attrs)
+            foreach (Attribut i in attrs)
             {
                 Console.WriteLine("\t{0} : {1},", i.getKey(), i.getValeur());
             }
             Console.WriteLine("}");
+        }
+
+        public Saison GetSaison()
+        {
+            int i = (int)this.GetMonth();
+            switch (i)
+            {
+                case 1:
+                case 2:
+                case 3:
+                    return (Saison)0;
+                case 4:
+                case 5:
+                case 6:
+                    return (Saison)1;
+                case 7:
+                case 8:
+                case 9:
+                    return (Saison)2;
+                default:
+                    return (Saison)3;
+            }
         }
 
     }
