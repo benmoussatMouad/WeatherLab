@@ -95,7 +95,7 @@ namespace WeatherLab.Data
          **/
         public virtual void Trier()
         {
-            Donnees.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear()).ThenBy(l => l.GetDay());
+            Donnees.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear());
         }
 
         /// <summary>
