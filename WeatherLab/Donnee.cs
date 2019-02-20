@@ -35,7 +35,7 @@ namespace WeatherLab.Data
             
             for(int i=0;i<Attrs.Length;i++)
             {
-                this.attrs.Add(new Attribut(Attrs[i], float.Parse(datas[i+1])));
+              this.attrs.Add(new Attribut(Attrs[i], float.Parse(datas[i+1])));
                 // problem is the frequent passage from the try block to the catch ( cost 2~8ms ) 
                 // multiplied by Attrs.Count will be a big deal -_-
                 /*
@@ -66,6 +66,11 @@ namespace WeatherLab.Data
         public int GetDay()
         {
             return date.Day;
+        }
+
+        public DateTime GetDate()
+        {
+            return date;
         }
 
         public float GetAttr(string attr)
