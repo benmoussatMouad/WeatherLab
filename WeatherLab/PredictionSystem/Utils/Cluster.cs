@@ -25,7 +25,7 @@ namespace PredictionFeature
             elements = new List<PredictionCouple>();
             this.startingEdge = startingEdge;
             this.endingEdge = endingEdge;
-            this.probability = 1;
+            this.probability = 0;
         }
         public List<PredictionCouple> Elements
         {
