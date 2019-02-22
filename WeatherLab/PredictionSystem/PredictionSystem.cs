@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherLab.PredictionSystem.DailyMeteo;
 using WeatherLab.PredictionSystem.Utils;
-
+using WeatherLab.PredictionSystem.Common;
+using WeatherLab.PredictionSystem.Exceptions;
 namespace WeatherLab.PredictionSystem
 {
     class PredictionSystem
@@ -44,12 +45,46 @@ namespace WeatherLab.PredictionSystem
                 return predictionSystem;
             }
         }
-
+        public DailyMeteoSystem DailyMeteoSystem {
+            get
+            {
+                return dailyMeteoSystem;
+            }
+        }
+        public ResultHandler Result
+        {
+            get
+            {
+                return resultHandler;
+            }
+        }
 
         /// <summary>
         /// Public Methods Section 
         /// </summary>
 
+        public void StartPrediction()
+        {
+            if(dailyMeteoSystem.Observation != null)
+            {
+                predictionManager.DailyObservation = dailyMeteoSystem.Observation;
+                /// QueryManager.GenerateQuery(dailyMeteoSystem.Observation);
+                /// DataRetreiver.SetQuery(QueryManager.Query);
+                /// DataRetreiver.GatherData();
+                ///predictionManager.PredictionCouples = DataRetreiver.RetreiveData();
+                if(predictionManager.PredictionCouples != null)
+                {
+                    predictionManager.Predict();
+                    /// resultHandler.Predictions = predictionManager.Predictions; 
+                    /// resultHandler.GenerateResults();
+                }
+            }
+            else
+            {
+                throw new NullObservationException("DailyMeteoSystem Has not yet acquired Observation");
+            }
+            
+        }
         
         /// <summary>
         /// Private Methods Section 
@@ -64,5 +99,6 @@ namespace WeatherLab.PredictionSystem
             dataRetreiver = new DataRetreiver();
             resultHandler = new ResultHandler();
         }
+        
     }
 }

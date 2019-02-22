@@ -6,28 +6,30 @@ using System.Threading.Tasks;
 
 namespace WeatherLab.PredictionSystem.Common
 {
-    class Parameter
+    /// <summary>
+    /// Class representing a prediction Parameter that can be used in distances and similarity mesures 
+    /// derives from Input class because it will be retreived from UI / FILE 
+    /// </summary>
+    class Parameter:Input
     {
-        private string paramKey;
-        private double value;
+       
 
-        public Parameter(string paramKey , double value)
+        public Parameter(string paramKey , double value):base(paramKey,value)
         {
-            this.paramKey = paramKey;
-            this.value = value;
+            
         }
         public Parameter(string paramKey) : this(paramKey, 0) { }
 
         public string ParamKey
         {
-            get { return paramKey; }
+            get { return inputKey; }
            
 
         }
 
-        public double Value
+        public new double Value
         {
-            get { return value; }
+            get { return (double ) value; }
             set { this.value = value;}
         }
 
