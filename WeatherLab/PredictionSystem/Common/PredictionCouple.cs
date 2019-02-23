@@ -14,6 +14,7 @@ namespace PredictionFeature
         /// @future is posterior outcome given based on a period of time and is retreived from the historical data
         /// @similarity is a real between 0 and 1 representing how similar this past observation from a given daily observation 
         /// </summary>
+        public static int NUMBER_OF_PARAMETERS = 4;
         private double[] past;
         private double[] future;
         private double similirity;

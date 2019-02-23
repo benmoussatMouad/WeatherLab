@@ -59,10 +59,15 @@ namespace WeatherLab.PredictionSystem
             }
         }
 
-        /// <summary>
+        
         /// Public Methods Section 
-        /// </summary>
+       
 
+        ///<summary>
+        ///
+        /// Entry Point of prediction ,requires all systems Initilized and requires DailyMeteoSystem to have a non null observation
+        /// 
+        /// </summary>
         public void StartPrediction()
         {
             if(dailyMeteoSystem.Observation != null)

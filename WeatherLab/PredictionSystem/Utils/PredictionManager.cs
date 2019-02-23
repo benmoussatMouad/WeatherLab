@@ -61,22 +61,31 @@ namespace WeatherLab.PredictionSystem.Utils
                 return predictions;
             }
         }
+        /// <summary>
+        /// Constructs Raw Predictions based on PredictionCouples 
+        /// </summary>
         public void Predict()
         {
+           
             if(predictionCouples!=null && dailyObservation != null)
             {
+                /// applying similarityFunction To all inputs in predictions Couples 
                 PredictionFunctions.SimilarityFunction(predictionCouples, dailyObservation.ToVector());
 
                 sumSimilarities = CalculateSumOfSimilarities();
 
+                /// clustering the PredictionCouples based on CLUSTER_WIDTH to make the prediction
                 clusters=PredictionFunctions.Cluster(predictionCouples, CLUSTER_WIDTH);
 
+                /// Calculating the probability of each cluster and ordering it by probabilty descending
                 CalculateProbabilities();
 
                 orderedClustersByProba = PredictionFunctions.OrderByProbabiltyDescending(clusters);
 
+                /// making the raw predictions and constructing a table containing each cluster with its list of predictions
                 predictions = PredictionFunctions.Predict(orderedClustersByProba);
 
+                /// setting the parameters in order to identify each Prediction
                 SetParameterKeys();
             }
         }

@@ -7,7 +7,7 @@ using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.Statistics;
-
+using WeatherLab.PredictionSystem.Common;
 namespace PredictionFeature
 {
     /// <summary>
@@ -102,9 +102,9 @@ namespace PredictionFeature
                 if (cluster.GetProbability() != 0)
                 {
                     List<ParamPrediction> clusterList = new List<ParamPrediction>();
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < PredictionCouple.NUMBER_OF_PARAMETERS; i++)
                     {
-                        clusterList.Add(PredictParamsCluster(cluster, "Key", i));
+                        clusterList.Add(PredictParamsCluster(cluster, InputKeys.NONE, i)); /// predicts currant parameter
                     }
                     map.Add(cluster, clusterList);
                 }
@@ -139,12 +139,8 @@ namespace PredictionFeature
         {
             if (cluster != null && sumSimilarites > 0)
             {
-                double sum = 0;
-                foreach (var item in cluster.Elements)
-                {
-                    sum += item.Similarity;
-                }
-                return sum / sumSimilarites;
+                
+                return cluster.SumOfSimilarity / sumSimilarites;
             }
             return 0;/// probabilty of null cluster is 0
         }
