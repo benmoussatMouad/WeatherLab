@@ -8,5 +8,6 @@ namespace WeatherLab.PredictionSystem.Common
 {
     class Query
     {
+        
     }
 }
