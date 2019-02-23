@@ -99,11 +99,11 @@ namespace WeatherLab.Data
         }
 
         /// <summary>
-        /// cette fonction sauvegarde les données dans le fichier et l'index dans
+        /// cette fonction sauvegarde les données et le fichier d'index
         /// </summary>
-        public virtual void sauvegarder(string nom_wilaya, string nom_index)
+        public virtual void sauvegarder(string path, string nom_index)
         {
-
+            
         }
 
         /// <summary>

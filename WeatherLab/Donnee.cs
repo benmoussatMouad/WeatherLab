@@ -20,22 +20,7 @@ namespace WeatherLab.Data
 
         public Donnee(string data, string[] Attrs)
         {
-            int year, month, day, hr, min;
-
-            string[] datas = data.Split(';');
-            string[] Date = datas[0].Split(' ');
-            year = int.Parse(Date[0].Split('.')[2]);
-            month = int.Parse(Date[0].Split('.')[1]);
-            day = int.Parse(Date[0].Split('.')[0]);
-            hr = int.Parse(Date[1].Split(':')[0]);
-            min = int.Parse(Date[1].Split(':')[1]);
-
-            date = new DateTime(year, month, day, hr, min, 0);
-            this.attrs = new List<Attribut>();
             
-            for(int i=0;i<Attrs.Length;i++)
-            {
-              this.attrs.Add(new Attribut(Attrs[i], float.Parse(datas[i+1])));
                 // problem is the frequent passage from the try block to the catch ( cost 2~8ms ) 
                 // multiplied by Attrs.Count will be a big deal -_-
                 /*
@@ -49,8 +34,57 @@ namespace WeatherLab.Data
                 {
                     Console.WriteLine(e.Message+e.StackTrace);
                 }//*/
-            }
    
+        }
+
+        /// <summary>
+        /// load data with the specified format
+        /// </summary>
+        /// <param name="format">can be csv, xml, json... PS : we only support csv for now</param>
+
+        public void fromRaw(string data, string[] Attrs, string format)
+        {
+            switch (format)
+            {
+                case "csv":
+                case "CSV":
+                    int year, month, day, hr, min;
+
+                    string[] datas = data.Split(';');
+                    string[] Date = datas[0].Split(' ');
+                    year = int.Parse(Date[0].Split('.')[2]);
+                    month = int.Parse(Date[0].Split('.')[1]);
+                    day = int.Parse(Date[0].Split('.')[0]);
+                    hr = int.Parse(Date[1].Split(':')[0]);
+                    min = int.Parse(Date[1].Split(':')[1]);
+
+                    date = new DateTime(year, month, day, hr, min, 0);
+                    this.attrs = new List<Attribut>();
+
+                    for (int i = 0; i < Attrs.Length; i++)
+                    {
+                        this.attrs.Add(new Attribut(Attrs[i], float.Parse(datas[i + 1])));
+                    }
+                    break;
+            }
+        }
+
+        public string toRaw(string format)
+        {
+            switch(format)
+            {
+                case "csv":
+                case "CSV":
+                    string outp = "";
+                    outp += date.Day+"/"+date.Month+"/"+date.Year;
+                    foreach(Attribut i in attrs)
+                    {
+                        outp += "," + i.getValeur();
+                    }
+                    return outp;
+                default:
+                    return "";
+            }
         }
 
         public int GetYear()
