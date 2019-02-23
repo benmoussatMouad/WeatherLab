@@ -18,11 +18,13 @@ namespace PredictionFeature
         private double[] past;
         private double[] future;
         private double similirity;
+        
         public PredictionCouple(double[] past, double[] future)
         {
             this.past = past;
             this.future = future;
         }
+        
         public double[] Past
         {
             get

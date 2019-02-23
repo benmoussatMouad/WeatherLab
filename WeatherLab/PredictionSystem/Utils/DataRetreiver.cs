@@ -16,7 +16,10 @@ namespace WeatherLab.PredictionSystem.Utils
         private Query query; 
         //contains the keys for each chosen parameter by the user.
         //and the chosen date and the chosen wilaya
-        private PredictionCouple 
+        private PredictionCouple;
+
+        public static setQuery(Query query);
         
+
     }
 }
