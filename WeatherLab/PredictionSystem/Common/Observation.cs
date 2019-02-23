@@ -25,7 +25,7 @@ namespace WeatherLab.PredictionSystem.Common
                 keys.Add(param.ParamKey);
             }
         }
-        public Observation() { this.parameters = new List<Parameter>(); this.keys = new HashSet<string>(); this.observationDate=new DateTime() }
+        public Observation() { this.parameters = new List<Parameter>(); this.keys = new HashSet<string>(); this.observationDate = new DateTime(); }
         public Observation(List<Parameter> parameters, DateTime datetime)
         {
             this.keys = new HashSet<string>();

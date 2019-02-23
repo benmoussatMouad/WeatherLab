@@ -14,19 +14,19 @@ namespace PredictionFeature
         /// used to groupe Couples by similarity and then calculate their probabilty.
         /// @startingEdge is lower bound of similarity that elements must have greater than .
         /// @endingEdge is higher bound of similarity , elements must have this lower or equal to to be in this cluster
-        /// 
+        /// @ sumOfSimilarities is is the sum of all similarity in elements used to calculate probability
         /// </summary>
         private List<PredictionCouple> elements;
         private double probability;
         private double startingEdge;
         private double endingEdge;
-        ///TODO : Add sumOf similarities attribute
+        private double sumOfSimilarities=0;
         public Cluster(double startingEdge, double endingEdge)
         {
             elements = new List<PredictionCouple>();
             this.startingEdge = startingEdge;
             this.endingEdge = endingEdge;
-            this.probability = 1;
+            this.probability = 0;
         }
         public List<PredictionCouple> Elements
         {
@@ -61,12 +61,20 @@ namespace PredictionFeature
         {
             return probability;
         }
+        public double SumOfSimilarity
+        {
+            get
+            {
+                return sumOfSimilarities;
+            }
+        }
         public bool AddElement(PredictionCouple couple)
         {
             if(couple.Past !=null && couple.Future != null)
             {   if(couple.Similarity > startingEdge && couple.Similarity <= endingEdge)
                 {
                     elements.Add(couple);
+                    sumOfSimilarities += couple.Similarity;
                     return true;
                 }
                 return false;
