@@ -14,6 +14,10 @@ namespace WeatherLab.PredictionSystem
         /// <summary>
         /// this class represents the system in charge of making forcasts (predictions) of weather based on
         /// historical data retreived from dataset
+        /// How To use the System : 
+        /// 1- Set the inputs gathered from UI using SetInputs function (list of inputs )
+        /// 2- use StartPrediction() to start the predictions
+        /// 3- Access results from Result .
         /// </summary>
         
         // singelton instance in the application
@@ -29,7 +33,7 @@ namespace WeatherLab.PredictionSystem
 
         private PredictionSystem()
         {
-            initSystems();
+            InitSystems();
         }
 
         // Getter for singleton instance 
@@ -73,15 +77,18 @@ namespace WeatherLab.PredictionSystem
             if(dailyMeteoSystem.Observation != null)
             {
                 predictionManager.DailyObservation = dailyMeteoSystem.Observation;
-                /// QueryManager.GenerateQuery(dailyMeteoSystem.Observation);
-                /// DataRetreiver.SetQuery(QueryManager.Query);
+
+              
+                queryManager.GenerateQuery(dailyMeteoSystem.Observation);
+
+                /// DataRetreiver.SetQuery(queryManager.query);
                 /// DataRetreiver.GatherData();
                 ///predictionManager.PredictionCouples = DataRetreiver.RetreiveData();
                 if(predictionManager.PredictionCouples != null)
                 {
                     predictionManager.Predict();
-                    /// resultHandler.Predictions = predictionManager.Predictions; 
-                    /// resultHandler.GenerateResults();
+                    resultHandler.Predictions = predictionManager.Predictions; 
+                    resultHandler.GenerateResults();
                 }
             }
             else
@@ -90,13 +97,25 @@ namespace WeatherLab.PredictionSystem
             }
             
         }
+
+        public void SetInputs(List<Input> inputs)
+        {
+            if(inputs != null)
+            {
+                dailyMeteoSystem.NewObservation(inputs); /// creating a new Observation
+                SetDurationInDays((int) inputs.Find(input => input.InputKey.Equals(InputKeys.DURATION)).Value); /// setting the duration of prediction in days
+            }
+           
+        }
+
+
         
         /// <summary>
         /// Private Methods Section 
         /// </summary>
 
         ///Init method used to initialize subsystems to prevent having null objects
-        private void initSystems()
+        private void InitSystems()
         {
             dailyMeteoSystem = new DailyMeteoSystem();
             predictionManager = new PredictionManager();
@@ -104,6 +123,11 @@ namespace WeatherLab.PredictionSystem
             dataRetreiver = new DataRetreiver();
             resultHandler = new ResultHandler();
         }
-        
+
+        private void SetDurationInDays(int days)
+        {
+            queryManager.SetDurationInDays(days);
+        }
+
     }
 }

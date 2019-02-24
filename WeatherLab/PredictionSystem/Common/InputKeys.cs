@@ -12,21 +12,21 @@ namespace WeatherLab.PredictionSystem.Common
     /// </summary>
     static class InputKeys
     {
-        public static string NONE = "NONE";
+        public static readonly string NONE = "NONE";
 
         /// Date and time related Keys 
 
-        public static string DATE = "DATE";
-        public static string DURATION = "DURATION";
-        public static string WILAYA = "WILAYA";
+        public static readonly string DATE = "DATE";
+        public static readonly string DURATION = "DURATION";
+        public static readonly string WILAYA = "WILAYA";
 
         /// Parameters related Keys 
-        public static string TEMPERATURE = "TEMP";
-        public static string WIND_SPEED = "WINDS";
-        public static string WIND_DIRECTION = "WINDD";
-        public static string HUMIDITY = "HUMIDITY";
-        public static string PLUVIOMETRIE = "PLUVIOMETRIE";
-        public static string GROUND_STATE = "GROUNDSTATE";
+        public static readonly string TEMPERATURE = "TEMP";
+        public static readonly string WIND_SPEED = "WINDS";
+        public static readonly string WIND_DIRECTION = "WINDD";
+        public static readonly string HUMIDITY = "HUMIDITY";
+        public static readonly string PLUVIOMETRIE = "PLUVIOMETRIE";
+        public static readonly string GROUND_STATE = "GROUNDSTATE";
         
     }
 }

@@ -12,6 +12,7 @@ namespace WeatherLab.PredictionSystem.Common
         /// <summary>
         /// Represents the final Observation built by DailyMeteo to be used in Prediction
         /// </summary>
+        private string wilaya;
         private List<Parameter> parameters;
         private HashSet<string> keys;
         private DateTime observationDate;
@@ -67,14 +68,21 @@ namespace WeatherLab.PredictionSystem.Common
             }
         }
 
+        public string Wilaya
+        {
+            get
+            {
+                return wilaya;
+            }
+            set
+            {
+                wilaya = value;
+            }
+        }
         /// <summary>
         /// Method used to do the query 
         /// </summary>
         /// <returns>the month of the Daily Observation</returns>
-        public int GetMonth()
-        {
-            return observationDate.Month;
-        }
 
         public Vector<double> ToVector()
         {

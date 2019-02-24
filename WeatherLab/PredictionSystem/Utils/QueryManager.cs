@@ -3,42 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using WeatherLab.PredictionSystem.Common;
 namespace WeatherLab.PredictionSystem.Utils
-{
-    public class QueryManager       //Cette classe contient une liste d'inputs selon le choix du User + Le delait de prediction + La date du jour 
+{   /// <summary>
+    ///  This class represents the entity in charge of building a query object to send it to DataRetreiver object in order to fetch for data in Dataset based on constraints like : date , selected parameters
+    ///@ query is a contract for Data retreiver to use in his search for data;
+    ///@durationInDays is set from exterior and is built in query ;
+    /// </summary>
+    class QueryManager      
     {
-        public List<ParamValue> Liste = new List<ParamValue>();
-        public double delai { get; set; }
-        public DateTime date = new DateTime();
 
-        public void add(ParamValue newParamValue)       //CEtte méthode ajoute un nouveau tuplet ParamValue a la liste
+        private Query query;
+        private int durationInDays;
+        public QueryManager()
         {
-            this.Liste.Add(newParamValue);
+
         }
 
-        public int length()         //REtourne la taille de la liste
+        public Query Query
         {
-            return Liste.Count;
+            get
+            {
+                return query;
+            }
+        }
+        public void SetDurationInDays(int days)
+        {
+            this.durationInDays = days;
+        }
+        public void GenerateQuery(Observation observation)
+        {   /// creating a new query object
+            query = new Query();
+            /// adding all parameter keys found in observation in the same order as they appear in it
+            foreach(Parameter param in observation.Parameters)
+            {
+                query.ParameterKeys.Add(param.ParamKey);
+            }
+            query.Date = observation.Date;
+            query.Duration = durationInDays;
+            query.RequestedWilaya = observation.Wilaya;
+
         }
 
-    }
-
-    public class ParamValue        //Cette Classe va contenir Le tuplet <Param,Value> 
-    {
-        public Param Parametre { get; set; }
-        public int Value { get; set; }
-    }
-
-    public enum Param       //Ce type contient Les parametres qui se trouve dans le Dataset et que l'utilisateur pourra Choisir Par la suite
-    {
-        Temp,
-        Pression,
-        Humidite,
-        DirectionVent,
-        VitesseVent,
-        PourcentageNuage,
-        DistanceVisibilite,
-        EtatSol
     }
 }

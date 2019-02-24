@@ -23,7 +23,7 @@ namespace WeatherLab.PredictionSystem.DailyMeteo
         {
             get
             {
-                if(inputs != null)
+                if (inputs != null)
                 {
                     return observation;
                 }
@@ -37,11 +37,11 @@ namespace WeatherLab.PredictionSystem.DailyMeteo
             {
                 return inputs;
             }
-        } 
+        }
 
         public Observation NewObservation(List<Input> inputs)
         {
-            if(inputs != null)
+            if (inputs != null)
             {
                 this.inputs = inputs;
                 BuildObservation();
@@ -51,22 +51,27 @@ namespace WeatherLab.PredictionSystem.DailyMeteo
             {
                 throw new NullReferenceException("Inputs are null => cannot create Observation");
             }
-            
-        }
 
+        }
+        /// <summary>
+        /// Method used to create an observation based on a list of inputs (Class Input) coming from ui each having A String Key and a value which is an object(depends on the type of the input)
+        /// </summary>
         private void BuildObservation()
         {
-            
+
             observation = new Observation();
             foreach (var input in inputs)
             {
-                if (!input.InputKey.Equals(InputKeys.DATE) && !input.InputKey.Equals(InputKeys.DURATION))
+                if (input.InputKey.Equals(InputKeys.WILAYA))
                 {
-                    observation.AddParameter((Parameter)input);
-                } else
+                    observation.Wilaya = (string) input.Value;
+                }else if(input is Parameter) {
+                    observation.AddParameter((Parameter) input);
+                }else
                 {
-                    throw new IllegalKeyException("Cannot include DATE or DURATION in Observation");
+                    /// TODO : implement other keys Code 
                 }
+
             }
         }
     }
