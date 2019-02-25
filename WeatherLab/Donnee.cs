@@ -20,20 +20,8 @@ namespace WeatherLab.Data
 
         public Donnee(string data, string[] Attrs)
         {
-            
-                // problem is the frequent passage from the try block to the catch ( cost 2~8ms ) 
-                // multiplied by Attrs.Count will be a big deal -_-
-                /*
-                try
-                {
-                    this.attrs.Add(Attrs[i], double.Parse(datas[i]));
-                } catch(FormatException e)
-                {
-                    this.attrs.Add(Attrs[i], 0);
-                } catch(Exception e)
-                {
-                    Console.WriteLine(e.Message+e.StackTrace);
-                }//*/
+            // utilisant le format csv par défault
+            fromRaw(data, Attrs, "csv");
    
         }
 
@@ -63,7 +51,16 @@ namespace WeatherLab.Data
 
                     for (int i = 0; i < Attrs.Length; i++)
                     {
-                        this.attrs.Add(new Attribut(Attrs[i], float.Parse(datas[i + 1])));
+                        float t;
+                        if(float.TryParse(datas[i + 1], out t))
+                            this.attrs.Add(new Attribut(Attrs[i], t));
+                        else if(float.TryParse(datas[i + 1].Replace('.',','), out t))
+                        {
+                            this.attrs.Add(new Attribut(Attrs[i], t));
+                        } else
+                        {
+                            throw new FormatException("Type not a float!");
+                        }
                     }
                     break;
             }
@@ -77,9 +74,10 @@ namespace WeatherLab.Data
                 case "CSV":
                     string outp = "";
                     outp += date.Day+"/"+date.Month+"/"+date.Year;
+                    Console.WriteLine(attrs.Count);
                     foreach(Attribut i in attrs)
                     {
-                        outp += "," + i.getValeur();
+                        outp += ";" + i.getValeur();
                     }
                     return outp;
                 default:
