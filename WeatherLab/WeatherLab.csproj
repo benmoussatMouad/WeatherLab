@@ -64,6 +64,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PredictionSystem\Common\Cluster.cs" />
+    <Compile Include="PredictionSystem\Common\Input.cs" />
+    <Compile Include="PredictionSystem\Common\InputKeys.cs" />
+    <Compile Include="PredictionSystem\Common\Observation.cs" />
+    <Compile Include="PredictionSystem\Common\Parameter.cs" />
+    <Compile Include="PredictionSystem\Common\ParamPrediction.cs" />
+    <Compile Include="PredictionSystem\Common\Prediction.cs" />
+    <Compile Include="PredictionSystem\Common\PredictionCouple.cs" />
+    <Compile Include="PredictionSystem\Common\Query.cs" />
+    <Compile Include="PredictionSystem\Common\Wilaya.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\DailyMeteoSystem.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\FileImportHandler.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\InputHandler.cs" />
+    <Compile Include="PredictionSystem\Exceptions\IllegalKeyException.cs" />
+    <Compile Include="PredictionSystem\Exceptions\NullObservationException.cs" />
+    <Compile Include="PredictionSystem\PredictionSystem.cs" />
+    <Compile Include="PredictionSystem\Utils\Cluster.cs" />
+    <Compile Include="PredictionSystem\Utils\DataRetreiver.cs" />
+    <Compile Include="PredictionSystem\Utils\ParamPrediction.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionCouple.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionFunctions.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionManager.cs" />
+    <Compile Include="PredictionSystem\Utils\QueryManager.cs" />
+    <Compile Include="PredictionSystem\Utils\ResponseManager.cs" />
+    <Compile Include="PredictionSystem\Utils\ResultHandler.cs" />
+    <Compile Include="PredictionSystem\Utils\SaveManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
