@@ -84,6 +84,10 @@ namespace WeatherLab.Data
                         Console.WriteLine(line);
             
         }
+        
+        //By Mouad Benmoussat :***************************************
+        //A la fin de Load(), Donnes et Attrs seront plein c'est ça ?
+        //*********************************************************
 
         /**
          *  la méthode de tri du fichier en utilisant Linq pour fournir un multi-tri rapide
@@ -107,7 +111,7 @@ namespace WeatherLab.Data
         }
 
         /// <summary>
-        /// this function is only to use in the console
+        /// this hfunction is only to use in te console
         /// </summary>
         /// <param name="nb"> le nommbre d'element a afficher </param>
         public void afficherDonnees(int nb)
