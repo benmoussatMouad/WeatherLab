@@ -7,6 +7,7 @@ using WeatherLab.PredictionSystem.DailyMeteo;
 using WeatherLab.PredictionSystem.Utils;
 using WeatherLab.PredictionSystem.Common;
 using WeatherLab.PredictionSystem.Exceptions;
+
 namespace WeatherLab.PredictionSystem
 {
     class PredictionSystem

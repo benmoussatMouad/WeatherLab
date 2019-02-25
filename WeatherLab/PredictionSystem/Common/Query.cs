@@ -12,6 +12,7 @@ namespace WeatherLab.PredictionSystem.Common
         private string requestedWilaya;
         private DateTime date;
         private int duration;
+        
 
         public Query()
         {
