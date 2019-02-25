@@ -50,20 +50,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PredictionSystem\Common\Cluster.cs" />
     <Compile Include="PredictionSystem\Common\Input.cs" />
     <Compile Include="PredictionSystem\Common\InputKeys.cs" />
@@ -90,24 +86,37 @@
     <Compile Include="PredictionSystem\Utils\ResponseManager.cs" />
     <Compile Include="PredictionSystem\Utils\ResultHandler.cs" />
     <Compile Include="PredictionSystem\Utils\SaveManager.cs" />
+    <Compile Include="Data\Attribut.cs" />
+    <Compile Include="Data\Donnee.cs" />
+    <Compile Include="Data\ManipDS.cs" />
+    <Compile Include="Data\StructDS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DataSetSystem" />
+    <Folder Include="Data" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages\MathNet.Numerics.4.7.0\.signature.p7s" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.dll" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.xml" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\net461\MathNet.Numerics.dll" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\net461\MathNet.Numerics.xml" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\netstandard1.3\MathNet.Numerics.dll" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\netstandard1.3\MathNet.Numerics.xml" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\netstandard2.0\MathNet.Numerics.dll" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\lib\netstandard2.0\MathNet.Numerics.xml" />
+    <Content Include="packages\MathNet.Numerics.4.7.0\MathNet.Numerics.4.7.0.nupkg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

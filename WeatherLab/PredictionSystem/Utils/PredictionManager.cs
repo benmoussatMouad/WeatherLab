@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherLab.PredictionSystem.Common;
 using PredictionFeature;
+using Cluster = WeatherLab.PredictionSystem.Common.Cluster;
+using ParamPrediction = WeatherLab.PredictionSystem.Common.ParamPrediction;
+using PredictionCouple = WeatherLab.PredictionSystem.Common.PredictionCouple;
+
 namespace WeatherLab.PredictionSystem.Utils
 {
     /// <summary>
