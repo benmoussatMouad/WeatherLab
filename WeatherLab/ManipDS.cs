@@ -63,7 +63,7 @@ namespace WeatherLab.Data
 
         // Cette fonction retourne le nombre d'années qu'on a dans le dataset
         public int getNbYear()
-        {
+        { 
             return dataset.Donnees.Select(x => x.GetYear()).ToList().Distinct().Count();
         }
 

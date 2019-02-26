@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attribut.cs" />
+    <Compile Include="InputSynthese.cs" />
     <Compile Include="ManipDS.cs" />
     <Compile Include="StructDS.cs" />
     <Compile Include="Donnee.cs" />
