@@ -77,7 +77,7 @@ namespace WeatherLab.PredictionSystem.Utils
         {
             _donnees = dataSet.getSaison(saison); //Le partie du dataset contenant tous les observations de la meme saison
             
-            // having the number of all observation, Initilizing the observation table.
+            // having the number of all observations, Initilizing the observation table.
             observationsTable = new List<PredictionCouple>(_donnees.Count); 
             
             int delay = query.Duration;
@@ -85,7 +85,7 @@ namespace WeatherLab.PredictionSystem.Utils
 
             double[] past = new double[numberOfParameters];
             double[] future = new double[numberOfParameters];
-            
+            PredictionCouple.NUMBER_OF_PARAMETERS = numberOfParameters;
             
 
             //TODO: Fill the observationsTable with observation according to parameters keys
