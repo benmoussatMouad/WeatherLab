@@ -40,6 +40,7 @@ namespace WeatherLab.Data
 
                     string[] datas = data.Split(';');
                     string[] Date = datas[0].Split(' ');
+                    
                     year = int.Parse(Date[0].Split('.')[2]);
                     month = int.Parse(Date[0].Split('.')[1]);
                     day = int.Parse(Date[0].Split('.')[0]);
@@ -122,6 +123,11 @@ namespace WeatherLab.Data
                 throw new ArgumentException();
         }
 
+        public Attribut[] getAttrs()
+        {
+            return attrs.ToArray();
+        }
+
         public void SetDate(int year, int month, int day)
         {
             date = new DateTime(year, month, day);
@@ -166,7 +172,7 @@ namespace WeatherLab.Data
 
         public Saison GetSaison()
         {
-            int i = (int)this.GetMonth();
+            int i = this.GetMonth();
             switch (i)
             {
                 case 1:

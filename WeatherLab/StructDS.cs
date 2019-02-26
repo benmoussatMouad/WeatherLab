@@ -27,6 +27,13 @@ namespace WeatherLab.Data
 {
     public class StructDS
     {
+
+        private struct Mois
+        {
+            int debut;
+            int fin;
+        }
+
         private string _path;
         public string Path
         {
@@ -103,7 +110,8 @@ namespace WeatherLab.Data
         /// </summary>
         public virtual void sauvegarder(string path, string nom_index)
         {
-            
+            Mois[] year = new Mois[12];
+
         }
 
         /// <summary>
