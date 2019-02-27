@@ -54,9 +54,7 @@ namespace WeatherLab.Data
                     {
                         float t;
                         if(float.TryParse(datas[i + 1], out t))
-                        {
                             this.attrs.Add(new Attribut(Attrs[i], t));
-                        }
                         else if(float.TryParse(datas[i + 1].Replace('.',','), out t))
                         {
                             this.attrs.Add(new Attribut(Attrs[i], t));
