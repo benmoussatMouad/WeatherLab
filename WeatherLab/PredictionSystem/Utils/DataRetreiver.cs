@@ -87,6 +87,8 @@ namespace WeatherLab.PredictionSystem.Utils
             double[] future = new double[numberOfParameters];
             PredictionCouple.NUMBER_OF_PARAMETERS = numberOfParameters;
             
+            Attribut.
+            
 
             //TODO: Fill the observationsTable with observation according to parameters keys
             foreach (Donnee donnee in _donnees)
