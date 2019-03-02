@@ -13,7 +13,6 @@ namespace WeatherLab.Data
         public ManipDS(string path)
         {
             dataset = new StructDS(path);
-            dataset.Load();
         }
 
         // Cette fonction retourne une listes de toutes les données d'une saison donnée de toutes les années
@@ -58,6 +57,12 @@ namespace WeatherLab.Data
         {
             DateTime date1 = new DateTime(year1, month1, day1);
             DateTime date2 = new DateTime(year2, month2, day2,23,59,59);
+            return dataset.Donnees.Where(x => x.GetDate().CompareTo(date1) >= 0 && x.GetDate().CompareTo(date2) <= 0 ).ToList();
+        }
+
+        // Cette fonction retourne une liste des données entre deux dates données
+        public List<Donnee> requetteAIntervalle(DateTime date1,DateTime date2)
+        {
             return dataset.Donnees.Where(x => x.GetDate().CompareTo(date1) >= 0 && x.GetDate().CompareTo(date2) <= 0 ).ToList();
         }
 
