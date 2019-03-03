@@ -12,39 +12,45 @@ using WeatherLab.Data;
 namespace WeatherLab.PredictionSystem.Utils
 {
     /// <summary>
-    /// This is the class that will call the DataSet, it will be accessed from diffrent parts of the program
+    /// This is the class that will call the DataSet, it will be accessed from different parts of the program
     /// Once the path entered by the user, DataRetreiver will load and manipulate the DataSet
     /// </summary>
     class DataRetreiver
     {
-        private string path;
-
         //contains the keys for each chosen parameter by the user.
         //and the chosen date and wilaya
         private Query query;
+
+        private string _path;
 
         private Saison saison;
 
         //The list of datas (observations) retrieved from the dataset in the same season
         private List<Donnee> _donnees;
+        private List<Donnee> _donneesSaisonSuivante;
         
         //The list that will contain all of the observations of the same season
         //concatenated with those +x duration
         private List<PredictionCouple>  observationsTable;
 
+        //The DataSet we want to load
         private ManipDS dataSet;
 
-
-        public DataRetreiver(string path)
+        public void SetQuery(Query aQuery)
         {
-            this.path = path;
-            dataSet = new ManipDS(path);
+            query = aQuery;
+            
+            HandleQuery(query);
         }
 
-        public void handleQuery(Query _query)
+
+        public void HandleQuery(Query _query)
         {
-            query = _query;
+
+            //TODO: this might generate some expections, take care of it
+             //_path = getWilayaPath(_query.RequestedWilaya);
             
+           
             
             switch (_query.Date.Month)
             {
@@ -73,9 +79,15 @@ namespace WeatherLab.PredictionSystem.Utils
 
         //public PredictionCouple retreiveData();
 
-        public void gatherData()
+
+
+
+        public void GatherData()
         {
-            _donnees = dataSet.getSaison(saison); //Le partie du dataset contenant tous les observations de la meme saison
+            dataSet = new ManipDS(_path);
+            //Le partie du dataset contenant tous les observations de la meme saison
+            _donnees = dataSet.getSaison(saison);
+            _donneesSaisonSuivante = dataSet.getSaison(saison + 1); //et la saison suivante
             
             // having the number of all observations, Initilizing the observation table.
             observationsTable = new List<PredictionCouple>(_donnees.Count); 
@@ -83,30 +95,31 @@ namespace WeatherLab.PredictionSystem.Utils
             int delay = query.Duration;
             int numberOfParameters = query.ParameterKeys.Count;
 
-            double[] past = new double[numberOfParameters];
-            double[] future = new double[numberOfParameters];
-            PredictionCouple.NUMBER_OF_PARAMETERS = numberOfParameters;
+           
             
-            Attribut.
+            
             
 
             //TODO: Fill the observationsTable with observation according to parameters keys
             foreach (Donnee donnee in _donnees)
             {
+                //Allocating new space for the double table
+                double[] past = new double[numberOfParameters];
+                double[] future = new double[numberOfParameters];
+                
                 foreach (string key in query.ParameterKeys)
                 {
                     //Filling the tables of doubles, 
+                    //TODO: Expections: key might not exist in the Dictionnary
                     past.Append(donnee.GetAttr(key));
                     
-                    //TODO: An error might occur, going out of the list
+                    //TODO: An error might occur, going out of the list, add from the following dataset
                     future.Append(_donnees[_donnees.IndexOf(donnee) + delay].GetAttr(key));
                     
                 }
-                observationsTable[_donnees.IndexOf(donnee)] = new PredictionCouple(past, future);
+                observationsTable.Add(new PredictionCouple(past, future));
+                
             }
         }
-        
-
-
     }
 }

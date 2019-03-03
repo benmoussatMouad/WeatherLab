@@ -54,7 +54,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\AttributFormatException.cs" />
     <Compile Include="Data\Correspondence.cs" />
+    <Compile Include="Data\IndexNotCompleteException.cs" />
+    <Compile Include="Data\IndexNotFoundException.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -70,7 +73,6 @@
     <Compile Include="PredictionSystem\Common\Prediction.cs" />
     <Compile Include="PredictionSystem\Common\PredictionCouple.cs" />
     <Compile Include="PredictionSystem\Common\Query.cs" />
-    <Compile Include="PredictionSystem\Common\Wilaya.cs" />
     <Compile Include="PredictionSystem\DailyMeteo\DailyMeteoSystem.cs" />
     <Compile Include="PredictionSystem\DailyMeteo\FileImportHandler.cs" />
     <Compile Include="PredictionSystem\DailyMeteo\InputHandler.cs" />
