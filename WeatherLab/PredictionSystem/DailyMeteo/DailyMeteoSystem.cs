@@ -62,12 +62,12 @@ namespace WeatherLab.PredictionSystem.DailyMeteo
             observation = new Observation();
             foreach (var input in inputs)
             {
-                if (input.InputKey.Equals(InputKeys.WILAYA))
+                if (input is Wilaya)
                 {
-                    observation.Wilaya = (string) input.Value;
+                    observation.Wilaya =  input as Wilaya;
                 }else if(input is Parameter) {
                     observation.AddParameter((Parameter) input);
-                }else
+                }else 
                 {
                     /// TODO : implement other keys Code 
                 }

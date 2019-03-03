@@ -12,21 +12,21 @@ namespace WeatherLab.PredictionSystem.Common
         /// <summary>
         /// Represents the final Observation built by DailyMeteo to be used in Prediction
         /// </summary>
-        private string wilaya;
+        private Wilaya wilaya;
         private List<Parameter> parameters;
         private HashSet<string> keys;
         private DateTime observationDate;
         public Observation(List<Parameter> parameters)
         {
             this.keys = new HashSet<string>();
-            this.observationDate = new DateTime();
+            this.observationDate = DateTime.Now;
             this.parameters = parameters;
             foreach(Parameter param in parameters)
             {
                 keys.Add(param.ParamKey);
             }
         }
-        public Observation() { this.parameters = new List<Parameter>(); this.keys = new HashSet<string>(); this.observationDate = new DateTime(); }
+        public Observation() { this.parameters = new List<Parameter>(); this.keys = new HashSet<string>(); this.observationDate = DateTime.Now; }
         public Observation(List<Parameter> parameters, DateTime datetime)
         {
             this.keys = new HashSet<string>();
@@ -68,7 +68,7 @@ namespace WeatherLab.PredictionSystem.Common
             }
         }
 
-        public string Wilaya
+        public Wilaya Wilaya
         {
             get
             {

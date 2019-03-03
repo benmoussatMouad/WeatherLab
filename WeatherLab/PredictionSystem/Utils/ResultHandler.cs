@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 using PredictionFeature;
+using WeatherLab.PredictionSystem.Common;
 namespace WeatherLab.PredictionSystem.Utils
 {
     class ResultHandler
     {
         private Dictionary<Cluster, List<ParamPrediction>> rawPredictions;
-        private IOrderedEnumerable<KeyValuePair<Cluster, List<ParamPrediction>>> results;
+        private List<Result> results;
         public ResultHandler()
         {
-
+            results = new List<Result>();
         }
 
         public Dictionary<Cluster,List<ParamPrediction>> Predictions
@@ -24,7 +25,7 @@ namespace WeatherLab.PredictionSystem.Utils
                 rawPredictions = value;
             }
         }
-        public IOrderedEnumerable<KeyValuePair<Cluster, List<ParamPrediction>>> Results
+        public List<Result> Results
         {
             get { return results; }
         }
@@ -32,9 +33,18 @@ namespace WeatherLab.PredictionSystem.Utils
 
         public void GenerateResults()
         {
+            if(results != null)
+            {
+                results.Clear();
+            }
            if(rawPredictions != null)
             {
-                results = rawPredictions.OrderByDescending(cluster => cluster.Key.GetProbability());
+               var temp = rawPredictions.OrderByDescending(cluster => cluster.Key.GetProbability());
+                foreach(var item in temp)
+                {
+                    Result result = new Result(item.Value, item.Key.GetProbability());
+                    results.Add(result);
+                }
             }
             
         }
