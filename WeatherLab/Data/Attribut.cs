@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace WeatherLab.Data
 {
-    class Attribut
+    public class Attribut
     {
         public const byte NUMERIC = 0;
         public const byte ENUM = 1;
