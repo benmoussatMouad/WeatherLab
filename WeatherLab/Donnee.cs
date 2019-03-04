@@ -40,7 +40,7 @@ namespace WeatherLab.Data
 
                     string[] datas = data.Split(';');
                     string[] Date = datas[0].Split(' ');
-                    
+
                     year = int.Parse(Date[0].Split('.')[2]);
                     month = int.Parse(Date[0].Split('.')[1]);
                     day = int.Parse(Date[0].Split('.')[0]);
@@ -53,12 +53,13 @@ namespace WeatherLab.Data
                     for (int i = 0; i < Attrs.Length; i++)
                     {
                         float t;
-                        if(float.TryParse(datas[i + 1], out t))
+                        if (float.TryParse(datas[i + 1], out t))
                             this.attrs.Add(new Attribut(Attrs[i], t));
-                        else if(float.TryParse(datas[i + 1].Replace('.',','), out t))
+                        else if (float.TryParse(datas[i + 1].Replace('.', ','), out t))
                         {
                             this.attrs.Add(new Attribut(Attrs[i], t));
-                        } else
+                        }
+                        else
                         {
                             throw new FormatException("Type not a float!");
                         }

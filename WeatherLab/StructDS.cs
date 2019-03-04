@@ -125,7 +125,7 @@ namespace WeatherLab.Data
             foreach (string line in lines)
                 if (line.Length > 0)
                 {
-                    if (line[0] != '#')
+                    if (line[0] == '#')
                         continue;
                     if (++i == 1)
                     {
@@ -133,7 +133,6 @@ namespace WeatherLab.Data
 
                         Attrs = line.Split(';').ToList();
                         Attrs.RemoveAt(0);
-
                         foreach (string attr in Attrs)
                         {
                             if (!Attribut.attrExists(attr))
@@ -142,7 +141,6 @@ namespace WeatherLab.Data
                     }
                     else
                         Donnees.Add(new Donnee(line, Attrs.ToArray()));
-                
                 }
             
         }
@@ -167,7 +165,7 @@ namespace WeatherLab.Data
                 f.Seek(0, SeekOrigin.Begin);
                 wilayas = (List<long>)writer.Deserialize(f);
                 if (wilayas[nb_wilaya] == 0)
-                    throw new IndexNotCompleteException("le nombre "+nb_wilaya+" n'existe pas dans l'index");
+                    throw new IndexNotCompleteException("le nombre " + nb_wilaya + " n'existe pas dans l'index");
                 f.Seek(wilayas[nb_wilaya], SeekOrigin.Begin);
                 id = (List < Index >) writer.Deserialize(f);
             }
