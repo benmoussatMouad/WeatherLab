@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using PredictionFeature;
 using WeatherLab.PredictionSystem.Common;
 namespace WeatherLab.PredictionSystem.Utils
 {

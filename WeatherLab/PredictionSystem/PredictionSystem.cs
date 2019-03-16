@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WeatherLab.PredictionSystem.DailyMeteo;
 using WeatherLab.PredictionSystem.Utils;
 using WeatherLab.PredictionSystem.Common;
 using WeatherLab.PredictionSystem.Exceptions;
-using PredictionFeature;
-
 namespace WeatherLab.PredictionSystem
 {
     class PredictionSystem
