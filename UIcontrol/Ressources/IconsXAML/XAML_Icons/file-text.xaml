@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This file is NOT compatible with Silverlight-->
+<Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+  <Canvas Name="svg12" Width="24" Height="24">
+    <Canvas.RenderTransform>
+      <TranslateTransform X="0" Y="0"/>
+    </Canvas.RenderTransform>
+    <Canvas.Resources/>
+    <!--Unknown tag: metadata-->
+    <!--Unknown tag: sodipodi:namedview-->
+    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path2" StrokeThickness="2" Stroke="currentColor" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+      <Path.Data>
+        <PathGeometry Figures="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" FillRule="NonZero"/>
+      </Path.Data>
+    </Path>
+    <Polyline xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="14 2 14 8 20 8" Name="polyline4" FillRule="NonZero" StrokeThickness="2" Stroke="currentColor" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+    <Line xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" X1="16" Y1="13" X2="8" Y2="13" Name="line6" StrokeThickness="2" Stroke="currentColor" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+    <Line xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" X1="16" Y1="17" X2="8" Y2="17" Name="line8" StrokeThickness="2" Stroke="currentColor" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+    <Polyline xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="10 9 9 9 8 9" Name="polyline10" FillRule="NonZero" StrokeThickness="2" Stroke="currentColor" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+  </Canvas>
+</Viewbox>
