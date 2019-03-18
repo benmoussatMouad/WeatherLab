@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Attribut.cs" />
     <Compile Include="AttributFormatException.cs" />
+    <Compile Include="IndexNotCompleteException.cs" />
     <Compile Include="IndexNotFoundException.cs" />
     <Compile Include="ManipDS.cs" />
     <Compile Include="StructDS.cs" />

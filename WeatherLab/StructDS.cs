@@ -98,6 +98,8 @@ namespace WeatherLab.Data
             this.Path = path;
             this.index = index;
 
+            this.Donnees = new List<Donnee>();
+
             Load(mois, nb_wilaya);
         }
 
@@ -125,13 +127,14 @@ namespace WeatherLab.Data
             foreach (string line in lines)
                 if (line.Length > 0)
                 {
-                    if (line[0] == '#')
+                    string l = line.Trim('\r');
+                    if (l[0] == '#')
                         continue;
                     if (++i == 1)
                     {
                         // check if attrs are in Attribut.dict
 
-                        Attrs = line.Split(';').ToList();
+                        Attrs = l.Split(';').ToList();
                         Attrs.RemoveAt(0);
                         foreach (string attr in Attrs)
                         {
@@ -140,7 +143,7 @@ namespace WeatherLab.Data
                         }
                     }
                     else
-                        Donnees.Add(new Donnee(line, Attrs.ToArray()));
+                        Donnees.Add(new Donnee(l, Attrs.ToArray()));
                 }
             
         }
@@ -155,19 +158,19 @@ namespace WeatherLab.Data
         /// <param name="mois">le mois qu'on veut récuperer</param>
         private void Load(int mois, int nb_wilaya)
         {
-            List<long> wilayas = new List<long>();
-            List<Index> id = new List<Index>();
+            long[] wilayas;
+            Index[] id;
             var writer = new BinaryFormatter();
 
             /* récuperant les champs nécessaires */
             using (var f = File.OpenRead(index))
             {
                 f.Seek(0, SeekOrigin.Begin);
-                wilayas = (List<long>)writer.Deserialize(f);
+                wilayas = (long[])writer.Deserialize(f);
                 if (wilayas[nb_wilaya] == 0)
                     throw new IndexNotCompleteException("le nombre " + nb_wilaya + " n'existe pas dans l'index");
                 f.Seek(wilayas[nb_wilaya], SeekOrigin.Begin);
-                id = (List < Index >) writer.Deserialize(f);
+                id = (Index[]) writer.Deserialize(f);
             }
 
             int count = id[mois].fin - id[mois].debut;
@@ -176,33 +179,34 @@ namespace WeatherLab.Data
             /* reading month data only */
             using (var f = File.OpenRead(Path))
             {
+                int i = 0;
+                var f2 = new StreamReader(f);
+                string line;
+                while ((line = f2.ReadLine()).Contains("#")) ;
+                Attrs = line.Split(';').ToList();
+                Attrs.RemoveAt(0);
+                foreach (string attr in Attrs)
+                    if (!Attribut.attrExists(attr))
+                        throw new AttributFormatException("l'attribut " + attr + " n'existe pas dans attrs");
+
                 f.Seek(id[mois].debut, SeekOrigin.Begin);
                 f.Read(chars, 0, count);
+
+                f2.Close();
             }
 
             Encoding enc = Encoding.UTF8;
             string data = enc.GetString(chars);
             string[] lines = data.Split('\n');
-
-            int i = 0;
+            
             foreach(string line in lines)
             {
                 if (line.Length > 0)
                 {
                     if (line[0] == '#')
                         continue;
-                    if (i++ == 0)
-                    {
-                        Attrs = line.Split(';').ToList();
-                        Attrs.RemoveAt(0);
-                        foreach (string attr in Attrs)
-                        {
-                            if (!Attribut.attrExists(attr))
-                                throw new AttributFormatException("l'attribut " + attr + " (" + i + ") n'existe pas dans Attribut");
-                        }
-                    }
-                    else
-                        Donnees.Add(new Donnee(line, Attrs.ToArray()));
+                    
+                    Donnees.Add(new Donnee(line, Attrs.ToArray()));
                 }
             }
         }
@@ -228,13 +232,16 @@ namespace WeatherLab.Data
             Trier();
             using (var ou = File.Create(Path + ".tmp.csv"))
             {
-                List<long> wilaya = new List<long>();
-                List<Index> id = new List<Index>();
+                long[] wilaya = new long[48];
+                Index[] id = new Index[12];
 
                 var writer = new BinaryFormatter();
+                var output = new StreamWriter(ou);
+                output.AutoFlush = true;
 
                 string str = "Date;" + String.Join(";", Attrs.ToArray());
-                writer.Serialize(ou, str);
+                //writer.Serialize(ou, str);
+                output.WriteLine(str);
 
                 // si le fichier d'index n'existe pas on crée ce fichier avec une entête de 48 wilaya
                 if (!File.Exists(nom_index))
@@ -246,29 +253,23 @@ namespace WeatherLab.Data
                         {
                             wilaya[j] = 0;
                         }
-                        /*
-                        for (int j = 0; j < 12; j++)
-                        {
-                            i.Add(new Index { debut = 0, fin = 0 });
-                        }//*/
 
                         writer.Serialize(f, wilaya);
                         wilaya[nb_wilaya] = f.Position;
 
                         /* remplissage du fichier et de la table d'index */
-                        int month = 0, debut = 0, fin = 0;
+                        int month = 0, debut = (int)ou.Position, fin = 0;
                         for (int j = 0; j < Donnees.Count; j++)
                         {
-                            if (Donnees[j].GetMonth() != month)
+                            if (Donnees[j].GetMonth()-1 != month)
                             {
-                                if(month != 0)
-                                {
-                                    fin = (int)ou.Position - 1;
-                                    id[Donnees[j].GetMonth()] = new Index { debut = debut, fin = fin };
-                                }
+                                fin = (int)ou.Position - 1;
+                                id[month] = new Index { debut = debut, fin = fin };
                                 debut = (int)ou.Position;
+                                month = Donnees[j].GetMonth()-1;
                             }
-                            writer.Serialize(ou, Donnees[j].toRaw("csv"));
+
+                            output.WriteLine(Donnees[j].toRaw("csv"));
                         }
                         
                         /* écriture du fichier d'index avec tout les informations */
@@ -283,8 +284,9 @@ namespace WeatherLab.Data
                     using (var f = File.OpenRead(nom_index))
                     {
                         f.Seek(0, SeekOrigin.Begin);
-                        wilaya = (List<long>)writer.Deserialize(f);
+                        wilaya = (long[])writer.Deserialize(f);
                     }
+
                     using (var f = File.OpenWrite(nom_index))
                     {
                         if (wilaya[nb_wilaya] == 0)
@@ -298,19 +300,21 @@ namespace WeatherLab.Data
                         }
 
                         /* remplissage du fichier et de la table d'index */
-                        int month = 0, debut = 0, fin = 0;
+                        int month = 0, debut = (int)ou.Position, fin = 0;
                         for (int j = 0; j < Donnees.Count; j++)
                         {
-                            if (Donnees[j].GetMonth() != month)
+                            if (Donnees[j].GetMonth() - 1 != month)
                             {
                                 if (month != 0)
                                 {
                                     fin = (int)ou.Position - 1;
-                                    id[Donnees[j].GetMonth()] = new Index { debut = debut, fin = fin };
+                                    id[month] = new Index { debut = debut, fin = fin };
+                                    month = Donnees[j].GetMonth() - 1;
                                 }
                                 debut = (int)ou.Position;
                             }
-                            writer.Serialize(ou, Donnees[j].toRaw("csv"));
+                            //writer.Serialize(ou, Donnees[j].toRaw("csv"));
+                            output.WriteLine(Donnees[j].toRaw("csv"));
                         }
 
                         writer.Serialize(f, id);
@@ -318,6 +322,7 @@ namespace WeatherLab.Data
                         writer.Serialize(f, wilaya);
                     }
                 }
+                output.Close();
             }
         }
 
@@ -364,21 +369,20 @@ namespace WeatherLab.Data
         public void ajouterDonnee(Donnee d)
         {
             Donnees.Add(d);
-            using (var f = File.OpenWrite(Path))
+            using (var f = new StreamWriter(new FileStream(Path, FileMode.Append)))
             {
-                new BinaryFormatter().Serialize(f, d.toRaw("csv"));
+                f.WriteLine(d.toRaw("csv"));
             }
         }
 
         public void ajouterDonnee(Donnee[] ds)
         {
-            using (var f = File.OpenWrite(Path))
+            using (var f = new StreamWriter(new FileStream(Path, FileMode.Append)))
             {
-                var writer = new BinaryFormatter();
                 foreach (Donnee d in ds)
                 {
                     Donnees.Add(d);
-                    writer.Serialize(f, d.toRaw("csv"));
+                    f.WriteLine(d.toRaw("csv"));
                 }
             }
         }
@@ -391,7 +395,7 @@ namespace WeatherLab.Data
         public void renommerAttr(string ancien, string nouveau)
         {
             string text = string.Empty;
-            using(var f = new StreamReader(Path))
+            using(var f = new StreamReader(Path,true))
             {
                 string line = f.ReadLine();
                 while(line[0] == '#')

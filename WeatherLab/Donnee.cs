@@ -36,7 +36,7 @@ namespace WeatherLab.Data
             {
                 case "csv":
                 case "CSV":
-                    int year, month, day, hr, min;
+                    int year, month, day;
 
                     string[] datas = data.Split(';');
                     string[] Date = datas[0].Split(' ');
@@ -44,10 +44,8 @@ namespace WeatherLab.Data
                     year = int.Parse(Date[0].Split('.')[2]);
                     month = int.Parse(Date[0].Split('.')[1]);
                     day = int.Parse(Date[0].Split('.')[0]);
-                    hr = int.Parse(Date[1].Split(':')[0]);
-                    min = int.Parse(Date[1].Split(':')[1]);
 
-                    date = new DateTime(year, month, day, hr, min, 0);
+                    date = new DateTime(year, month, day, 0, 0, 0);
                     this.attrs = new List<Attribut>();
 
                     for (int i = 0; i < Attrs.Length; i++)
@@ -59,9 +57,14 @@ namespace WeatherLab.Data
                         {
                             this.attrs.Add(new Attribut(Attrs[i], t));
                         }
+                        else if(datas[i + 1] == "")
+                        {
+                            this.attrs.Add(new Attribut(Attrs[i], 0f));
+                        }
                         else
                         {
-                            throw new FormatException("Type not a float!");
+                            //Console.WriteLine(Attrs[i]);
+                            throw new FormatException("Type not a float: "+datas[i + 1]);
                         }
                     }
                     break;
@@ -75,8 +78,8 @@ namespace WeatherLab.Data
                 case "csv":
                 case "CSV":
                     string outp = "";
-                    outp += date.Day+"/"+date.Month+"/"+date.Year;
-                    Console.WriteLine(attrs.Count);
+                    outp += date.Day+"."+date.Month+"."+date.Year;
+                    //Console.WriteLine(attrs.Count);
                     foreach(Attribut i in attrs)
                     {
                         outp += ";" + i.getValeur();
@@ -150,6 +153,7 @@ namespace WeatherLab.Data
         public void afficher()
         {
             Console.WriteLine("Donnees {");
+            Console.WriteLine("\tdate : {0}.{1}.{2}", date.Day, date.Month, date.Year);
             foreach (Attribut i in attrs)
             {
                 Console.WriteLine("\t{0} : {1},", i.getKey(), i.getValeur());
