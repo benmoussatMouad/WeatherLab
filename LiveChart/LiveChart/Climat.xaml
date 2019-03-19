@@ -1,0 +1,72 @@
+﻿<Page x:Class="LiveChart.Climat" Background="Transparent"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:LiveChart"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Climat">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Choisir la wilaya :" Foreground="White" FontSize="20" VerticalAlignment="Center" Margin="60,0,30,0"/>
+            <ComboBox x:Name="wilaya" Margin="20" VerticalAlignment="Center" SelectionChanged="Wilaya_SelectionChanged">
+                <ComboBoxItem>01- Adrar</ComboBoxItem>
+                <ComboBoxItem>02- Chlef</ComboBoxItem>
+                <ComboBoxItem>03- Laghouat</ComboBoxItem>
+                <ComboBoxItem>04- Oum El Bouaghi</ComboBoxItem>
+                <ComboBoxItem>05- Batna</ComboBoxItem>
+                <ComboBoxItem>06- Béjaia</ComboBoxItem>
+                <ComboBoxItem>07- Biskra</ComboBoxItem>
+                <ComboBoxItem>08- Béchar</ComboBoxItem>
+                <ComboBoxItem>09- Blida</ComboBoxItem>
+                <ComboBoxItem>10- Bouira</ComboBoxItem>
+                <ComboBoxItem>11- Tamenrasset</ComboBoxItem>
+                <ComboBoxItem>12- Tébessa</ComboBoxItem>
+                <ComboBoxItem>13- Tlemcen</ComboBoxItem>
+                <ComboBoxItem>14- Tiaret</ComboBoxItem>
+                <ComboBoxItem>15- Tizi-Ouzou</ComboBoxItem>
+                <ComboBoxItem>16- Alger</ComboBoxItem>
+                <ComboBoxItem>17- Djelfa</ComboBoxItem>
+                <ComboBoxItem>18- Jijel</ComboBoxItem>
+                <ComboBoxItem>19- Sétif</ComboBoxItem>
+                <ComboBoxItem>20- Saida</ComboBoxItem>
+                <ComboBoxItem>21- Skikda</ComboBoxItem>
+                <ComboBoxItem>22- Sidi Bel Abbès</ComboBoxItem>
+                <ComboBoxItem>23- Annaba</ComboBoxItem>
+                <ComboBoxItem>24- Guelma</ComboBoxItem>
+                <ComboBoxItem>25- Constantine</ComboBoxItem>
+                <ComboBoxItem>26- Médéa</ComboBoxItem>
+                <ComboBoxItem>27- Mostaganem</ComboBoxItem>
+                <ComboBoxItem>28- M'Sila</ComboBoxItem>
+                <ComboBoxItem>29- Mascara</ComboBoxItem>
+                <ComboBoxItem>30- Ouargla</ComboBoxItem>
+                <ComboBoxItem>31- Oran</ComboBoxItem>
+                <ComboBoxItem>32- El Bayadh</ComboBoxItem>
+                <ComboBoxItem>33- Illizi</ComboBoxItem>
+                <ComboBoxItem>34- Bordj Bou Arreridj</ComboBoxItem>
+                <ComboBoxItem>35- Boumerdes</ComboBoxItem>
+                <ComboBoxItem>36- El Taref</ComboBoxItem>
+                <ComboBoxItem>37- Tindouf</ComboBoxItem>
+                <ComboBoxItem>38- Tissemsilt</ComboBoxItem>
+                <ComboBoxItem>39- El Oued</ComboBoxItem>
+                <ComboBoxItem>40- Khenchla</ComboBoxItem>
+                <ComboBoxItem>41- Souk Ahras</ComboBoxItem>
+                <ComboBoxItem>42- Tipaza</ComboBoxItem>
+                <ComboBoxItem>43- Mila</ComboBoxItem>
+                <ComboBoxItem>44- Ain Defla</ComboBoxItem>
+                <ComboBoxItem>45- Naâma</ComboBoxItem>
+                <ComboBoxItem>46- Ain Témouchent</ComboBoxItem>
+                <ComboBoxItem>47- Ghardia</ComboBoxItem>
+                <ComboBoxItem>48- Relizane</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+        <TextBlock Name="climat" Grid.Row="1" TextAlignment="Center" Margin="15" Text="{Binding textblock}"/>
+        
+    </Grid>
+</Page>
