@@ -62,9 +62,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="map.xaml.cs">
-      <DependentUpon>map.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -77,10 +74,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="map.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -109,17 +102,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BITS.UI.WPF">
-      <Version>1.8.9</Version>
-    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>2.0.0-alpha0212</Version>
     </PackageReference>
     <PackageReference Include="MaterialDesignThemes">
       <Version>2.5.1-ci1322</Version>
-    </PackageReference>
-    <PackageReference Include="Syncfusion.SfMaps.WPF">
-      <Version>16.4.0.54</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
