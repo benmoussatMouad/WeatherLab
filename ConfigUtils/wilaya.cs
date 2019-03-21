@@ -23,5 +23,30 @@ namespace ConfigUtils
             this.attrs = attrs;
             this.code = code;
         }
+
+        public void ajouterAttr(string nom, string abr)
+        {
+            attrs.Add(nom, abr);
+        }
+
+        public void supprimerAttr(string nom)
+        {
+            attrs.Remove(nom);
+        }
+
+        public void modifierAttr(string nom, string abr)
+        {
+            attrs[nom] = abr;
+        }
+
+        public string[] getNomAttrs()
+        {
+            return attrs.Keys.ToArray();
+        }
+
+        public string getAttr(string nom)
+        {
+            return attrs[nom];
+        }
     }
 }

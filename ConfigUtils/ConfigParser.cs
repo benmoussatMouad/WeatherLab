@@ -10,7 +10,7 @@ namespace ConfigUtils
 {
     class ConfigParser
     {
-        public Dictionary<string, Wilaya> wilayas { get; set; }
+        Dictionary<string, Wilaya> wilayas { get; set; }
 
         public ConfigParser()
         {
@@ -20,6 +20,31 @@ namespace ConfigUtils
         public ConfigParser(Dictionary<string, Wilaya> wilayas)
         {
             this.wilayas = wilayas;
+        }
+
+        public void ajouterWilaya(string nom, Wilaya wil)
+        {
+            wilayas.Add(nom, wil);
+        }
+
+        public void supprimerWilaya(string nom)
+        {
+            wilayas.Remove(nom);
+        }
+
+        public void modifierWilaya(string nom, Wilaya wil)
+        {
+            wilayas[nom] = wil;
+        }
+
+        public string[] getNomWilayas()
+        {
+            return wilayas.Keys.ToArray();
+        }
+
+        public Wilaya getWilaya(string nom)
+        {
+            return wilayas[nom];
         }
 
         public void export(string config)
