@@ -6,3 +6,4 @@ obj/
 .vs/
 Program.cs
 Weatheria/
+packages/
