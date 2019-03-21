@@ -12,8 +12,9 @@ using WeatherLab.Data;
 namespace WeatherLab.PredictionSystem.Utils
 {
     /// <summary>
-    /// This is the class that will call the DataSet, it will be accessed from different parts of the program
-    /// Once the path entered by the user, DataRetreiver will load and manipulate the DataSet
+    /// This is the class that will call the DataSet.
+    ///  DataRetreiver will load and manipulate the DataSet and create from the correspendent dataset a
+    /// list of prediction couples.
     /// </summary>
     class DataRetreiver
     {
@@ -34,25 +35,21 @@ namespace WeatherLab.PredictionSystem.Utils
         private List<PredictionCouple>  observationsTable;
 
         //The DataSet we want to load
-        private ManipDS dataSet;
+        private ManipDS _datatSet;
 
-        public void SetQuery(Query aQuery)
+        public void SetQuery(Query query)
         {
-            query = aQuery;
-            
-            HandleQuery(query);
+            this.query = query;
         }
 
 
-        public void HandleQuery(Query _query)
+        public void HandleQuery()
         {
 
             //TODO: this might generate some expections, take care of it
-             //_path = getWilayaPath(_query.RequestedWilaya);
+             //_path = getWilayaPath(query.RequestedWilaya);
             
-           
-            
-            switch (_query.Date.Month)
+            switch (query.Date.Month)
             {
                 case 1:
                 case 2:
@@ -79,28 +76,25 @@ namespace WeatherLab.PredictionSystem.Utils
 
         //public PredictionCouple retreiveData();
 
-
-
-
         public void GatherData()
         {
-            dataSet = new ManipDS(_path);
+            _datatSet = new ManipDS(_path);
+            
             //Le partie du dataset contenant tous les observations de la meme saison
-            _donnees = dataSet.getSaison(saison);
-            _donneesSaisonSuivante = dataSet.getSaison(saison + 1); //et la saison suivante
+            _donnees = _datatSet.getSaison(saison);
+            _donneesSaisonSuivante = _datatSet.getSaison(saison + 1); //et la saison suivante
             
             // having the number of all observations, Initilizing the observation table.
             observationsTable = new List<PredictionCouple>(_donnees.Count); 
             
             int delay = query.Duration;
             int numberOfParameters = query.ParameterKeys.Count;
-
-           
             
             
             
 
             //TODO: Fill the observationsTable with observation according to parameters keys
+            //::::::::::::::
             foreach (Donnee donnee in _donnees)
             {
                 //Allocating new space for the double table
@@ -117,6 +111,8 @@ namespace WeatherLab.PredictionSystem.Utils
                     future.Append(_donnees[_donnees.IndexOf(donnee) + delay].GetAttr(key));
                     
                 }
+                
+                
                 observationsTable.Add(new PredictionCouple(past, future));
                 
             }
