@@ -23,6 +23,6 @@
             <Button x:Name="Comparaison" Margin="25" Content="Comparaison"  Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Click="Comparaison_Click"  />
         </StackPanel> 
         <Frame  Grid.Row="2" Name="contenu"/>
-        
+       
     </Grid>
 </Page>

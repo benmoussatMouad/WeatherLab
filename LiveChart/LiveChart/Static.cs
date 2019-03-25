@@ -1,30 +1,31 @@
 ﻿using MathNet.Numerics.Statistics;
+using System.Collections.Generic;
 
 namespace LiveChart
 {
-    class Static
+    public static class Static
     {
-        public double Moyenne(double[] Tab)
+        public static double Moyenne(List<double> Tab)
         {
             return Statistics.Mean(Tab);
         }
-        public double EcartType(double[] Tab)
+        public static double EcartType(List<double> Tab)
         {
             return Statistics.StandardDeviation(Tab);
         }
-        public double Minimum(double[] Tab)
+        public static double Minimum(List<double> Tab)
         {
             return Statistics.Minimum(Tab);
         }
-        public double Maximum(double[] Tab)
+        public static double Maximum(List<double> Tab)
         {
             return Statistics.Maximum(Tab);
         }
-        public double Mediane(double[] Tab)
+        public static double Mediane(List<double> Tab)
         {
             return Statistics.Median(Tab);
         }
-        public double Variance(double[] Tab)
+        public static double Variance(List<double> Tab)
         {
             return Statistics.Variance(Tab);
         }

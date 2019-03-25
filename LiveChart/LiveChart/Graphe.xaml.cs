@@ -23,9 +23,12 @@ namespace LiveChart
     public partial class Graphe : Page
     {
         public Boolean firstgraph = true;
+        public Boolean done = false;
+
         public Graphe()
         {
             InitializeComponent();
+            done = true;
             date1.SelectedDate = DateTime.Today;
             date2.SelectedDate = DateTime.Today;
         }
@@ -325,8 +328,11 @@ namespace LiveChart
             }
             else
             {
-                Chart.AxisY.Add(new Axis { Title = "Température", LabelFormatter = T.Formatter });
-                Chart.Series.Add(new LineSeries { Title = "Température", ScalesYAt = Chart.AxisY.Count - 1, Values = T.Values });
+                var converter = new BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#7B9EAE");
+
+                Chart.AxisY.Add(new Axis { Title = "Température", LabelFormatter = T.Formatter, Foreground = brush });
+                Chart.Series.Add(new LineSeries { Title = "Température", ScalesYAt = Chart.AxisY.Count - 1, Values = T.Values, Stroke = brush, Fill = Brushes.Transparent });
                 firstgraph = false;
                 titre.Text = GetTitle();
             }
@@ -349,8 +355,11 @@ namespace LiveChart
             }
             else
             {
-                Chart.AxisY.Add(new Axis { Title = "Humidité", LabelFormatter = H.Formatter });
-                Chart.Series.Add(new LineSeries { Title = "Humidité", ScalesYAt = Chart.AxisY.Count - 1, Values = H.Values });
+                var converter = new BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#E8ECF1");
+
+                Chart.AxisY.Add(new Axis { Title = "Humidité", LabelFormatter = H.Formatter, Foreground = brush });
+                Chart.Series.Add(new LineSeries { Title = "Humidité", ScalesYAt = Chart.AxisY.Count - 1, Values = H.Values, Stroke = brush, Fill = Brushes.Transparent });
                 firstgraph = false;
                 titre.Text = GetTitle();
             }
@@ -372,8 +381,10 @@ namespace LiveChart
             }
             else
             {
-                Chart.AxisY.Add(new Axis { Title = "Vitesse du vent", LabelFormatter = VV.Formatter });
-                Chart.Series.Add(new LineSeries { Title = "Vitesse du vent", ScalesYAt = Chart.AxisY.Count - 1, Values = VV.Values });
+                var converter = new BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#707070");
+                Chart.AxisY.Add(new Axis { Title = "Vitesse du vent", LabelFormatter = VV.Formatter, Foreground = brush });
+                Chart.Series.Add(new LineSeries { Title = "Vitesse du vent", ScalesYAt = Chart.AxisY.Count - 1, Values = VV.Values, Stroke = brush, Fill = Brushes.Transparent });
                 firstgraph = false;
                 titre.Text = GetTitle();
             }
@@ -396,8 +407,10 @@ namespace LiveChart
             }
             else
             {
-                Chart.AxisY.Add(new Axis { Title = "Direction du vent", LabelFormatter = DV.Formatter });
-                Chart.Series.Add(new LineSeries { Title = "Direction du vent", ScalesYAt = Chart.AxisY.Count - 1, Values = DV.Values });
+                var converter = new BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#E4E4E4");
+                Chart.AxisY.Add(new Axis { Title = "Direction du vent", LabelFormatter = DV.Formatter, Foreground = brush });
+                Chart.Series.Add(new LineSeries { Title = "Direction du vent", ScalesYAt = Chart.AxisY.Count - 1, Values = DV.Values, Stroke = brush, Fill = Brushes.Transparent });
                 firstgraph = false;
                 titre.Text = GetTitle();
             }
@@ -419,8 +432,10 @@ namespace LiveChart
             }
             else
             {
-                Chart.AxisY.Add(new Axis { Title = "Précipitation", LabelFormatter = T.Formatter });
-                Chart.Series.Add(new LineSeries { Title = "Précipitation", ScalesYAt = Chart.AxisY.Count - 1, Values = T.Values });
+                var converter = new BrushConverter();
+                var brush = (Brush)converter.ConvertFromString("#4BEEA7");
+                Chart.AxisY.Add(new Axis { Title = "Précipitation", LabelFormatter = T.Formatter, Foreground = brush });
+                Chart.Series.Add(new LineSeries { Title = "Précipitation", ScalesYAt = Chart.AxisY.Count - 1, Values = T.Values, Stroke = brush, Fill = Brushes.Transparent });
                 firstgraph = false;
                 titre.Text = GetTitle();
             }
@@ -678,9 +693,12 @@ namespace LiveChart
 
         private void Wilaya_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
-            titre.Text = "";
-            /* On change les donnés*/
+            if (done)
+            {
+                TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
+                titre.Text = "";
+                /* On change les donnés*/
+            }
         }
 
         private void Date1_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

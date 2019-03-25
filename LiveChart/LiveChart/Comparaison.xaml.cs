@@ -25,6 +25,7 @@ namespace LiveChart
         public Comparaison()
         {
             InitializeComponent();
+            done = true;
             date1.SelectedDate = date2.SelectedDate = DateTime.Today;
         }
         /**********   Méthodes  **************/
@@ -281,14 +282,7 @@ namespace LiveChart
 
         private void TemperatureCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (done)
-            {
-                MessageBox.Show("Vous ne pouvez pas effectuer deux choix au meme temps");
-                this.TemperatureCheckbox.IsChecked = false;
-            }
-            else
-            {
-                done = true;
+            this.HumiditeCheckbox.IsChecked = this.VitesseVentCheckbox.IsChecked = this.DirectionVentCheckbox.IsChecked = this.PrecipitationCheckbox.IsChecked = false;
                 //On recipere les donnes des deux Wilaya 
                 ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
                 DataGraphClass Wilaya1 = new DataGraphClass("Température", Values);
@@ -301,23 +295,17 @@ namespace LiveChart
                 //On affecte les titres
                 X1.Title = GetWilaya1();
                 X2.Title = GetWilaya2();
-                Y.Title = "Température (°)";
-                titre.Text = GetTitle();
-            }
+                Y.Title = "Température";
+            Y.LabelFormatter = Wilaya1.Formatter;
+            titre.Text = GetTitle();
+            
         }
 
         private void HumiditeCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (done)
-            {
-                MessageBox.Show("Vous ne pouvez pas effectuer deux choix au meme temps");
-                this.HumiditeCheckbox.IsChecked = false;
-            }
-            else
-            {
-                done = true;
-                //On recipere les donnes des deux Wilaya 
-                ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
+            this.TemperatureCheckbox.IsChecked = this.VitesseVentCheckbox.IsChecked = this.DirectionVentCheckbox.IsChecked = this.PrecipitationCheckbox.IsChecked = false;
+            //On recipere les donnes des deux Wilaya 
+            ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
                 DataGraphClass Wilaya1 = new DataGraphClass("Humidité", Values);
                 DataGraphClass Wilaya2 = new DataGraphClass("Humidité", Values);
                 ///On affecte les valeurs
@@ -327,23 +315,16 @@ namespace LiveChart
                 //On affecte les titres
                 X1.Title = GetWilaya1();
                 X2.Title = GetWilaya2();
-                Y.Title = "Humidité (%)";
-                titre.Text = GetTitle();
-            }
+                Y.Title = "Humidité";
+            Y.LabelFormatter = Wilaya1.Formatter;
+            titre.Text = GetTitle();
         }
             
         private void DirectionVentCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (done)
-            {
-                MessageBox.Show("Vous ne pouvez pas effectuer deux choix au meme temps");
-                this.DirectionVentCheckbox.IsChecked = false;
-            }
-            else
-            {
-                done = true;
-                //On recipere les donnes des deux Wilaya 
-                ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
+            this.HumiditeCheckbox.IsChecked = this.VitesseVentCheckbox.IsChecked = this.TemperatureCheckbox.IsChecked = this.PrecipitationCheckbox.IsChecked = false;
+            //On recipere les donnes des deux Wilaya 
+            ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
                 DataGraphClass Wilaya1 = new DataGraphClass("Direction du vent", Values);
                 DataGraphClass Wilaya2 = new DataGraphClass("Direction du vent", Values);
                 ///On affecte les valeurs
@@ -353,49 +334,35 @@ namespace LiveChart
                 //On affecte les titres
                 X1.Title = GetWilaya1();
                 X2.Title = GetWilaya2();
-                Y.Title = "Direction du vent (°)";
-                titre.Text = GetTitle();
-            }
+                Y.Title = "Direction du vent";
+             Y.LabelFormatter = Wilaya1.Formatter;
+            titre.Text = GetTitle();
         }
 
         private void VitesseVentCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (done)
-            {
-                MessageBox.Show("Vous ne pouvez pas effectuer deux choix au meme temps");
-                this.VitesseVentCheckbox.IsChecked = false;
-            }
-            else
-            {
-                done = true;
-                //On recipere les donnes des deux Wilaya 
-                ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
-                DataGraphClass Wilaya1 = new DataGraphClass("Vitesse du vent", Values);
-                DataGraphClass Wilaya2 = new DataGraphClass("Vitesse du vent", Values);
-                ///On affecte les valeurs
-                X1.Values = Wilaya1.Values;
-                X2.Values = Wilaya2.Values;
-
-                //On affecte les titres
-                X1.Title = GetWilaya1();
-                X2.Title = GetWilaya2();
-                Y.Title = "Vitesse du vent (km/h)";
-                titre.Text = GetTitle();
-            }
+            this.HumiditeCheckbox.IsChecked = this.TemperatureCheckbox.IsChecked = this.DirectionVentCheckbox.IsChecked = this.PrecipitationCheckbox.IsChecked = false;
+            //On recipere les donnes des deux Wilaya 
+            ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
+            DataGraphClass Wilaya1 = new DataGraphClass("Vitesse du vent", Values);
+            DataGraphClass Wilaya2 = new DataGraphClass("Vitesse du vent", Values);
+            ///On affecte les valeurs
+            X1.Values = Wilaya1.Values;
+            X2.Values = Wilaya2.Values;
+                
+            //On affecte les titres
+            X1.Title = GetWilaya1();
+            X2.Title = GetWilaya2();
+            Y.Title = "Vitesse du vent";
+            Y.LabelFormatter = Wilaya1.Formatter;
+            titre.Text = GetTitle();
         }
 
         private void PrecipitationCheckbox_Checked(object sender, RoutedEventArgs e)
         {
-            if (done)
-            {
-                MessageBox.Show("Vous ne pouvez pas effectuer deux choix au meme temps");
-                this.PrecipitationCheckbox.IsChecked = false;
-            }
-            else
-            {
-                done = true;
-                //On recipere les donnes des deux Wilaya 
-                ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
+            this.HumiditeCheckbox.IsChecked = this.VitesseVentCheckbox.IsChecked = this.DirectionVentCheckbox.IsChecked = this.TemperatureCheckbox.IsChecked = false;
+            //On recipere les donnes des deux Wilaya 
+            ChartValues<double> Values = new ChartValues<double> { 3, 4, 6, 8 };
                 DataGraphClass Wilaya1 = new DataGraphClass("Précipitation", Values);
                 DataGraphClass Wilaya2 = new DataGraphClass("Précipitation", Values);
                 ///On affecte les valeurs
@@ -405,23 +372,23 @@ namespace LiveChart
                 //On affecte les titres
                 X1.Title = GetWilaya1();
                 X2.Title = GetWilaya2();
-                Y.Title = "Précipitation (mm)";
-                titre.Text = GetTitle();
-            }
+                Y.Title = "Précipitation";
+            Y.LabelFormatter = Wilaya1.Formatter;
+            titre.Text = GetTitle();
         }
-        
+
 
         /*******************    UnChecked    *******************/
         private void TemperatureCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             Uncheked();
         }
-        
+
         private void HumiditeCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             Uncheked();
         }
-                
+
         private void DirectionVentCheckbox_Unchecked(object sender, RoutedEventArgs e)
         {
             Uncheked();
@@ -473,16 +440,22 @@ namespace LiveChart
 
         private void Wilaya1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
-            titre.Text = "";
-            //On change les donnés
+            if (done)
+            {
+                TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
+                titre.Text = "";
+                //On change les donnés
+            }
         }
 
         private void Wilaya2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
-            titre.Text = "";
-            //On change les donnés
+            if (done)
+            {
+                TemperatureCheckbox.IsChecked = HumiditeCheckbox.IsChecked = VitesseVentCheckbox.IsChecked = DirectionVentCheckbox.IsChecked = PrecipitationCheckbox.IsChecked = false;
+                titre.Text = "";
+                //On change les donnés
+            }
         }
     }
 

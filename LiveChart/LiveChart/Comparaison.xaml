@@ -11,7 +11,7 @@
 
     <Grid Background="#7b9eae">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -58,7 +58,7 @@
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal"> <!--Choix de la wilaya 1-->
                 <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center"/>
-                <ComboBox x:Name="wilaya1" Margin="10" VerticalAlignment="Center" SelectionChanged="Wilaya1_SelectionChanged">
+                <ComboBox x:Name="wilaya1" Margin="10" VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="Wilaya1_SelectionChanged">
                     <ComboBoxItem>01- Adrar</ComboBoxItem>
                     <ComboBoxItem>02- Chlef</ComboBoxItem>
                     <ComboBoxItem>03- Laghouat</ComboBoxItem>
@@ -111,7 +111,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"><!--Choix de la wilaya 2-->
                 <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center"/>
-                <ComboBox x:Name="wilaya2" Margin="10"  VerticalAlignment="Center" SelectionChanged="Wilaya2_SelectionChanged">
+                <ComboBox x:Name="wilaya2" Margin="10"  VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="Wilaya2_SelectionChanged">
                     <ComboBoxItem>01- Adrar</ComboBoxItem>
                     <ComboBoxItem>02- Chlef</ComboBoxItem>
                     <ComboBoxItem>03- Laghouat</ComboBoxItem>
@@ -177,14 +177,29 @@
             <StackPanel Orientation="Vertical"> <!--Choix des parametres-->
                 <TextBlock Text="Choix du paramétre :" FontWeight ="DemiBold"/>
                 <StackPanel Orientation="Vertical" Margin="10">
-                    <CheckBox x:Name="TemperatureCheckbox" Content="Temperture" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked" />
-                    <CheckBox x:Name="HumiditeCheckbox" Content="Humidite" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked" />
-                    <CheckBox x:Name="VitesseVentCheckbox" Content="Vitesse du vent" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked"  />
-                    <CheckBox x:Name="DirectionVentCheckbox" Content="Direction du vent" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked"  />
-                    <CheckBox x:Name="PrecipitationCheckbox" Content="Précipitation" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked"  />
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ToggleButton x:Name="TemperatureCheckbox" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked"/>
+                        <TextBlock Text="  Température"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ToggleButton x:Name="HumiditeCheckbox" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked"/>
+                        <TextBlock Text="  Humidité"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ToggleButton  x:Name="VitesseVentCheckbox" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked"/>
+                        <TextBlock Text="  Vitesse du vent"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ToggleButton x:Name="DirectionVentCheckbox" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked"/>
+                        <TextBlock Text="  Direction du vent"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <ToggleButton x:Name="PrecipitationCheckbox" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked"/>
+                        <TextBlock Text="  Précipitation"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="titre" FontWeight="SemiBold" Grid.Column="1" Grid.Row="1" />
+        <TextBlock x:Name="titre" FontWeight="SemiBold" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"/>
     </Grid>
 </Page>

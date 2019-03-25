@@ -43,7 +43,7 @@ namespace LiveChart
         {
             Tableau.Foreground = Brushes.Aqua;
             Graphe.Foreground = Climat.Foreground = Comparaison.Foreground = Brushes.White;
-            contenu.Navigate(new Uri("Climat.xaml", UriKind.RelativeOrAbsolute));
+            contenu.Navigate(new Uri("Tableau.xaml", UriKind.RelativeOrAbsolute));
         }
 
         private void Comparaison_Click(object sender, RoutedEventArgs e)

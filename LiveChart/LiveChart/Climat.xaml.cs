@@ -21,11 +21,11 @@ namespace LiveChart
     /// </summary>
     public partial class Climat : Page
     {
-        private string Climatpath = @"C:\Users\acer\Desktop\Climat.txt";
-        private List<string> ClimatList = new List<string>();
+        private string Climatpath = @"C:\Users\acer\Desktop\Climat\"; //Contient le chemin vers le dossier Climat
+        private List<string> ClimatList = new List<string>();   //Contient touts les lignes de texte qu'il faut afficher
         public Climat()
         {
-            ClimatList = File.ReadAllLines(Climatpath).ToList();
+            ClimatList = File.ReadAllLines(Climatpath+ "Climat.txt").ToList();
             InitializeComponent();
         }
      /*   private void InitWilaya()
@@ -51,6 +51,14 @@ namespace LiveChart
         private void Wilaya_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             this.climat.Text = ClimatList.ElementAt(wilaya.SelectedIndex);
+            string imagePath = Climatpath + (this.wilaya.SelectedIndex + 1) + ".jpg";
+            Image image = new Image();
+            ImageBrush brush = new ImageBrush();
+
+            image.Source = new BitmapImage(new Uri(imagePath));
+            brush.ImageSource = image.Source;
+            this.grid.Background = brush;
         }
     }
 }
+    

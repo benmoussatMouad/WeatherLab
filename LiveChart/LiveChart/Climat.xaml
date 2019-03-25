@@ -8,8 +8,8 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Climat">
 
-    <Grid>
-        <Grid.RowDefinitions>
+    <Grid x:Name="grid">
+       <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -66,7 +66,8 @@
                 <ComboBoxItem>48- Relizane</ComboBoxItem>
             </ComboBox>
         </StackPanel>
-        <TextBlock Name="climat" Grid.Row="1" TextAlignment="Center" Margin="15" Text="{Binding textblock}"/>
+        <WrapPanel></WrapPanel>
+        <TextBlock Name="climat" Grid.Row="1" TextAlignment="Center" Margin="15" Text="{Binding textblock}" TextWrapping="Wrap" Foreground="White"/>
         
     </Grid>
 </Page>
