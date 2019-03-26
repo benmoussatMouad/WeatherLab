@@ -118,5 +118,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ConfigUtils" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
