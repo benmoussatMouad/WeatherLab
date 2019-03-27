@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using WeatherLab.PredictionSystem.DailyMeteo;
 using WeatherLab.PredictionSystem.Utils;
 using WeatherLab.PredictionSystem.Common;
@@ -76,17 +72,19 @@ namespace WeatherLab.PredictionSystem
         /// </summary>
         public void StartPrediction()
         {
-            if(dailyMeteoSystem.Observation != null)
+            if (dailyMeteoSystem.Observation != null)
             {
                 predictionManager.DailyObservation = dailyMeteoSystem.Observation;
 
-              
+
                 queryManager.GenerateQuery(dailyMeteoSystem.Observation);
 
+                PredictionCouple.NUMBER_OF_PARAMETERS = dailyMeteoSystem.Observation.Parameters.Count;
+                
                 /// DataRetreiver.SetQuery(queryManager.query);
                 /// DataRetreiver.GatherData();
                 ///predictionManager.PredictionCouples = DataRetreiver.RetreiveData();
-                if(predictionManager.PredictionCouples != null)
+                if (predictionManager.PredictionCouples != null)
                 {
                     predictionManager.Predict();
                     resultHandler.Predictions = predictionManager.Predictions; 

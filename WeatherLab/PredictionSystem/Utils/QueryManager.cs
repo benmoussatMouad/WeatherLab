@@ -41,7 +41,7 @@ namespace WeatherLab.PredictionSystem.Utils
             }
             query.Date = observation.Date;
             query.Duration = durationInDays;
-            query.RequestedWilaya = observation.Wilaya;
+            query.RequestedWilaya = (string) observation.Wilaya.Value;
 
         }
 

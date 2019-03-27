@@ -8,7 +8,7 @@ using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 using MathNet.Numerics.Statistics;
 using WeatherLab.PredictionSystem.Common;
-namespace PredictionFeature
+namespace WeatherLab.PredictionSystem.Utils
 {
     /// <summary>
     /// Static Class Containing static methods used for making predictions via PredictionManager

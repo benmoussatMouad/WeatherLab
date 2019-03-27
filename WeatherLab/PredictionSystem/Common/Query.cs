@@ -16,7 +16,7 @@ namespace WeatherLab.PredictionSystem.Common
 
         public Query()
         {
-
+            parameterKeys = new List<string>();
         }
         public List<string> ParameterKeys
         {
