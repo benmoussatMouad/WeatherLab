@@ -54,9 +54,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\AttributFormatException.cs" />
-    <Compile Include="Data\Correspondence.cs" />
-    <Compile Include="Data\IndexNotCompleteException.cs" />
     <Compile Include="Data\IndexNotFoundException.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
@@ -93,6 +90,10 @@
     <Compile Include="Data\Donnee.cs" />
     <Compile Include="Data\ManipDS.cs" />
     <Compile Include="Data\StructDS.cs" />
+    <Compile Include="Data\AttributFormatException.cs" />
+    <Compile Include="Data\IndexNotCompleteException.cs" />
+    <Compile Include="ConfigUtils\ConfigParser.cs" />
+    <Compile Include="ConfigUtils\Wilaya.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -117,9 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ConfigUtils" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

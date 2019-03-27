@@ -13,19 +13,18 @@ namespace WeatherLab.Data
         public ManipDS(string path)
         {
             dataset = new StructDS(path);
-            dataset.Load();
         }
 
         // Cette fonction retourne une listes de toutes les données d'une saison donnée de toutes les années
         public List<Donnee> getSaison(Saison a)
         {
-            return dataset.Donnees.Where(x => x.GetSaison() == a).ToList();
+            return dataset.Donnees.Where(x => x.GetSaison() == a).OrderBy(x=> x.GetDate()).ToList();
         }
 
         // Cette fonction retourne une listes de toutes les données d'un mois donné de toutes les années
         public List<Donnee> getMonth(int i)
         {
-            return dataset.Donnees.Where(x => x.GetMonth() == i).ToList();
+            return dataset.Donnees.Where(x => x.GetMonth() == i).OrderBy(x => x.GetDate()).ToList();
         }
 
         // Cette fonction retourne une liste des données dans un intervalles de jour de toutes les années
@@ -35,22 +34,24 @@ namespace WeatherLab.Data
             {
                 Console.WriteLine("hnaaaaa");
                 return dataset.Donnees.Where(x => ((x.GetMonth() > month1 && x.GetMonth() < month2) || (x.GetMonth() == month1 && x.GetDay() >= day1)
-                                          || (x.GetMonth() == month2 && x.GetDay() <= day2))).ToList();
+                                          || (x.GetMonth() == month2 && x.GetDay() <= day2))).OrderBy(x => x.GetDate()).ToList();
             }
             else if (month1 == month2)
             {
                 if (day1 > day2)
                 {
-                    return dataset.Donnees.Where(x => !(x.GetMonth() == month1 && x.GetDay() > day2 && x.GetDay() < day1)).ToList();
+                    return dataset.Donnees.Where(x => !(x.GetMonth() == month1 && x.GetDay() > day2 && x.GetDay() < day1))
+                        .OrderBy(x => x.GetDate()).ToList();
                 }
                 else
                 {
 
-                    return dataset.Donnees.Where(x => (x.GetMonth() == month1 && x.GetDay() >= day1 && x.GetDay() <= day2)).ToList();
+                    return dataset.Donnees.Where(x => (x.GetMonth() == month1 && x.GetDay() >= day1 && x.GetDay() <= day2))
+                        .OrderBy(x => x.GetDate()).ToList();
                 }
             }
             else return dataset.Donnees.Where(x => !((x.GetMonth() > month2 && x.GetMonth() < month1) || (x.GetMonth() == month2 && x.GetDay() >= day2)
-                                          || (x.GetMonth() == month1 && x.GetDay() <= day1))).ToList();
+                                          || (x.GetMonth() == month1 && x.GetDay() <= day1))).OrderBy(x => x.GetDate()).ToList();
         }
 
         // Cette fonction retourne une liste des données entre deux dates données
@@ -58,12 +59,20 @@ namespace WeatherLab.Data
         {
             DateTime date1 = new DateTime(year1, month1, day1);
             DateTime date2 = new DateTime(year2, month2, day2,23,59,59);
-            return dataset.Donnees.Where(x => x.GetDate().CompareTo(date1) >= 0 && x.GetDate().CompareTo(date2) <= 0 ).ToList();
+            return dataset.Donnees.Where(x => x.GetDate().CompareTo(date1) >= 0 && x.GetDate().CompareTo(date2) <= 0 )
+                .OrderBy(x => x.GetDate()).ToList();
+        }
+
+        // Cette fonction retourne une liste des données entre deux dates données
+        public List<Donnee> requetteAIntervalle(DateTime date1,DateTime date2)
+        {
+            return dataset.Donnees.Where(x => x.GetDate().CompareTo(date1) >= 0 && x.GetDate().CompareTo(date2) <= 0 )
+                .OrderBy(x => x.GetDate()).ToList();
         }
 
         // Cette fonction retourne le nombre d'années qu'on a dans le dataset
         public int getNbYear()
-        {
+        { 
             return dataset.Donnees.Select(x => x.GetYear()).ToList().Distinct().Count();
         }
 
@@ -83,7 +92,7 @@ namespace WeatherLab.Data
         // Cette fonction retourne une liste des données d'un jour donné de toutes les années
         public List<Donnee> getDay(int day, int month)
         {
-            return dataset.Donnees.Where(x => x.GetDay() == day && x.GetMonth() == month).ToList();
+            return dataset.Donnees.Where(x => x.GetDay() == day && x.GetMonth() == month).OrderBy(x => x.GetDate()).ToList();
         }
 
         // Cette fonction retourne une liste des données d'un jour précis 

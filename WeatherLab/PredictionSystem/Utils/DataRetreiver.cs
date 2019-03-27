@@ -5,26 +5,34 @@ using System.Text;
 using System.Threading.Tasks;
 using WeatherLab.PredictionSystem.Common;
 using WeatherLab.Data;
+using WeatherLab.ConfigUtils;
 
 
 //Started : 21/02/2019
 //Expected end date: 23/02/2019
 namespace WeatherLab.PredictionSystem.Utils
 {
-    /// <summary>
-    /// This is the class that will call the DataSet.
-    ///  DataRetreiver will load and manipulate the DataSet and create from the correspendent dataset a
-    /// list of prediction couples.
-    /// </summary>
+    
     class DataRetreiver
     {
-        //contains the keys for each chosen parameter by the user.
-        //and the chosen date and wilaya
-        private Query query;
-
         private string _path;
 
+        /// <summary>
+        /// This is the class that will call the DataSet.
+        ///  DataRetreiver will load and manipulate the DataSet and create from the correspendent dataset a
+        /// list of prediction couples.
+        /// </summary>
+        
+        
+        private Query query;
+            //contains the keys for each chosen parameter by the user.
+            //and the chosen date and wilaya
+        
+        private Wilaya consideredWilaya;
+            //To get the requested wilaya in the query and use the config tool to communicate with the dataset
+
         private Saison saison;
+            //To get the requested season
 
         //The list of datas (observations) retrieved from the dataset in the same season
         private List<Donnee> _donnees;
@@ -46,8 +54,8 @@ namespace WeatherLab.PredictionSystem.Utils
         public void HandleQuery()
         {
 
-            //TODO: this might generate some expections, take care of it
-             //_path = getWilayaPath(query.RequestedWilaya);
+            consideredWilaya = ConfigParser.getWilaya(query.RequestedWilaya);
+            _path = consideredWilaya.path;
             
             switch (query.Date.Month)
             {
@@ -76,13 +84,22 @@ namespace WeatherLab.PredictionSystem.Utils
 
         //public PredictionCouple retreiveData();
 
-        public void GatherData()
+        public void SetObservationTable()
         {
             _datatSet = new ManipDS(_path);
             
             //Le partie du dataset contenant tous les observations de la meme saison
             _donnees = _datatSet.getSaison(saison);
-            _donneesSaisonSuivante = _datatSet.getSaison(saison + 1); //et la saison suivante
+            
+            _donneesSaisonSuivante = _datatSet.getSaison(
+                ((saison + 1) > Saison.automne) ? Saison.hiver : (saison + 1) //gestion d'une erreur 
+                ); //et la saison suivante
+            
+            
+            //************************************
+            //_donnees = FilterToDays(_donnees);
+            //_donneesSaisonSuivante = FilterToDays(_donneesSaisonsSuivante);
+            //************************************
             
             // having the number of all observations, Initilizing the observation table.
             observationsTable = new List<PredictionCouple>(_donnees.Count); 
@@ -90,11 +107,12 @@ namespace WeatherLab.PredictionSystem.Utils
             int delay = query.Duration;
             int numberOfParameters = query.ParameterKeys.Count;
             
+            //****By tha way, knowing that the attributes in the application are different from
+            //those in the dataset, so we need a conversion. (Line: 115)
+            
             
             
 
-            //TODO: Fill the observationsTable with observation according to parameters keys
-            //::::::::::::::
             foreach (Donnee donnee in _donnees)
             {
                 //Allocating new space for the double table
@@ -105,10 +123,27 @@ namespace WeatherLab.PredictionSystem.Utils
                 {
                     //Filling the tables of doubles, 
                     //TODO: Expections: key might not exist in the Dictionnary
-                    past.Append(donnee.GetAttr(key));
-                    
-                    //TODO: An error might occur, going out of the list, add from the following dataset
-                    future.Append(_donnees[_donnees.IndexOf(donnee) + delay].GetAttr(key));
+                    past.Append( donnee.GetAttr(
+                        consideredWilaya.getAttr(key)
+                        ));
+
+                    try
+                    {
+                        future.Append(
+                            _donnees[_donnees.IndexOf(donnee) + delay].GetAttr(
+                                consideredWilaya.getAttr(key)
+                                ));
+                    }
+                    catch (IndexOutOfRangeException e)
+                    {
+                        //If we go beyond the first list of the current season we will get those in the next season
+                        future.Append(
+                            _donneesSaisonSuivante[_donnees.Count - _donnees.IndexOf(donnee)].GetAttr(
+                                consideredWilaya.getAttr(key)
+                            ));
+                        
+                        throw;
+                    }
                     
                 }
                 
@@ -117,5 +152,13 @@ namespace WeatherLab.PredictionSystem.Utils
                 
             }
         }
+
+        public List<PredictionCouple> GetObservations()
+        {
+            //Supposing that the observation table contains the observations by time, not by day.
+            return observationsTable;
+        }
+        
+        
     }
 }
