@@ -9,7 +9,7 @@ using WeatherLab.ConfigUtils;
 
 
 //Started : 21/02/2019
-//Expected end date: 23/02/2019
+//By: Benmoussat Mouad
 namespace WeatherLab.PredictionSystem.Utils
 {
     
@@ -25,7 +25,7 @@ namespace WeatherLab.PredictionSystem.Utils
         
         
         private Query query;
-            //contains the keys for each chosen parameter by the user.
+        //contains the keys for each chosen parameter by the user.
             //and the chosen date and wilaya
         
         private Wilaya consideredWilaya;
@@ -132,7 +132,7 @@ namespace WeatherLab.PredictionSystem.Utils
                         future.Append(
                             _donnees[_donnees.IndexOf(donnee) + delay].GetAttr(
                                 consideredWilaya.getAttr(key)
-                                ));
+                            ));
                     }
                     catch (IndexOutOfRangeException e)
                     {
@@ -141,7 +141,10 @@ namespace WeatherLab.PredictionSystem.Utils
                             _donneesSaisonSuivante[_donnees.Count - _donnees.IndexOf(donnee)].GetAttr(
                                 consideredWilaya.getAttr(key)
                             ));
-                        
+                    }
+                    catch (Exception e)
+                    {
+                        Console.Write(e);
                         throw;
                     }
                     
