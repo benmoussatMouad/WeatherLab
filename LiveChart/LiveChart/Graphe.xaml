@@ -53,8 +53,8 @@
         </lvc:CartesianChart>
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">   <!--Choix de la wilaya-->
-                <TextBlock Text="Choix de la wilaya : " Margin="10" VerticalAlignment="Center"/>
-                <ComboBox x:Name="wilaya" Margin="10" VerticalAlignment="Center" SelectionChanged="Wilaya_SelectionChanged" SelectedIndex="0">
+                <TextBlock Text="Choix de la wilaya : " Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                <ComboBox x:Name="wilaya" Margin="10" VerticalAlignment="Center" SelectionChanged="Wilaya_SelectionChanged" SelectedIndex="0" Foreground="White">
                     <ComboBoxItem>01- Adrar</ComboBoxItem>
                     <ComboBoxItem>02- Chlef</ComboBoxItem>
                     <ComboBoxItem>03- Laghouat</ComboBoxItem>
@@ -107,25 +107,26 @@
             </StackPanel>
             <StackPanel Orientation="Vertical">       <!--Choix de la date-->
                 <StackPanel Orientation="Horizontal"> <!--Date de début-->
-                    <TextBlock Text="De :" Margin="15" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="date1" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date1_SelectedDateChanged"/>
+                    <TextBlock Text="De :" Margin="15" VerticalAlignment="Center" Foreground="White"/>
+                    <DatePicker x:Name="date1" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date1_SelectedDateChanged" Foreground="White"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal"> <!--Date de fin-->
-                    <TextBlock Text="À : " Margin="15" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="date2" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date2_SelectedDateChanged" />
+                    <TextBlock Text="À : " Margin="15" VerticalAlignment="Center" Foreground="White"/>
+                    <DatePicker x:Name="date2" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date2_SelectedDateChanged" Foreground="White" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical"> <!--Choix des parametres-->
-                <TextBlock Text="Choix des paramétres :" FontWeight ="DemiBold"/>
+                <TextBlock Text="Choix des paramétres :" FontWeight ="DemiBold" Foreground="White"/>
                 <StackPanel Orientation="Vertical" Margin="10">
-                    <CheckBox x:Name="TemperatureCheckbox" Content="Temperture" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked_1" />
-                    <CheckBox x:Name="HumiditeCheckbox" Content="Humidite" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked" />
-                    <CheckBox x:Name="VitesseVentCheckbox" Content="Vitesse du vent" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked" />
-                    <CheckBox x:Name="DirectionVentCheckbox" Content="Direction du vent" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked"  />
-                    <CheckBox x:Name="PrecipitationCheckbox" Content="Précipitation" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked" />
+                    <CheckBox x:Name="TemperatureCheckbox" Foreground="White" Content="Temperture" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked_1" />
+                    <CheckBox x:Name="HumiditeCheckbox" Foreground="White" Content="Humidite" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked" />
+                    <CheckBox x:Name="VitesseVentCheckbox" Foreground="White" Content="Vitesse du vent" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked" />
+                    <CheckBox x:Name="DirectionVentCheckbox" Foreground="White" Content="Direction du vent" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked"  />
+                    <CheckBox x:Name="PrecipitationCheckbox" Foreground="White" Content="Précipitation" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked" />
                 </StackPanel>    
             </StackPanel>
+            <Button Content="Importer les donnés" Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Margin="20" Click="Button_Click"/>
         </StackPanel>
-        <TextBlock x:Name="titre" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" FontWeight="SemiBold" Margin="10"/>
+        <TextBlock x:Name="titre" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" FontWeight="SemiBold" Margin="10" Foreground="White" />
     </Grid>
 </Page>

@@ -76,3 +76,7 @@ C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\LiveChart.csproj.CoreCom
 C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\LiveChart.csproj.CopyComplete
 C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\LiveChart.exe
 C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\LiveChart.pdb
+C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\Interop.Microsoft.Office.Core.dll
+C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\Interop.Microsoft.Office.Interop.Excel.dll
+C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\Interop.VBIDE.dll
+C:\Users\acer\Desktop\2CP\LiveChart\LiveChart\obj\Debug\LiveChart.csproj.ResolveComReference.cache

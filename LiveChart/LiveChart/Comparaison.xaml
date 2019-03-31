@@ -57,8 +57,8 @@
         </lvc:CartesianChart>
         <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal"> <!--Choix de la wilaya 1-->
-                <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center"/>
-                <ComboBox x:Name="wilaya1" Margin="10" VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="Wilaya1_SelectionChanged">
+                <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                <ComboBox x:Name="wilaya1" Margin="10" VerticalAlignment="Center" SelectedIndex="0" Foreground="White" SelectionChanged="Wilaya1_SelectionChanged">
                     <ComboBoxItem>01- Adrar</ComboBoxItem>
                     <ComboBoxItem>02- Chlef</ComboBoxItem>
                     <ComboBoxItem>03- Laghouat</ComboBoxItem>
@@ -110,8 +110,8 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal"><!--Choix de la wilaya 2-->
-                <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center"/>
-                <ComboBox x:Name="wilaya2" Margin="10"  VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="Wilaya2_SelectionChanged">
+                <TextBlock Text="Choix de la wilaya : " FontWeight="SemiBold" Margin="10" VerticalAlignment="Center" Foreground="White"/>
+                <ComboBox x:Name="wilaya2" Margin="10"  VerticalAlignment="Center" SelectedIndex="0" Foreground="White" SelectionChanged="Wilaya2_SelectionChanged">
                     <ComboBoxItem>01- Adrar</ComboBoxItem>
                     <ComboBoxItem>02- Chlef</ComboBoxItem>
                     <ComboBoxItem>03- Laghouat</ComboBoxItem>
@@ -165,41 +165,41 @@
             <StackPanel Orientation="Vertical"><!--Choix de la date-->
                 <StackPanel Orientation="Horizontal">
                     <!--Date de début-->
-                    <TextBlock Text="De :" Margin="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="date1" Width="auto" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date1_SelectedDateChanged"/>
+                    <TextBlock Text="De :" Margin="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="White"/>
+                    <DatePicker x:Name="date1" Width="auto" Margin="10" VerticalAlignment="Center" Foreground="White" SelectedDateChanged="Date1_SelectedDateChanged"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <!--Date de fin-->
-                    <TextBlock Text="À : " Margin="15" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                    <DatePicker x:Name="date2" Width="auto" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date2_SelectedDateChanged" />
+                    <TextBlock Text="À : " Margin="15" FontWeight="SemiBold" VerticalAlignment="Center" Foreground="White"/>
+                    <DatePicker x:Name="date2" Width="auto" Margin="10" VerticalAlignment="Center" Foreground="White" SelectedDateChanged="Date2_SelectedDateChanged" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Vertical"> <!--Choix des parametres-->
-                <TextBlock Text="Choix du paramétre :" FontWeight ="DemiBold"/>
+                <TextBlock Text="Choix du paramétre :" FontWeight ="DemiBold" Foreground="White"/>
                 <StackPanel Orientation="Vertical" Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="3">
                         <ToggleButton x:Name="TemperatureCheckbox" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked"/>
-                        <TextBlock Text="  Température"/>
+                        <TextBlock Text="  Température" Foreground="White"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="3">
-                        <ToggleButton x:Name="HumiditeCheckbox" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked"/>
-                        <TextBlock Text="  Humidité"/>
+                        <ToggleButton x:Name="HumiditeCheckbox"  Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked"/>
+                        <TextBlock Text="  Humidité" Foreground="White"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="3">
                         <ToggleButton  x:Name="VitesseVentCheckbox" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked"/>
-                        <TextBlock Text="  Vitesse du vent"/>
+                        <TextBlock Text="  Vitesse du vent" Foreground="White"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="3">
                         <ToggleButton x:Name="DirectionVentCheckbox" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked"/>
-                        <TextBlock Text="  Direction du vent"/>
+                        <TextBlock Text="  Direction du vent" Foreground="White"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="3">
                         <ToggleButton x:Name="PrecipitationCheckbox" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked"/>
-                        <TextBlock Text="  Précipitation"/>
+                        <TextBlock Text="  Précipitation" Foreground="White"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
-        <TextBlock x:Name="titre" FontWeight="SemiBold" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"/>
+        <TextBlock x:Name="titre" FontWeight="SemiBold" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Foreground="White"/>
     </Grid>
 </Page>

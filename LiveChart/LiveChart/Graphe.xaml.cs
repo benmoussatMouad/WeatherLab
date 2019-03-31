@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using Microsoft.Win32;
 
 namespace LiveChart
 {
@@ -23,7 +24,7 @@ namespace LiveChart
     public partial class Graphe : Page
     {
         public Boolean firstgraph = true;
-        public Boolean done = false;
+        public Boolean done = false; //J'en aurais besoin pour les initialisations des wilayas et des dates
 
         public Graphe()
         {
@@ -305,6 +306,27 @@ namespace LiveChart
             return (value.Content.ToString().Substring(3, value.Content.ToString().Length-3));
         }
                           
+        public LiveCharts.IChartValues GetDataChart (string name)   //Cette méthode retourne des donnés de graphe
+        {           
+           foreach (var item in Chart.Series)
+           {
+                if (item.Title == name)
+                {
+                    return item.Values;
+                }
+           }
+            return (Chart.Series.ElementAt(Chart.Series.Count-1).Values);
+        }
+
+        public List<double> ChartValuesToDouble (LiveCharts.IChartValues Donnes)  //Cette métohde permet de convertir De ChartValues en Liste de double
+        {
+            List<double> D = new List<double>();
+            foreach (var item in Donnes)
+            {
+                D.Add((double)item);
+            }
+            return D;
+        }
         
                                 /*************************/
                                 /******  EVENT   *********/
@@ -731,6 +753,57 @@ namespace LiveChart
                 MessageBox.Show("La date Choisie n'est pas valide");
                 date1.SelectedDate = DateTime.Today;
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            List<ImportData> Data = new List<ImportData>(); //Inputs.periode
+
+            if (this.TemperatureCheckbox.IsChecked == true)
+            {
+                var ChartsData = GetDataChart("Température");       //Je récupere les données des charts
+                var DoubleData = ChartValuesToDouble(ChartsData);   //Je les convertie en liste de double List<double>
+                ImportData TempData = new ImportData(DoubleData, "Température");
+                Data.Add(TempData);
+            }
+
+            if (this.HumiditeCheckbox.IsChecked == true)
+            {
+                var ChartsData = GetDataChart("Humidité");       //Je récupere les données des charts
+                var DoubleData = ChartValuesToDouble(ChartsData);   //Je les convertie en liste de double List<double>
+                ImportData HumData = new ImportData(DoubleData, "Humidité");
+                Data.Add(HumData);
+            }
+
+            if (this.VitesseVentCheckbox.IsChecked == true)
+            {
+                var ChartsData = GetDataChart("Vitesse du vent");       //Je récupere les données des charts
+                var DoubleData = ChartValuesToDouble(ChartsData);   //Je les convertie en liste de double List<double>
+                ImportData VVData = new ImportData(DoubleData, "Vitesse du vent");
+                Data.Add(VVData);
+            }
+
+            if (this.DirectionVentCheckbox.IsChecked == true)
+            {
+                var ChartsData = GetDataChart("Direction du vent");       //Je récupere les données des charts
+                var DoubleData = ChartValuesToDouble(ChartsData);   //Je les convertie en liste de double List<double>
+                ImportData DVData = new ImportData(DoubleData, "Direction du vent");
+                Data.Add(DVData);
+            }
+
+            if (this.PrecipitationCheckbox.IsChecked == true)
+            {
+                var ChartsData = GetDataChart("Précipitation");       //Je récupere les données des charts
+                var DoubleData = ChartValuesToDouble(ChartsData);   //Je les convertie en liste de double List<double>
+                ImportData PrecData = new ImportData(DoubleData, "Précipitation");
+                Data.Add(PrecData);
+            }
+
+            OpenFileDialog openFiledialog = new OpenFileDialog();
+            openFiledialog.Filter = "Text files (*.xlsx)|*.xlsx";
+            openFiledialog.ShowDialog();            //Je recupere le nom du fichier 
+            ExcelClass excel = new ExcelClass(openFiledialog.FileName, 1);
+            excel.WriteRange(Data);
         }
     }
       
