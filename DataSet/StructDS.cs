@@ -24,13 +24,14 @@ using System.Linq;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace WeatherLab.Data
 {
     public class StructDS
     {
+        #region Attributs
+
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 1)]
         [Serializable]
         private struct Index
@@ -63,18 +64,22 @@ namespace WeatherLab.Data
                 _index = value;
             }
         }
-        private List<string> Attrs;
-        public List<Donnee> Donnees { get; }
+
+        private DataSet dataset;
+
+        #endregion
+
+        #region Constructeur
 
         public StructDS(string path)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException();
             this.Path = path;
-            Donnees = new List<Donnee>();
-            Attrs = new List<string>();
 
-            Load();
+            dataset = new DataSet();
+
+            Load("csv");  // par défault
         }
 
         /// <summary>
@@ -90,7 +95,7 @@ namespace WeatherLab.Data
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException();
-            if (!File.Exists(path))
+            if (!File.Exists(index))
                 throw new IndexNotFoundException();
             if (mois < 1 || mois > 12)
                 throw new ArgumentException("mois doit être entre 1 et 12.");
@@ -98,65 +103,51 @@ namespace WeatherLab.Data
             this.Path = path;
             this.index = index;
 
-            this.Donnees = new List<Donnee>();
+            dataset = new DataSet();
 
-            Load(mois, nb_wilaya);
+            Load(mois, nb_wilaya, "csv");
         }
 
+        #endregion
+
+        #region Methodes
+
         /// <summary>
-        /// la méthode permettant de récuperer le fichier et ses attributs
-        /// 
-        ///  qlq améliorations :
-        ///     - traitement des fichiers de différents formats( .csv, .xls, json...)
+        /// récuperer le fichier et ses attributs
         /// </summary>
+        /// <Error>
+        ///     <Name>NotSupportedException</Name>
+        ///     <Detail>la seule format qu'on a maintenant est csv</Detail>
+        /// </Error>
         /// <PS>
-        /// si les attributs ne sont pas dans Attribut.dict Exception AttributFormatException
+        /// qlq améliorations :
+        ///     - traitement des fichiers de différents formats( .csv, .xls, json...)
         /// </PS>
-        private void Load()
+        private void Load(string format)
         {
-            int i = 0;
-            string[] lines;
-
-            /* reading all lines from file */
-            using (StreamReader f = File.OpenText(Path))
-
+            CsvParser parser;
+            if (format == "csv" || format == "CSV")
             {
-                lines = f.ReadToEnd().Split('\n');
+                parser = new CsvParser(Path);
+            } else
+            {
+                throw new NotSupportedException("cette format n'est pas implementé.");
             }
 
-            foreach (string line in lines)
-                if (line.Length > 0)
-                {
-                    string l = line.Trim('\r');
-                    if (l[0] == '#')
-                        continue;
-                    if (++i == 1)
-                    {
-                        // check if attrs are in Attribut.dict
+            // get attrs from config here ...
+            dataset.modifierAttributs(parser.getAttributs());
 
-                        Attrs = l.Split(';').ToList();
-                        Attrs.RemoveAt(0);
-                        foreach (string attr in Attrs)
-                        {
-                            if (!Attribut.attrExists(attr))
-                                throw new AttributFormatException();
-                        }
-                    }
-                    else
-                        Donnees.Add(new Donnee(l, Attrs.ToArray()));
-                }
-            
+            try
+            {
+                while (true)
+                    dataset.ajouterObservation(parser.getObservation());
+            } catch(EndOfStreamException e)
+            {}
+
+            parser.Dispose();
         }
 
-        /// <summary>
-        /// rétourne les données du mois dans Donnees
-        /// </summary>
-        /// <PS>
-        /// si la wilaya n'existe pas dans l'index Exception IndexNotCompleteException
-        /// si les Attributs ne sont pas dans Attribut.dict Exception AttributFormatException
-        /// </PS>
-        /// <param name="mois">le mois qu'on veut récuperer</param>
-        private void Load(int mois, int nb_wilaya)
+        private void Load(int mois, int nb_wilaya, string format)
         {
             long[] wilayas;
             Index[] id;
@@ -170,45 +161,29 @@ namespace WeatherLab.Data
                 if (wilayas[nb_wilaya] == 0)
                     throw new IndexNotCompleteException("le nombre " + nb_wilaya + " n'existe pas dans l'index");
                 f.Seek(wilayas[nb_wilaya], SeekOrigin.Begin);
-                id = (Index[]) writer.Deserialize(f);
+                id = (Index[])writer.Deserialize(f);
             }
 
-            int count = id[mois].fin - id[mois].debut;
-            byte[] chars = new byte[count];
-
-            /* reading month data only */
-            using (var f = File.OpenRead(Path))
+            DataParser parser;
+            if (format == "csv" || format == "CSV")
             {
-                int i = 0;
-                var f2 = new StreamReader(f);
-                string line;
-                while ((line = f2.ReadLine()).Contains("#")) ;
-                Attrs = line.Split(';').ToList();
-                Attrs.RemoveAt(0);
-                foreach (string attr in Attrs)
-                    if (!Attribut.attrExists(attr))
-                        throw new AttributFormatException("l'attribut " + attr + " n'existe pas dans attrs");
-
-                f.Seek(id[mois].debut, SeekOrigin.Begin);
-                f.Read(chars, 0, count);
-
-                f2.Close();
+                parser = new CsvParser(Path, id[mois - 1].debut, id[mois - 1].fin);
             }
-
-            Encoding enc = Encoding.UTF8;
-            string data = enc.GetString(chars);
-            string[] lines = data.Split('\n');
-            
-            foreach(string line in lines)
+            else
             {
-                if (line.Length > 0)
-                {
-                    if (line[0] == '#')
-                        continue;
-                    
-                    Donnees.Add(new Donnee(line, Attrs.ToArray()));
-                }
+                throw new NotSupportedException("cette format n'est pas implementé.");
             }
+
+            // get attrs from config here ...
+            dataset.modifierAttributs(parser.getAttributs());
+
+            try
+            {
+                while (true)
+                    dataset.ajouterObservation(parser.getObservation());
+            }
+            catch (EndOfStreamException e)
+            { }
         }
 
         /**
@@ -221,7 +196,7 @@ namespace WeatherLab.Data
          **/
         protected virtual void Trier()
         {
-            Donnees.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear()).ThenBy(l => l.GetDay());
+            dataset.observations = dataset.observations.OrderBy(l => l.GetMonth()).ThenBy(l => l.GetYear()).ThenBy(l => l.GetDay()).ToList();
         }
 
         /// <summary>
@@ -235,13 +210,15 @@ namespace WeatherLab.Data
                 long[] wilaya = new long[48];
                 Index[] id = new Index[12];
 
+                int nblignes = 0;
+
                 var writer = new BinaryFormatter();
                 var output = new StreamWriter(ou);
                 output.AutoFlush = true;
 
-                string str = "Date;" + String.Join(";", Attrs.ToArray());
-                //writer.Serialize(ou, str);
+                string str = "Date;" + String.Join(";", dataset.getAttributs());
                 output.WriteLine(str);
+                nblignes++;
 
                 // si le fichier d'index n'existe pas on crée ce fichier avec une entête de 48 wilaya
                 if (!File.Exists(nom_index))
@@ -258,20 +235,23 @@ namespace WeatherLab.Data
                         wilaya[nb_wilaya] = f.Position;
 
                         /* remplissage du fichier et de la table d'index */
-                        int month = 0, debut = (int)ou.Position, fin = 0;
-                        for (int j = 0; j < Donnees.Count; j++)
+                        int month = 0, deb = nblignes, fi = 0;
+                        for (int j = 0; j < dataset.observations.Count; j++)
                         {
-                            if (Donnees[j].GetMonth()-1 != month)
+                            if (dataset.observations[j].GetMonth()-1 != month)
                             {
-                                fin = (int)ou.Position - 1;
-                                id[month] = new Index { debut = debut, fin = fin };
-                                debut = (int)ou.Position;
-                                month = Donnees[j].GetMonth()-1;
+                                fi = nblignes - 1;
+                                id[month] = new Index { debut = deb, fin = fi };
+                                deb = nblignes;
+                                month = dataset.observations[j].GetMonth()-1;
                             }
 
-                            output.WriteLine(Donnees[j].toRaw("csv"));
+                            output.WriteLine(dataset.observations[j].toRaw("csv"));
+                            nblignes++;
                         }
-                        
+                        fi = nblignes - 1;
+                        id[month] = new Index { debut = deb, fin = fi };
+
                         /* écriture du fichier d'index avec tout les informations */
                         writer.Serialize(f, id);
                         f.Seek(0, SeekOrigin.Begin);
@@ -283,7 +263,6 @@ namespace WeatherLab.Data
                     /* récuperant l'entête de l'index */
                     using (var f = File.OpenRead(nom_index))
                     {
-                        f.Seek(0, SeekOrigin.Begin);
                         wilaya = (long[])writer.Deserialize(f);
                     }
 
@@ -300,22 +279,21 @@ namespace WeatherLab.Data
                         }
 
                         /* remplissage du fichier et de la table d'index */
-                        int month = 0, debut = (int)ou.Position, fin = 0;
-                        for (int j = 0; j < Donnees.Count; j++)
+                        int month = 0, deb = nblignes, fi = 0;
+                        for (int j = 0; j < dataset.observations.Count; j++)
                         {
-                            if (Donnees[j].GetMonth() - 1 != month)
+                            if (dataset.observations[j].GetMonth() - 1 != month)
                             {
-                                if (month != 0)
-                                {
-                                    fin = (int)ou.Position - 1;
-                                    id[month] = new Index { debut = debut, fin = fin };
-                                    month = Donnees[j].GetMonth() - 1;
-                                }
-                                debut = (int)ou.Position;
+                                fi = nblignes-1;
+                                id[month] = new Index { debut = deb, fin = fi };
+                                month = dataset.observations[j].GetMonth() - 1;
+                                deb = nblignes;
                             }
-                            //writer.Serialize(ou, Donnees[j].toRaw("csv"));
-                            output.WriteLine(Donnees[j].toRaw("csv"));
+                            output.WriteLine(dataset.observations[j].toRaw("csv"));
+                            nblignes++;
                         }
+                        fi = nblignes - 1;
+                        id[month] = new Index { debut = deb, fin = fi };
 
                         writer.Serialize(f, id);
                         f.Seek(0, SeekOrigin.Begin);
@@ -344,76 +322,61 @@ namespace WeatherLab.Data
         /// this function is only to use in the console
         /// </summary>
         /// <param name="nb"> le nommbre d'element a afficher </param>
-        public void afficherDonnees(int nb)
+        public void afficherObservations(int nb)
         {
             for(int i=0;i<nb;i++)
             {
-                Donnees[i].afficher();
+                dataset.observations[i].afficher();
             }
         }
 
-        public List<string> GetAttrs()
+        public List<Observation> GetObservations()
         {
-            return Attrs;
-        }
-
-        public List<Donnee> GetDonnees()
-        {
-            return Donnees;
+            return dataset.observations;
         }
 
         /// <summary>
         /// ajouter des données dans le fichier
         /// </summary>
         /// <param name="d"></param>
-        public void ajouterDonnee(Donnee d)
+        public void ajouterObservation(Observation d)
         {
-            Donnees.Add(d);
-            using (var f = new StreamWriter(new FileStream(Path, FileMode.Append)))
-            {
-                f.WriteLine(d.toRaw("csv"));
-            }
+            dataset.ajouterObservation(d);
+            CsvParser csv = new CsvParser(Path);
+            csv.addObservation(d);
         }
 
-        public void ajouterDonnee(Donnee[] ds)
+        public void ajouterObservations(Observation[] ds)
         {
-            using (var f = new StreamWriter(new FileStream(Path, FileMode.Append)))
+            CsvParser csv = new CsvParser(Path);
+            foreach (Observation d in ds)
             {
-                foreach (Donnee d in ds)
-                {
-                    Donnees.Add(d);
-                    f.WriteLine(d.toRaw("csv"));
-                }
+                dataset.ajouterObservation(d);
+                csv.addObservation(d);
             }
         }
 
         /// <summary>
         /// renommer attr in file
         /// </summary>
-        /// <param name="ancien"></param>
-        /// <param name="nouveau"></param>
         public void renommerAttr(string ancien, string nouveau)
         {
-            string text = string.Empty;
-            using(var f = new StreamReader(Path,true))
+            CsvParser csv = new CsvParser(Path);
+            csv.renommerAttribut(ancien, nouveau);
+
+            string[] attrs = dataset.getAttributs();
+            for(int i = 0; i < attrs.Length; i++)
             {
-                string line = f.ReadLine();
-                while(line[0] == '#')
+                if(attrs[i] == ancien)
                 {
-                    text += line + "\n";
-                    line = f.ReadLine();
+                    attrs[i] = nouveau;
+                    break;
                 }
-                line = Regex.Replace(line, ancien, nouveau);
-                text += line + "\n";
-                text += f.ReadToEnd();
             }
-            using(var f = File.CreateText(Path + ".tmp"))
-            {
-                f.Write(text);
-            }
-            File.Delete(Path);
-            File.Move(Path + ".tmp", Path);
+
+            dataset.modifierAttributs(attrs);
         }
 
+        #endregion
     }
 }

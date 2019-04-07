@@ -1,0 +1,87 @@
+﻿<Window x:Class="FenetreDataSet.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FenetreDataSet"
+        mc:Ignorable="d"
+        Title="MainWindow" SizeToContent="Height"
+        Name="wnd"
+        Width="525">
+    <Grid>
+        <!-- think about making attributs dynamic -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label FontSize="20" FontFamily="arial" Content="DataSet" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Grid 
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="30, 10, 30, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Chemin du fichier" Margin="5" VerticalAlignment="Top"></Label>
+            <StackPanel Margin="5" Grid.Column="1" HorizontalAlignment="right" Orientation="Horizontal">
+                <Label>Wilaya :</Label>
+                <ComboBox MinWidth="100" MinHeight="20" Name="wilayaCombo"></ComboBox>
+            </StackPanel>
+            <TextBox Padding="15, 10" MinHeight="15" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></TextBox>
+            <Button Margin="5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">Parcourir</Button>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Grid.ColumnSpan="2" HorizontalAlignment="Center">Les variables météorologiques</Label>
+            <Label Grid.Row="1" Margin="36, 0, 0, 0">Température</Label>
+            <Label Grid.Row="2" Margin="36, 0, 0, 0">Vitesse du vent</Label>
+            <Label Grid.Row="3" Margin="36, 0, 0, 0">Humidité</Label>
+            <Label Grid.Row="4" Margin="36, 0, 0, 0">Nuages</Label>
+            <Label Grid.Row="5" Margin="36, 0, 0, 0">Pluviometrie</Label>
+            <ComboBox Name="tempCombo" Grid.Row="1" Grid.Column="1" MaxWidth="75" />
+            <ComboBox Name="vdvCombo" Grid.Row="2" Grid.Column="1" MaxWidth="75"></ComboBox>
+            <ComboBox Name="humiCombo" Grid.Row="3" Grid.Column="1" MaxWidth="75"></ComboBox>
+            <ComboBox Name="nuageCombo" Grid.Row="4" Grid.Column="1" MaxWidth="75"></ComboBox>
+            <ComboBox Name="pluieCombo" Grid.Row="5" Grid.Column="1" MaxWidth="75"></ComboBox>
+        </Grid>
+        <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190">
+            <TextBlock.Text>
+                Faites entrer les mots clés des variables
+                à utiliser dans le dataset.
+                Les mots clés doivent exister dans le
+                DataSet.
+                e.g: temp pour température
+            </TextBlock.Text>
+        </TextBlock>
+        <Button Grid.Row="4" 
+                Grid.ColumnSpan="2" 
+                HorizontalAlignment="Center"
+                Margin="0, 50, 0 20">
+            Ajouter DataSet
+        </Button>
+    </Grid>
+</Window>

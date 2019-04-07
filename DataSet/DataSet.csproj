@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C1192DAB-BC66-4F94-B9B9-3B59F50D2EB0}</ProjectGuid>
+    <ProjectGuid>{E8A829DF-B5D5-4A84-8EF5-2C4A6B25D6B9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>ConsoleApp1</RootNamespace>
     <AssemblyName>ConsoleApp1</AssemblyName>
@@ -46,13 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attribut.cs" />
+    <Compile Include="CsvParser.cs" />
+    <Compile Include="DataParser.cs" />
+    <Compile Include="Donnee.cs" />
     <Compile Include="AttributFormatException.cs" />
+    <Compile Include="DataSet.cs" />
     <Compile Include="IndexNotCompleteException.cs" />
     <Compile Include="IndexNotFoundException.cs" />
     <Compile Include="ManipDS.cs" />
     <Compile Include="StructDS.cs" />
-    <Compile Include="Donnee.cs" />
+    <Compile Include="Observation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
