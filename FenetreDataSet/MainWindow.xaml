@@ -5,27 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FenetreDataSet"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="Height"
+        Title="MainWindow" SizeToContent="WidthAndHeight"
         Name="wnd"
-        Width="525">
-    <Grid>
+        MinWidth="600"
+        MinHeight="475"
+        Loaded="Wnd_Loaded"
+        Background="#FFEAEEF4">
+    <Window.Resources>
+        <Style x:Key="ButtonStyle">
+            <Style.Setters>
+                <Setter Property="Button.Background" Value="#FF789BAA" />
+                <Setter Property="Button.Foreground" Value="#FFEEEEEE" />
+                <Setter Property="Button.Padding" Value="25, 5" />
+                <Setter Property="Button.BorderBrush" Value="Gray" />
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="true">
+                    <Setter Property="Button.Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Label.FontSize" Value="12" />
+            <Setter Property="Label.Foreground" Value="#FFADAFB2" />
+        </Style>
+        <Style x:Key="HeaderTextStyle">
+            <Setter Property="Label.FontSize" Value="15" />
+            <Setter Property="Label.Foreground" Value="#FF707172" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="35, 10">
         <!-- think about making attributs dynamic -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Label FontSize="20" FontFamily="arial" Content="DataSet" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label FontSize="20" Foreground="Black" FontFamily="arial" Content="DataSet" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Grid 
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="2"
-            Margin="30, 10, 30, 0">
+            Margin="0, 10, 0, 0">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -35,40 +61,54 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Label Content="Chemin du fichier" Margin="5" VerticalAlignment="Top"></Label>
+            <Label Style="{StaticResource HeaderTextStyle}" Content="Chemin du fichier" Margin="5" VerticalAlignment="Top"></Label>
             <StackPanel Margin="5" Grid.Column="1" HorizontalAlignment="right" Orientation="Horizontal">
-                <Label>Wilaya :</Label>
-                <ComboBox MinWidth="100" MinHeight="20" Name="wilayaCombo"></ComboBox>
+                <Label Style="{StaticResource HeaderTextStyle}">Wilaya :</Label>
+                <ComboBox Name="ComboWilaya" MinWidth="100" MinHeight="20"></ComboBox>
             </StackPanel>
-            <TextBox Padding="15, 10" MinHeight="15" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></TextBox>
-            <Button Margin="5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">Parcourir</Button>
+            <TextBox Name="txtPath" Padding="15, 10" MinHeight="15" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></TextBox>
+            <Button Click="btnClickParcourir" Style="{StaticResource ButtonStyle}" Margin="5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">Parcourir</Button>
         </Grid>
-        <Grid Grid.Row="2" Grid.Column="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Label Grid.ColumnSpan="2" HorizontalAlignment="Center">Les variables météorologiques</Label>
-            <Label Grid.Row="1" Margin="36, 0, 0, 0">Température</Label>
-            <Label Grid.Row="2" Margin="36, 0, 0, 0">Vitesse du vent</Label>
-            <Label Grid.Row="3" Margin="36, 0, 0, 0">Humidité</Label>
-            <Label Grid.Row="4" Margin="36, 0, 0, 0">Nuages</Label>
-            <Label Grid.Row="5" Margin="36, 0, 0, 0">Pluviometrie</Label>
-            <ComboBox Name="tempCombo" Grid.Row="1" Grid.Column="1" MaxWidth="75" />
-            <ComboBox Name="vdvCombo" Grid.Row="2" Grid.Column="1" MaxWidth="75"></ComboBox>
-            <ComboBox Name="humiCombo" Grid.Row="3" Grid.Column="1" MaxWidth="75"></ComboBox>
-            <ComboBox Name="nuageCombo" Grid.Row="4" Grid.Column="1" MaxWidth="75"></ComboBox>
-            <ComboBox Name="pluieCombo" Grid.Row="5" Grid.Column="1" MaxWidth="75"></ComboBox>
-        </Grid>
-        <TextBlock Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190">
+        <ScrollViewer Grid.Row="2" Grid.Column="0" MaxHeight="167" MinHeight="167">
+            <Grid Name="comboCont" Margin="5, 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Style="{StaticResource HeaderTextStyle}" Grid.ColumnSpan="2">Les variables météorologiques</Label>
+                <Label Grid.Row="1">Température</Label>
+                <Label Grid.Row="2">Pression</Label>
+                <Label Grid.Row="3">Humidité</Label>
+                <Label Grid.Row="4">Direction du vent</Label>
+                <Label Grid.Row="5">Vitesse du vent</Label>
+                <Label Grid.Row="6">Nuage %</Label>
+                <Label Grid.Row="7">Distance de visibilité</Label>
+                <Label Grid.Row="8">Etat du sol</Label>
+                <Label Grid.Row="9">Hauteur de neige</Label>
+                <ComboBox Name="combo1" Grid.Row="1" Grid.Column="1" MaxWidth="75" />
+                <ComboBox Name="combo2" Grid.Row="2" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo3" Grid.Row="3" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo4" Grid.Row="4" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo5" Grid.Row="5" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo6" Grid.Row="6" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo7" Grid.Row="7" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo8" Grid.Row="8" Grid.Column="1" MaxWidth="75"/>
+                <ComboBox Name="combo9" Grid.Row="9" Grid.Column="1" MaxWidth="75"/>
+            </Grid>
+            </ScrollViewer>
+            <TextBlock Margin="5" Name="InfoError" FontSize="12" Foreground="#FFADAFB2" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190">
             <TextBlock.Text>
                 Faites entrer les mots clés des variables
                 à utiliser dans le dataset.
@@ -77,10 +117,12 @@
                 e.g: temp pour température
             </TextBlock.Text>
         </TextBlock>
-        <Button Grid.Row="4" 
+        <Button Click="btnClickAjouter"
+                Grid.Row="4" 
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Center"
-                Margin="0, 50, 0 20">
+                Margin="0, 50, 0, 10"
+                Style="{StaticResource ButtonStyle}">
             Ajouter DataSet
         </Button>
     </Grid>

@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigUtils
+namespace WeatherLab.ConfigUtils
 {
-    class ConfigParser
+    public class ConfigParser
     {
         Dictionary<string, Wilaya> wilayas { get; set; }
 

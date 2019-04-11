@@ -94,5 +94,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConfigUtils\ConfigUtils.csproj">
+      <Project>{b0a2ceea-1143-4478-b7f1-c9f4eb571998}</Project>
+      <Name>ConfigUtils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataSet\DataSet.csproj">
+      <Project>{e8a829df-b5d5-4a84-8ef5-2c4a6b25d6b9}</Project>
+      <Name>DataSet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigUtils
+namespace WeatherLab.ConfigUtils
 {
-    class Wilaya
+    public class Wilaya
     {
         public string path { get; set; }
         public int code { get; set; }
