@@ -12,27 +12,16 @@
         Loaded="Wnd_Loaded"
         Background="#FFEAEEF4">
     <Window.Resources>
-        <Style x:Key="ButtonStyle">
-            <Style.Setters>
-                <Setter Property="Button.Background" Value="#FF789BAA" />
-                <Setter Property="Button.Foreground" Value="#FFEEEEEE" />
-                <Setter Property="Button.Padding" Value="25, 5" />
-                <Setter Property="Button.BorderBrush" Value="Gray" />
-            </Style.Setters>
-            <Style.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="true">
-                    <Setter Property="Button.Foreground" Value="Black" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-        <Style TargetType="Label">
+        
+        <Style TargetType="{x:Type Label}">
             <Setter Property="Label.FontSize" Value="12" />
-            <Setter Property="Label.Foreground" Value="#FFADAFB2" />
+            <Setter Property="Label.Foreground" Value="#FF888888" />
         </Style>
         <Style x:Key="HeaderTextStyle">
             <Setter Property="Label.FontSize" Value="15" />
             <Setter Property="Label.Foreground" Value="#FF707172" />
         </Style>
+
     </Window.Resources>
     <Grid Margin="35, 10">
         <!-- think about making attributs dynamic -->
@@ -61,13 +50,13 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Label Style="{StaticResource HeaderTextStyle}" Content="Chemin du fichier" Margin="5" VerticalAlignment="Top"></Label>
+            <Label Target="{Binding ElementName=txtPath}" Style="{StaticResource HeaderTextStyle}" Content="_Chemin du fichier" Margin="5" VerticalAlignment="Top"></Label>
             <StackPanel Margin="5" Grid.Column="1" HorizontalAlignment="right" Orientation="Horizontal">
-                <Label Style="{StaticResource HeaderTextStyle}">Wilaya :</Label>
+                <Label Target="{Binding ElementName=ComboWilaya}" Style="{StaticResource HeaderTextStyle}">_Wilaya :</Label>
                 <ComboBox Name="ComboWilaya" MinWidth="100" MinHeight="20"></ComboBox>
             </StackPanel>
             <TextBox Name="txtPath" Padding="15, 10" MinHeight="15" Margin="5" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"></TextBox>
-            <Button Click="btnClickParcourir" Style="{StaticResource ButtonStyle}" Margin="5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">Parcourir</Button>
+            <Button Padding="30, 5" Click="btnClickParcourir" Margin="5" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">_Parcourir</Button>
         </Grid>
         <ScrollViewer Grid.Row="2" Grid.Column="0" MaxHeight="167" MinHeight="167">
             <Grid Name="comboCont" Margin="5, 0">
@@ -108,7 +97,7 @@
                 <ComboBox Name="combo9" Grid.Row="9" Grid.Column="1" MaxWidth="75"/>
             </Grid>
             </ScrollViewer>
-            <TextBlock Margin="5" Name="InfoError" FontSize="12" Foreground="#FFADAFB2" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190">
+        <TextBlock Margin="5" Name="InfoError" FontSize="12" Foreground="#FF888888" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" MaxWidth="190">
             <TextBlock.Text>
                 Faites entrer les mots clés des variables
                 à utiliser dans le dataset.
@@ -122,8 +111,8 @@
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Center"
                 Margin="0, 50, 0, 10"
-                Style="{StaticResource ButtonStyle}">
-            Ajouter DataSet
+                Padding="30, 5">
+            _Ajouter DataSet
         </Button>
     </Grid>
 </Window>
