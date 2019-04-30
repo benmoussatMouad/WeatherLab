@@ -54,7 +54,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Data\CsvParser.cs" />
+    <Compile Include="Data\DataParser.cs" />
+    <Compile Include="Data\DataSet.cs" />
     <Compile Include="Data\IndexNotFoundException.cs" />
+    <Compile Include="Data\Observation.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
   </ItemGroup>
   <ItemGroup>

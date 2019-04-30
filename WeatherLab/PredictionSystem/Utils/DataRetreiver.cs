@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WeatherLab.PredictionSystem.Common;
 using WeatherLab.Data;
 using WeatherLab.ConfigUtils;
+using Observation = WeatherLab.Data.Observation;
 
 
 //Started : 21/02/2019
@@ -16,6 +17,8 @@ namespace WeatherLab.PredictionSystem.Utils
     class DataRetreiver
     {
         private string _path;
+
+        private ConfigParser config;
 
         /// <summary>
         /// This is the class that will call the DataSet.
@@ -28,15 +31,15 @@ namespace WeatherLab.PredictionSystem.Utils
         //contains the keys for each chosen parameter by the user.
             //and the chosen date and wilaya
         
-        private Wilaya consideredWilaya;
+        private ConfigUtils.Wilaya consideredWilaya;
             //To get the requested wilaya in the query and use the config tool to communicate with the dataset
 
         private Saison saison;
             //To get the requested season
 
         //The list of datas (observations) retrieved from the dataset in the same season
-        private List<Donnee> _donnees;
-        private List<Donnee> _donneesSaisonSuivante;
+        private List<Observation> _donnees;
+        private List<Observation> _donneesSaisonSuivante;
         
         //The list that will contain all of the observations of the same season
         //concatenated with those +x duration
@@ -44,6 +47,15 @@ namespace WeatherLab.PredictionSystem.Utils
 
         //The DataSet we want to load
         private ManipDS _datatSet;
+
+        public DataRetreiver()
+        {
+        }
+
+        public DataRetreiver(ConfigParser config)
+        {
+            this.config = config;
+        }
 
         public void SetQuery(Query query)
         {
@@ -54,7 +66,7 @@ namespace WeatherLab.PredictionSystem.Utils
         public void HandleQuery()
         {
 
-            consideredWilaya = ConfigParser.getWilaya(query.RequestedWilaya);
+            consideredWilaya = config.getWilaya(query.RequestedWilaya);
             _path = consideredWilaya.path;
             
             switch (query.Date.Month)
@@ -78,11 +90,14 @@ namespace WeatherLab.PredictionSystem.Utils
                     saison =  Saison.automne;
                     break;
             }
-            
-        }
-        
 
-        //public PredictionCouple retreiveData();
+            //***DEBUG ONLY**
+            //Console.WriteLine("******HANDLE QUERY : WILAYA : " + consideredWilaya.code + " path : " + _path +
+            //                  "SEASON: " + saison.ToString() + " Keys: " + query.ParameterKeys[0]);
+            //Console.Read();
+            //***************
+        }
+       
 
         public void SetObservationTable()
         {
@@ -92,7 +107,7 @@ namespace WeatherLab.PredictionSystem.Utils
             _donnees = _datatSet.getSaison(saison);
             
             _donneesSaisonSuivante = _datatSet.getSaison(
-                ((saison + 1) > Saison.automne) ? Saison.hiver : (saison + 1) //gestion d'une erreur 
+                ((saison + 1) > Saison.automne) ? (Saison.hiver) : (saison + 1) //gestion d'une erreur 
                 ); //et la saison suivante
             
             
@@ -113,32 +128,39 @@ namespace WeatherLab.PredictionSystem.Utils
             
             
 
-            foreach (Donnee donnee in _donnees)
+            foreach (Observation observation in _donnees)
             {
                 //Allocating new space for the double table
-                double[] past = new double[numberOfParameters];
-                double[] future = new double[numberOfParameters];
+                List<double> pastList = new List<double>(numberOfParameters);
+                List<double> futureList = new List<double>(numberOfParameters);
                 
                 foreach (string key in query.ParameterKeys)
                 {
+                    //**DEBUG ONLY****
+                    //Console.WriteLine("Key : " + key + " in ds : " + consideredWilaya.getAttr(key) + " value of the 1st obs : " + observation
+                    //  .getDonnee(consideredWilaya.getAttr(key)) + " Datetime" + observation.GetDate().ToString());
+                    //Console.Read();
+                    //****************
+
+
                     //Filling the tables of doubles, 
                     //TODO: Expections: key might not exist in the Dictionnary
-                    past.Append( donnee.GetAttr(
+                    pastList.Add( observation.getDonnee(
                         consideredWilaya.getAttr(key)
                         ));
 
                     try
                     {
-                        future.Append(
-                            _donnees[_donnees.IndexOf(donnee) + delay].GetAttr(
+                        futureList.Add(
+                            _donnees[_donnees.IndexOf(observation) + delay].getDonnee(
                                 consideredWilaya.getAttr(key)
                             ));
                     }
-                    catch (IndexOutOfRangeException e)
+                    catch (ArgumentOutOfRangeException e)
                     {
                         //If we go beyond the first list of the current season we will get those in the next season
-                        future.Append(
-                            _donneesSaisonSuivante[_donnees.Count - _donnees.IndexOf(donnee)].GetAttr(
+                        futureList.Add(
+                            _donneesSaisonSuivante[_donnees.Count - _donnees.IndexOf(observation)].getDonnee(
                                 consideredWilaya.getAttr(key)
                             ));
                     }
@@ -150,8 +172,13 @@ namespace WeatherLab.PredictionSystem.Utils
                     
                 }
                 
+                double[] past = new double[numberOfParameters];
+                double[] future = new double[numberOfParameters];
+                past = pastList.ToArray();
+                future = futureList.ToArray();
                 
                 observationsTable.Add(new PredictionCouple(past, future));
+                
                 
             }
         }

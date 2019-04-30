@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace WeatherLab.ConfigUtils
 {
-    class  ConfigParser
+    public class ConfigParser
     {
-        static Dictionary<string, Wilaya> wilayas { get; set; }
+        Dictionary<string, Wilaya> wilayas { get; set; }
 
         public ConfigParser()
         {
@@ -42,7 +42,7 @@ namespace WeatherLab.ConfigUtils
             return wilayas.Keys.ToArray();
         }
 
-        public static Wilaya getWilaya(string nom)
+        public Wilaya getWilaya(string nom)
         {
             return wilayas[nom];
         }
