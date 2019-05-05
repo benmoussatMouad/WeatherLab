@@ -42,15 +42,27 @@ namespace WeatherLab.Data
         ///     <Nom>AttibutFormatException</Nom>
         ///     <Detail>si les attributs dans l'observation ne correspond pas au attributs dans le dataset</Detail>
         /// </Error>
+        /// <Error>
+        ///     <Nom>ArgumentNullException</Nom>
+        ///     <Detail>si la liste des attributs n'est pas initialisée</Detail>
+        /// </Error>
         /// <param name="obser">l'observation à ajouter</param>
         public void ajouterObservation(Observation obser)
         {
+            if (obser.nbDonnees() != attributs.Length)
+                throw new AttributFormatException();
+
+            Donnee[] d = obser.getDonnees();
+            for (int i = 0; i < d.Length; i++)
+                if (isValidAttribut(d[i].getAttribut()))
+                    throw new AttributFormatException();
+
             observations.Add(obser);
         }
 
         public void ajouterObservation(DateTime d, string[] attr, float[] valeur)
         {
-            observations.Add(new Observation(d, attr, valeur));
+            ajouterObservation(new Observation(d, attr, valeur));
         }
 
         /// <summary>
@@ -76,12 +88,20 @@ namespace WeatherLab.Data
         /// <param name="id">l'indice de modification</param>
         public void modifierObservation(int id, Observation obser)
         {
+            if (obser.nbDonnees() != attributs.Length)
+                throw new AttributFormatException();
+
+            Donnee[] d = obser.getDonnees();
+            for (int i = 0; i < d.Length; i++)
+                if (isValidAttribut(d[i].getAttribut()))
+                    throw new AttributFormatException();
+
             observations[id] = obser;
         }
 
         public void modifierObservation(int id, DateTime d, string[] attr, float[] valeur)
         {
-            observations[id] = new Observation(d, attr, valeur);
+            modifierObservation(id, new Observation(d, attr, valeur));
         }
 
         #endregion
@@ -97,9 +117,16 @@ namespace WeatherLab.Data
         /// <summary>
         /// remplace le tableau des attributs avec 'attributs'
         /// </summary>
+        /// <Error>
+        ///     <Name>ArgumentException</Name>
+        ///     <Detail>la longueure des attributs doit etre la meme</Detail>
+        /// </Error>
         /// <param name="attributs">la liste des attributs contenant le dataset</param>
         public void modifierAttributs(string[] attributs)
         {
+            if (this.attributs.Length != 0 && this.attributs.Length != attributs.Length)
+                throw new ArgumentException();
+
             this.attributs = attributs;
         }
 

@@ -181,6 +181,11 @@ namespace WeatherLab.Data
             throw new ArgumentException(String.Format("L'attribut {0} n'existe pas dans l'observation.", attr));
         }
 
+        public int nbDonnees()
+        {
+            return donnees.Count;
+        }
+
         public Donnee[] getDonnees()
         {
             return donnees.ToArray();

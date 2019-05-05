@@ -18,8 +18,17 @@ namespace WeatherLab.Data
 
         #region Constructeur
 
+        /// <summary>
+        /// le contructeur par défault
+        /// </summary>
+        /// <Error>
+        ///    FileNotFoundException
+        /// </Error>
+        /// <param name="path"></param>
         public DataParser(string path)
         {
+            if (!File.Exists(path))
+                throw new FileNotFoundException(String.Format("le fichier {0} n'existe pas.", path));
             this.path = path;
         }
 
@@ -30,6 +39,9 @@ namespace WeatherLab.Data
         /// <summary>
         /// retourne la liste des attributs existant dans le fichier
         /// </summary>
+        /// <Error>
+        /// FormatException
+        /// </Error>
         abstract public string[] getAttributs();
 
         /// <summary>
@@ -49,6 +61,10 @@ namespace WeatherLab.Data
         /// <summary>
         /// ajoute une observation au fichier
         /// </summary>
+        /// <Error>
+        ///     <Name>ArgumentException</Name>
+        ///     <Detail>si les valeurs ne correspond pas au attributs</Detail>
+        /// </Error>
         /// <param name="attributs"></param>
         /// <param name="valeurs"></param>
         /// <returns></returns>

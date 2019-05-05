@@ -71,6 +71,13 @@ namespace WeatherLab.Data
 
         #region Constructeur
 
+        /// <summary>
+        /// constructeur par défault
+        /// </summary>
+        /// <Error>
+        ///     <Name>FileNotFoundException</Name>
+        /// </Error>
+        /// <param name="path"></param>
         public StructDS(string path)
         {
             if (!File.Exists(path))
@@ -85,11 +92,17 @@ namespace WeatherLab.Data
         /// <summary>
         /// donner les données du mois dans path
         /// </summary>
-        /// <PS>
-        /// si l'index n'existe pas Exception IndexNotFoundException
-        /// si le mois par dans l'intervalle 1..12 Exception ArgumentException
-        /// si le path n'existe pas Exception FileNotFoundException
-        /// </PS>
+        /// <Error>
+        ///     <Name>IndexNotFoundException</Name>
+        ///     <Detail>si l'index n'existe pas</Detail>
+        /// </Error>
+        /// <Error>
+        ///     <Name>ArgumentException</Name>
+        ///     <Detail>si le mois pas dans [[1, 12]]</Detail>
+        /// </Error>
+        /// <Error>
+        ///     <Name>FileNotFoundException</Name>
+        /// </Error>
         /// <param name="mois"> mois entre 1 et 12 </param>
         public StructDS(string path, string index, int nb_wilaya, int mois)
         {
@@ -147,6 +160,17 @@ namespace WeatherLab.Data
             parser.Dispose();
         }
 
+
+        /// <summary>
+        /// récuperer seulement les données d'une wilaya
+        /// </summary>
+        /// <Error>
+        ///     <Name>IndexNotCompleteException</Name>
+        ///     <Detail>si le fichier d'index n'est pas sauvegarder avec la wilaya voulu</Detail>
+        /// </Error>
+        /// <param name="mois"></param>
+        /// <param name="nb_wilaya"></param>
+        /// <param name="format"></param>
         private void Load(int mois, int nb_wilaya, string format)
         {
             long[] wilayas;

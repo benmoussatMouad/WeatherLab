@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace WeatherLab.Data
 {
@@ -50,11 +48,12 @@ namespace WeatherLab.Data
 
             attrs = getAttributs();
 
-            for(int i = 0; i < lineDebut-linesRead; i++)
+            this.fin = lineFin;
+            for (int i = 0; i < lineDebut-linesRead; i++)
             {
                 reader.ReadLine();
             }
-            this.fin = lineFin;
+            
         }
 
         public CsvParser(string path, int lineDebut, int lineFin, char delim) : base(path)
@@ -65,11 +64,12 @@ namespace WeatherLab.Data
 
             delimiter = delim;
 
+            this.fin = lineFin;
             for (int i = 0; i < lineDebut - linesRead; i++)
             {
                 reader.ReadLine();
             }
-            this.fin = lineFin;
+            
         }
 
         ~CsvParser()
@@ -157,19 +157,26 @@ namespace WeatherLab.Data
         {
             string[] attributs;
             string[] valeurs;
-            
-            getObservation(out attributs, out valeurs);
 
-            string date = valeurs[0];
+            try
+            {
+                getObservation(out attributs, out valeurs);
 
-            List<string> tmp = valeurs.ToList();
-            tmp.RemoveAt(0);
-            valeurs = tmp.ToArray();
 
-            string[] arr = date.Split('.', ':', '/');
+                string date = valeurs[0];
 
-            DateTime d = new DateTime(int.Parse(arr[2]), int.Parse(arr[1]), int.Parse(arr[0]));
-            return new Observation(d, attributs, valeurs);
+                List<string> tmp = valeurs.ToList();
+                tmp.RemoveAt(0);
+                valeurs = tmp.ToArray();
+
+                string[] arr = date.Split('.', ':', '/');
+
+                DateTime d = new DateTime(int.Parse(arr[2]), int.Parse(arr[1]), int.Parse(arr[0]));
+                return new Observation(d, attributs, valeurs);
+            } catch(EndOfStreamException e)
+            {
+                return null;
+            }
         }
 
         public override Observation[] getObservations()

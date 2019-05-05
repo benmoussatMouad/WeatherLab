@@ -10,7 +10,8 @@
         MinWidth="600"
         MinHeight="475"
         Loaded="Wnd_Loaded"
-        Background="#FFEAEEF4">
+        Background="#FFEAEEF4"
+        Style="{StaticResource CustomWindowStyle}">
     <Window.Resources>
         
         <Style TargetType="{x:Type Label}">
@@ -107,11 +108,12 @@
             </TextBlock.Text>
         </TextBlock>
         <Button Click="btnClickAjouter"
-                Grid.Row="4" 
+                Grid.Row="3" 
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Center"
                 Margin="0, 50, 0, 10"
-                Padding="30, 5">
+                Padding="30, 5"
+                IsDefault="True">
             _Ajouter DataSet
         </Button>
     </Grid>
