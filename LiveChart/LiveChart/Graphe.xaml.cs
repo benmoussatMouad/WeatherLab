@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -802,9 +803,13 @@ namespace LiveChart
             OpenFileDialog openFiledialog = new OpenFileDialog();
             openFiledialog.Filter = "Text files (*.xlsx)|*.xlsx";
             openFiledialog.ShowDialog();            //Je recupere le nom du fichier 
-            ExcelClass excel = new ExcelClass(openFiledialog.FileName, 1);
-            excel.WriteRange(Data);
+            if (File.Exists(openFiledialog.FileName))
+            {
+                ExcelClass excel = new ExcelClass(openFiledialog.FileName, 1);
+                excel.WriteRange(Data);
+            }            
         }
+        
     }
       
 }

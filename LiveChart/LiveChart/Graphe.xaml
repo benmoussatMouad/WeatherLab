@@ -125,7 +125,7 @@
                     <CheckBox x:Name="PrecipitationCheckbox" Foreground="White" Content="Précipitation" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked" />
                 </StackPanel>    
             </StackPanel>
-            <Button Content="Importer les donnés" Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Margin="20" Click="Button_Click"/>
+            <Button Content="Exporter les donnés" Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Margin="20" Click="Button_Click" />
         </StackPanel>
         <TextBlock x:Name="titre" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" FontWeight="SemiBold" Margin="10" Foreground="White" />
     </Grid>
