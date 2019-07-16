@@ -1,4 +1,2 @@
-Bonjour , 
-Si vous d�sirez lancer l'application sur Visual Studio pour consulter le code , Veuillez lancer directement WeatherLab.sln
-
-Merci 
+« WeatherLab » est une application desktop moderne conçu en ayant les simples utilisateurs et amateurs de météo en tête, elle vous permet de réaliser des prédictions météo à base de données historiques pour des future dates et réaliser des synthèses climatologiques descriptives de chaque wilaya de l’Algérie de manière simple et efficace et rapide grâce à son interface intuitive, facile à manipuler, et pratique. C’est pour cela qu’on veut vous remercier pour avoir choisi notre produit "WeatherLab », Vous ne le regretterez certainement pas !
+La Notice d’utilisation suivante vous permettra de bien comprendre le fonctionnement et la manière d’utiliser et manipuler les fonctionnalités de l’application, Vous serez des experts de prédiction météo dans peu de temps. 
