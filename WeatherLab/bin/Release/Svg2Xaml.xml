@@ -1,0 +1,532 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Svg2Xaml</name>
+    </assembly>
+    <members>
+        <member name="T:Svg2Xaml.SvgGeometryParser">
+            <summary> 
+            Parser for XAML abbreviated geometry.
+            SVG path spec is closely followed http://www.w3.org/TR/SVG11/paths.html 
+            3/23/2006, new parser for performance (fyuan)
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ParseGeometry(System.String,System.Boolean)">
+            <summary>
+            Parse a PathGeometry string.
+            The PathGeometry syntax is the same as the PathFigureCollection syntax except that it
+            may start with a "wsp*Fwsp*(0|1)" which indicate the winding mode (F0 is EvenOdd while 
+            F1 is NonZero).
+            </summary> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ParseGeometry(System.String,System.IFormatProvider,System.Boolean)">
+            <summary>
+            Parse a PathGeometry string.
+            The PathGeometry syntax is the same as the PathFigureCollection syntax except that it
+            may start with a "wsp*Fwsp*(0|1)" which indicate the winding mode (F0 is EvenOdd while 
+            F1 is NonZero).
+            </summary> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ParseStringToStreamGeometryContext(System.Windows.Media.StreamGeometryContext,System.String,System.IFormatProvider,System.Windows.Media.FillRule@,System.Boolean)">
+            <summary>
+            Given a mini-language representation of a Geometry - write it to the
+            supplied streamgeometrycontext 
+            </summary> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ThrowBadToken">
+            <summary> 
+            Throw unexpected token exception
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ReadToken">
+            <summary>
+            Read the next non whitespace character 
+            </summary>
+            <returns>True if not end of string</returns> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ReadNumber(System.Boolean)">
+            <summary> 
+            Read a floating point number
+            </summary> 
+            <returns></returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ReadBool">
+            <summary> 
+            Read a bool: 1 or 0
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ReadPoint(System.Char,System.Boolean)">
+            <summary> 
+            Read a relative point
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.Reflect">
+            <summary> 
+            Reflect _secondLastPoint over _lastPoint to get a new point for smooth curve
+            </summary> 
+            <returns></returns> 
+        </member>
+        <member name="M:Svg2Xaml.SvgGeometryParser.ParseToGeometryContext(System.Windows.Media.StreamGeometryContext,System.String,System.Int32)">
+            <summary>
+            Parse a PathFigureCollection string 
+            </summary> 
+        </member>
+        <member name="T:Svg2Xaml.SvgImageExtension">
+            <summary>
+              A <see cref="T:System.Windows.Markup.MarkupExtension"/> for loading SVG images.
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgImageExtension.#ctor">
+            <summary>
+              Initializes a new <see cref="T:Svg2Xaml.SvgImageExtension"/> instance.
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgImageExtension.#ctor(System.Uri)">
+            <summary>
+              Initializes a new <see cref="T:Svg2Xaml.SvgImageExtension"/> instance.
+            </summary>
+            <param name="uri">
+              The location of the SVG document.
+            </param>
+        </member>
+        <member name="M:Svg2Xaml.SvgImageExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+              Overrides <see cref="M:System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)"/> and returns the 
+              <see cref="T:System.Windows.Media.DrawingImage"/> the SVG document is rendered into.
+            </summary>
+            <param name="serviceProvider">
+              Object that can provide services for the markup extension; 
+              <paramref name="serviceProvider"/> is not used.
+            </param>
+            <returns>
+              The <see cref="T:System.Windows.Media.DrawingImage"/> the SVG image is rendered into or 
+              <c>null</c> in case there has been an error while parsing or 
+              rendering.
+            </returns>
+        </member>
+        <member name="P:Svg2Xaml.SvgImageExtension.Uri">
+            <summary>
+              Gets or sets the location of the SVG image.
+            </summary>
+        </member>
+        <member name="P:Svg2Xaml.SvgImageExtension.IgnoreEffects">
+            <summary>
+              Gets or sets whether SVG filter effects should be transformed into
+              WPF bitmap effects.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgStyleElement">
+            <summary>
+              Represents a &lt;style&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFEColorMatrixElement">
+            <summary>
+              Represents an &lt;feColorMatrix&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgForeignObjectElement">
+            <summary>
+              Represents a &lt;foreignObject&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgReaderOptions">
+            <summary>
+              Defines a set of options to customize rendering repspectively reading 
+              of SVG documents.
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgReaderOptions.#ctor">
+            <summary>
+              Initializes a new <see cref="T:Svg2Xaml.SvgReaderOptions"/> instance.
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgReaderOptions.#ctor(System.Boolean)">
+            <summary>
+              Initializes a new <see cref="T:Svg2Xaml.SvgReaderOptions"/> instance.
+            </summary>
+            <param name="ignoreEffects">
+              Specifies whether filter effects should be applied using WPF bitmap 
+              effects.
+            </param>
+        </member>
+        <member name="P:Svg2Xaml.SvgReaderOptions.IgnoreEffects">
+            <summary>
+              Gets or sets whether SVG effects should either be ignored or 
+              converted to <see cref="T:System.Windows.Media.Effects.BitmapEffect">bitmap effects</see>.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgColorPaint">
+            <summary>
+              A paint with a solid color.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgTSpanElement">
+            <summary>
+              Represents a &lt;tspan&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgAElement">
+            <summary>
+              Represents an &lt;a&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgBaseElement">
+            <summary>
+              Base class for all other SVG elements.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgCircleElement">
+            <summary>
+              Represents an &lt;circle&gt; element.
+            </summary>
+        </member>
+        <member name="F:Svg2Xaml.SvgCircleElement.CenterX">
+            <summary>
+              The x-coordinate of the circle's center.
+            </summary>
+        </member>
+        <member name="F:Svg2Xaml.SvgCircleElement.CenterY">
+            <summary>
+              The y-coordinate of the circle's center.
+            </summary>
+        </member>
+        <member name="F:Svg2Xaml.SvgCircleElement.Radius">
+            <summary>
+              The circle's radius.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgClipPathElement">
+            <summary>
+              Represents a &lt;clipPath&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgColor">
+            <summary>
+              Represents an RGB color.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgContainerBaseElement">
+            <summary>
+              Base element for all container elements.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgCoordinate">
+            <summary>
+              A coordinate.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgDefsElement">
+            <summary>
+              Represents a &lt;defs&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgEllipseElement">
+            <summary>
+              Represents an &lt;ellipse&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFEBlendElement">
+            <summary>
+              Represents an &lt;feBlend&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFEGaussianBlurElement">
+            <summary>
+              Represents an &lt;feGaussianBlur&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFilterEffectBaseElement">
+            <summary>
+              Represents a &lt;filterEffect&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFilterElement">
+            <summary>
+              Represents a &lt;filter&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFlowParaElement">
+            <summary>
+              Represents a &lt;flowPara&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFlowRegionElement">
+            <summary>
+              Represents a &lt;flowRegíon&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFlowRootElement">
+            <summary>
+              Represents a &lt;flowRoot&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgFlowSpanElement">
+            <summary>
+              Represents a &lt;flowSpan&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgGElement">
+            <summary>
+              Represents a &lt;g&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgImageElement">
+            <summary>
+              Represents an &lt;image&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgLinearGradientElement">
+            <summary>
+              Represents a &lt;linearGradient&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgLineElement">
+            <summary>
+              Represents a &lt;line&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgMarkerElement">
+            <summary>
+              Represents a &lt;marker&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgMaskElement">
+            <summary>
+              Represents a &lt;mask&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgMetadataElement">
+            <summary>
+              Represents a &lt;metadata&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgPathElement">
+            <summary>
+              Represents a &lt;path&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgPatternElement">
+            <summary>
+              Represents a &lt;pattern&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgReader">
+            <summary>
+              Provides methods to read (and render) SVG documents.
+            </summary>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.Load(System.Xml.XmlReader,Svg2Xaml.SvgReaderOptions)">
+            <summary>
+              Loads an SVG document and renders it into a 
+              <see cref="T:System.Windows.Media.DrawingImage"/>.
+            </summary>
+            <param name="reader">
+              A <see cref="T:System.Xml.XmlReader"/> to read the XML structure of the SVG 
+              document.
+            </param>
+            <param name="options">
+              <see cref="T:Svg2Xaml.SvgReaderOptions"/> to use for parsing respectively 
+              rendering the SVG document.
+            </param>
+            <returns>
+              A <see cref="T:System.Windows.Media.DrawingImage"/> containing the rendered SVG document.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.Load(System.Xml.XmlReader)">
+            <summary>
+              Loads an SVG document and renders it into a 
+              <see cref="T:System.Windows.Media.DrawingImage"/>.
+            </summary>
+            <param name="reader">
+              A <see cref="T:System.Xml.XmlReader"/> to read the XML structure of the SVG 
+              document.
+            </param>
+            <returns>
+              A <see cref="T:System.Windows.Media.DrawingImage"/> containing the rendered SVG document.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.Load(System.IO.Stream,Svg2Xaml.SvgReaderOptions)">
+            <summary>
+              Loads an SVG document and renders it into a 
+              <see cref="T:System.Windows.Media.DrawingImage"/>.
+            </summary>
+            <param name="stream">
+              A <see cref="T:System.IO.Stream"/> to read the XML structure of the SVG 
+              document.
+            </param>
+            <param name="options">
+              <see cref="T:Svg2Xaml.SvgReaderOptions"/> to use for parsing respectively 
+              rendering the SVG document.
+            </param>
+            <returns>
+              A <see cref="T:System.Windows.Media.DrawingImage"/> containing the rendered SVG document.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.Load(System.IO.Stream)">
+            <summary>
+              Loads an SVG document and renders it into a 
+              <see cref="T:System.Windows.Media.DrawingImage"/>.
+            </summary>
+            <param name="stream">
+              A <see cref="T:System.IO.Stream"/> to read the XML structure of the SVG 
+              document.
+            </param>
+            <returns>
+              A <see cref="T:System.Windows.Media.DrawingImage"/> containing the rendered SVG document.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.RemoveChars(System.String,System.Char[])">
+            <summary>
+            Entfernt aus diesem String die angegebenen Zeichen.
+            </summary>
+            <param name="input">Dieser String.</param>
+            <param name="chars">Die betreffenden Zeichen.</param>
+            <returns>Dieser String ohne die betreffenden Zeichen.</returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvert``1(System.Object,``0,System.Globalization.CultureInfo,System.ComponentModel.ITypeDescriptorContext)">
+            <summary>
+            Versucht dieses Objekt mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertFrom(System.Object)"/> 
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <param name="obj">Dieses Objekt.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <param name="cultureInfo">
+            Die als aktuelle Kultur zu verwendenden CultureInfo.
+            </param>
+            <param name="typeDescriptorContext">
+            Eine ITypeDescriptorContext-Schnittstelle, die einen Formatierungskontext bereitstellt. 
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvert``1(System.String,``0,System.Globalization.CultureInfo,System.ComponentModel.ITypeDescriptorContext)">
+            <summary>
+            Versucht diesen String mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertFromString(System.String)"/> 
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <param name="str">Dieser String.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <param name="cultureInfo">
+            Die als aktuelle Kultur zu verwendenden CultureInfo.
+            </param>
+            <param name="typeDescriptorContext">
+            Eine ITypeDescriptorContext-Schnittstelle, die einen Formatierungskontext bereitstellt. 
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvert``2(System.Object,``0,System.Globalization.CultureInfo,System.ComponentModel.ITypeDescriptorContext)">
+            <summary>
+            Versucht dieses Objekt mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertFrom(System.Object)"/> 
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <typeparam name="TC">Der zu verwendende <see cref="T:System.ComponentModel.TypeConverter"/>.</typeparam>
+            <param name="obj">Dieses Objekt.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <param name="cultureInfo">
+            Die als aktuelle Kultur zu verwendenden CultureInfo.
+            </param>
+            <param name="typeDescriptorContext">
+            Eine ITypeDescriptorContext-Schnittstelle, die einen Formatierungskontext bereitstellt. 
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvert``2(System.String,``0,System.Globalization.CultureInfo,System.ComponentModel.ITypeDescriptorContext)">
+            <summary>
+            Versucht diesen String mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertFromString(System.String)"/> 
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <typeparam name="TC">Der zu verwendende <see cref="T:System.ComponentModel.TypeConverter"/>.</typeparam>
+            <param name="str">Dieser String.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <param name="cultureInfo">
+            Die als aktuelle Kultur zu verwendenden CultureInfo.
+            </param>
+            <param name="typeDescriptorContext">
+            Eine ITypeDescriptorContext-Schnittstelle, die einen Formatierungskontext bereitstellt. 
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvertTo``2(System.Object,``0)">
+            <summary>
+            Versucht dieses Objekt mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.Object,System.Type)"/> 
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <typeparam name="TC">Der zu verwendende <see cref="T:System.ComponentModel.TypeConverter"/>.</typeparam>
+            <param name="obj">Dieses Objekt.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="M:Svg2Xaml.SvgReader.TryConvertTo``2(System.String,``0)">
+            <summary>
+            Versucht diesen String mit Hilfe von <see cref="M:System.ComponentModel.TypeConverter.ConvertTo(System.Object,System.Type)"/>
+            in den Typen <typeparamref name="T"/> zu konvertieren.
+            </summary>
+            <typeparam name="T">Der Zieltyp.</typeparam>
+            <typeparam name="TC">Der zu verwendende <see cref="T:System.ComponentModel.TypeConverter"/>.</typeparam>
+            <param name="str">Dieser String.</param>
+            <param name="defaultValue">
+            Der Default-Wert, falls eine Konvertierung nicht möglich ist.
+            </param>
+            <returns>
+            Der konvertierte Wert, falls möglich, sonst <paramref name="defaultValue"/>.
+            </returns>
+        </member>
+        <member name="T:Svg2Xaml.SvgRectElement">
+            <summary>
+              Represents a &lt;rect&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgSVGElement">
+            <summary>
+              Represents an &lt;svg&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgSwitchElement">
+            <summary>
+              Represents a &lt;switch&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgSymbolElement">
+            <summary>
+              Represents a &lt;symbol&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgTextElement">
+            <summary>
+              Represents a &lt;text&gt; element.
+            </summary>
+        </member>
+        <member name="T:Svg2Xaml.SvgUseElement">
+            <summary>
+              Represents an &lt;use&gt; element.
+            </summary>
+        </member>
+    </members>
+</doc>

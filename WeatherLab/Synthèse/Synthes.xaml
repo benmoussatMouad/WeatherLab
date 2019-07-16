@@ -1,0 +1,149 @@
+﻿<Page x:Class="WeatherLab.Synthése.Synthese"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WeatherLab.Synthése"
+      
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Synthese">
+    <Page.Resources>
+        <local:WpConverter x:Key="WpConverter"/>
+        <local:FtConverter x:Key="size"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="Transparent"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="Transparent"/>
+        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+            <Border Name="Border" BorderBrush="black" BorderThickness="1"     CornerRadius="15" Background="{StaticResource DarkBlue}"     TextBlock.Foreground="#FFE0E0E0">
+                <Grid>
+                    <Rectangle Name="FocusCue" Visibility="Hidden" Stroke="Black"         StrokeThickness="1" StrokeDashArray="1 2" SnapsToDevicePixels="True"></Rectangle>
+                    <ContentPresenter Margin="{TemplateBinding Padding}"   HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}"      RecognizesAccessKey="True"></ContentPresenter>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+        <Style x:Key="ButtonErreur" TargetType="Button">
+            <Setter Property="Control.Template" Value="{StaticResource ButtonTemplate}"/>
+        </Style>
+    </Page.Resources>
+
+
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+
+            <TextBox x:Name="wilaya" 
+                     IsReadOnly="True" Width="auto"       
+                     Foreground="{StaticResource DarkBlue}"        
+                     FontWeight="Bold" FontSize="38"
+                     Margin="20,20, 10,0"
+                     TextChanged="Wilaya_TextChanged" Style="{DynamicResource TextBoxStyle1}"/>
+
+            <Button x:Name="ChangerWilaya" Width="18" Height="18" Margin="0,36,0,0" BorderThickness="0" BorderBrush="Transparent" Click="ChangerWilaya_Click" >
+                <Button.Background>
+                    <ImageBrush ImageSource="..\assets\icons\reload.png" AlignmentX="Center" AlignmentY="Bottom"/>
+                </Button.Background>
+            </Button>
+
+        </StackPanel>
+        <WrapPanel Grid.Row="1" x:Name="wp">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Width="auto">
+
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="{Binding Path=ActualWidth,ElementName=wp,Converter={StaticResource WpConverter}}" />
+                        <ColumnDefinition Width="{Binding Path=ActualWidth,ElementName=wp,Converter={StaticResource WpConverter}}"/>
+                        <ColumnDefinition Width="{Binding Path=ActualWidth,ElementName=wp,Converter={StaticResource WpConverter}}"/>
+                        <ColumnDefinition Width="{Binding Path=ActualWidth,ElementName=wp,Converter={StaticResource WpConverter}}"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="Climat" Grid.Column="1" Foreground="#556060" Height=" 50" Content="Climat"  Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Click="Climat_Click" FontSize="{Binding Path=ActualWidth,  ElementName=wp, Converter={StaticResource size} }"/>
+                    <Button x:Name="Graphe" Grid.Column="2" Foreground="#556060" Height=" 50"  Content="Graphe"  Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Click="Graphe_Click" FontSize="{Binding Path=ActualWidth,  ElementName=wp, Converter={StaticResource size} }" />
+                    <Button x:Name="Tableau" Grid.Column="3" Foreground="#556060" Height=" 50"  Content="Histogramme"  Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Click="Tableau_Click" FontSize="{Binding Path=ActualWidth,  ElementName=wp, Converter={StaticResource size} }"/>
+                    <Button x:Name="Comparaison" Grid.Column="4" Foreground="#556060" Height=" 50" Content="Comparaison" Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Click="Comparaison_Click" FontSize="{Binding Path=ActualWidth,  ElementName=wp, Converter={StaticResource size} }"/>
+
+                </Grid>
+            </StackPanel>
+        </WrapPanel>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Separator Grid.Column="1" BorderBrush="#556060" />
+        </Grid>
+         <Frame  Grid.Row="3" Name="contenu" NavigationUIVisibility="Hidden"/>
+        <Grid Grid.Row="3" Name="contenuErreur" Visibility="Collapsed">
+            <Grid.Background>
+                <SolidColorBrush Opacity="0.5" Color="#E8ECF1"/>
+            </Grid.Background>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                <Image Source="pack://application:,,,/assets/imgs/incorrecte.png" MaxHeight="130"
+                       Margin="20" HorizontalAlignment="Center"></Image>
+                <TextBlock Name="ErreurMessage" HorizontalAlignment="Center" FontFamily="17"
+                           Margin="10"></TextBlock>
+                <StackPanel Orientation="Horizontal" >
+                    <Button Margin="15" Name="ErreurReessayer"
+                            Style="{StaticResource ButtonErreur}"
+                            Height="30" Width="100">Réessayer</Button>
+                    <Button Margin="15" Name="ErreurAnnuler"
+                            Style="{StaticResource ButtonErreur}"
+                            Height="30" Width="100">Annuler</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>

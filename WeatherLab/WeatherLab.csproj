@@ -1,0 +1,480 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8A829DF-B5D5-4A84-8EF5-2C4A6B25D6B9}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WeatherLab</RootNamespace>
+    <AssemblyName>WeatherLab</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Excel, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Excel.1.0.0\lib\dotnet\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.8.0\lib\net461\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="Svg2Xaml, Version=0.3.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Svg2Xaml.0.3.0.5\lib\net40\Svg2Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BtnOfMap.xaml.cs">
+      <DependentUpon>BtnOfMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet.xaml.cs">
+      <DependentUpon>DataSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetSystem\ConfigHandler\ConfigParser.cs" />
+    <Compile Include="DataSetSystem\ConfigHandler\Wilaya.cs" />
+    <Compile Include="DataSetSystem\CsvParser.cs" />
+    <Compile Include="DataSetSystem\DataParser.cs" />
+    <Compile Include="DataSetSystem\DataSet.cs" />
+    <Compile Include="DataSetSystem\Donnee.cs" />
+    <Compile Include="DataSetSystem\Exceptions\AttributFormatException.cs" />
+    <Compile Include="DataSetSystem\Exceptions\IndexNotCompleteException.cs" />
+    <Compile Include="DataSetSystem\Exceptions\IndexNotFoundException.cs" />
+    <Compile Include="DataSetSystem\ManipDS.cs" />
+    <Compile Include="DataSetSystem\Observation.cs" />
+    <Compile Include="DataSetSystem\StructDS.cs" />
+    <Compile Include="MapPage.xaml.cs">
+      <DependentUpon>MapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageBoxWindow.xaml.cs">
+      <DependentUpon>MessageBoxWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PredictionPage.xaml.cs">
+      <DependentUpon>PredictionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PredictionSystem\Common\Cluster.cs" />
+    <Compile Include="PredictionSystem\Common\Duration.cs" />
+    <Compile Include="PredictionSystem\Common\Input.cs" />
+    <Compile Include="PredictionSystem\Common\InputKeys.cs" />
+    <Compile Include="PredictionSystem\Common\Observation.cs" />
+    <Compile Include="PredictionSystem\Common\Parameter.cs" />
+    <Compile Include="PredictionSystem\Common\ParamPrediction.cs" />
+    <Compile Include="PredictionSystem\Common\Prediction.cs" />
+    <Compile Include="PredictionSystem\Common\PredictionCouple.cs" />
+    <Compile Include="PredictionSystem\Common\Query.cs" />
+    <Compile Include="PredictionSystem\Common\Result.cs" />
+    <Compile Include="PredictionSystem\Common\WilayaClasses\Wilaya.cs" />
+    <Compile Include="PredictionSystem\Common\WilayaClasses\Wilayas.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\DailyMeteoSystem.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\FileImportHandler.cs" />
+    <Compile Include="PredictionSystem\DailyMeteo\InputHandler.cs" />
+    <Compile Include="PredictionSystem\Exceptions\IllegalKeyException.cs" />
+    <Compile Include="PredictionSystem\Exceptions\NullObservationException.cs" />
+    <Compile Include="PredictionSystem\PredictionSystem.cs" />
+    <Compile Include="PredictionSystem\Utils\Cluster.cs" />
+    <Compile Include="PredictionSystem\Utils\DataRetreiver.cs" />
+    <Compile Include="PredictionSystem\Utils\DecisionMaker.cs" />
+    <Compile Include="PredictionSystem\Utils\ParamPrediction.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionCouple.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionFunctions.cs" />
+    <Compile Include="PredictionSystem\Utils\PredictionManager.cs" />
+    <Compile Include="PredictionSystem\Utils\QueryManager.cs" />
+    <Compile Include="PredictionSystem\Utils\ResponseManager.cs" />
+    <Compile Include="PredictionSystem\Utils\ResultHandler.cs" />
+    <Compile Include="PredictionSystem\Utils\SaveManager.cs" />
+    <Compile Include="ProgressWindow.xaml.cs">
+      <DependentUpon>ProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StyleableWindow\ControlDoubleClickBehavior.cs" />
+    <Compile Include="StyleableWindow\ShowSystemMenuBehavior.cs" />
+    <Compile Include="StyleableWindow\SystemMenuManager.cs" />
+    <Compile Include="StyleableWindow\WindowCloseCommand.cs" />
+    <Compile Include="StyleableWindow\WindowDragBehavior.cs" />
+    <Compile Include="StyleableWindow\WindowMaximizeCommand.cs" />
+    <Compile Include="StyleableWindow\WindowMinimizeCommand.cs" />
+    <Compile Include="StyleableWindow\WindowResizeBehavior.cs" />
+    <Compile Include="Synthèse\ChangeWilaya.xaml.cs">
+      <DependentUpon>ChangeWilaya.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Synthèse\Climat.xaml.cs">
+      <DependentUpon>Climat.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Synthèse\Comparaison.xaml.cs">
+      <DependentUpon>Comparaison.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Synthèse\DataGraphClass.cs" />
+    <Compile Include="Synthèse\DateClass.cs" />
+    <Compile Include="Synthèse\ExcelClass.cs" />
+    <Compile Include="Synthèse\Graphe.xaml.cs">
+      <DependentUpon>Graphe.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Synthèse\ImportData.cs" />
+    <Compile Include="Synthèse\InputSynthese.cs" />
+    <Compile Include="Synthèse\InputSynthesePrime.cs" />
+    <Compile Include="Synthèse\NoWilayaNameException.cs" />
+    <Compile Include="Synthèse\Static.cs" />
+    <Compile Include="Synthèse\Synthes.xaml.cs" />
+    <Compile Include="Synthèse\Tableau.xaml.cs">
+      <DependentUpon>Tableau.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UIElements\common\ImagePaths.cs" />
+    <Compile Include="UIElements\common\StringFormater.cs" />
+    <Compile Include="UIElements\UIFactory.cs" />
+    <Page Include="ChangePassword.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Authentification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BtnOfMap.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Couleurs\mainblue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Couleurs\Name.MainBlue.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataSet.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Authentification.xaml.cs">
+      <DependentUpon>Authentification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="MapPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MessageBoxWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page1.xaml" />
+    <Page Include="PredictionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ProgressWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Synthèse\ChangeWilaya.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Synthèse\Climat.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Synthèse\Comparaison.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Synthèse\Graphe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Synthèse\Synthes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Synthèse\Tableau.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="DataSets\ADRAR.csv" />
+    <None Include="DataSets\ALGER.csv" />
+    <None Include="DataSets\ANNABA.csv" />
+    <None Include="DataSets\BAJAIA.csv" />
+    <None Include="DataSets\BATNA.csv" />
+    <None Include="DataSets\BECHAR.csv" />
+    <None Include="DataSets\BELABBES.csv" />
+    <None Include="DataSets\BICKRA.csv" />
+    <None Include="DataSets\BLIDA.csv" />
+    <None Include="DataSets\BNISAF.csv" />
+    <None Include="DataSets\BORDJ.csv" />
+    <None Include="DataSets\BOUIRA.csv" />
+    <None Include="DataSets\CHLEF.csv" />
+    <None Include="DataSets\CONSTANTINE.csv" />
+    <None Include="DataSets\DJELFA.csv" />
+    <None Include="DataSets\GHARDAIA.csv" />
+    <None Include="DataSets\GUELMA.csv" />
+    <None Include="DataSets\ILLIZI.csv" />
+    <None Include="DataSets\JIJEL.csv" />
+    <None Include="DataSets\KENCHLA.csv" />
+    <None Include="DataSets\LAGHOUAT.csv" />
+    <None Include="DataSets\MASCARA.csv" />
+    <None Include="DataSets\MEDEA.csv" />
+    <None Include="DataSets\MOSTA.csv" />
+    <None Include="DataSets\MSILA.csv" />
+    <None Include="DataSets\NAAMA.csv" />
+    <None Include="DataSets\ORAN.csv" />
+    <None Include="DataSets\OUARGLA.csv" />
+    <None Include="DataSets\OUMBOUAQI.csv" />
+    <None Include="DataSets\RELIZANE.csv" />
+    <None Include="DataSets\SAIDA.csv" />
+    <None Include="DataSets\SETIF.csv" />
+    <None Include="DataSets\SKIKDA.csv" />
+    <None Include="DataSets\SOUKAHRAS.csv" />
+    <None Include="DataSets\TAMENRASSET.csv" />
+    <None Include="DataSets\TEBESSA.csv" />
+    <None Include="DataSets\TIARET.csv" />
+    <None Include="DataSets\TINDOUF.csv" />
+    <None Include="DataSets\TIZI.csv" />
+    <None Include="DataSets\TLEMCEN.csv" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\Climat\1.jpg" />
+    <Resource Include="assets\Climat\10.jpg" />
+    <Resource Include="assets\Climat\11.jpg" />
+    <Resource Include="assets\Climat\12.jpg" />
+    <Resource Include="assets\Climat\13.jpg" />
+    <Resource Include="assets\Climat\14.jpg" />
+    <Resource Include="assets\Climat\15.jpg" />
+    <Resource Include="assets\Climat\16.jpg" />
+    <Resource Include="assets\Climat\17.jpg" />
+    <Resource Include="assets\Climat\18.jpg" />
+    <Resource Include="assets\Climat\19.jpg" />
+    <Resource Include="assets\Climat\2.jpg" />
+    <Resource Include="assets\Climat\20.jpg" />
+    <Resource Include="assets\Climat\21.jpg" />
+    <Resource Include="assets\Climat\22.jpg" />
+    <Resource Include="assets\Climat\23.jpg" />
+    <Resource Include="assets\Climat\24.jpg" />
+    <Resource Include="assets\Climat\25.jpg" />
+    <Resource Include="assets\Climat\26.jpg" />
+    <Resource Include="assets\Climat\27.jpg" />
+    <Resource Include="assets\Climat\28.jpg" />
+    <Resource Include="assets\Climat\29.jpg" />
+    <Resource Include="assets\Climat\3.jpg" />
+    <Resource Include="assets\Climat\30.jpg" />
+    <Resource Include="assets\Climat\31.jpg" />
+    <Resource Include="assets\Climat\32.jpg" />
+    <Resource Include="assets\Climat\33.jpg" />
+    <Resource Include="assets\Climat\34.jpg" />
+    <Resource Include="assets\Climat\35.jpg" />
+    <Resource Include="assets\Climat\36.jpg" />
+    <Resource Include="assets\Climat\37.jpg" />
+    <Resource Include="assets\Climat\38.jpg" />
+    <Resource Include="assets\Climat\39.jpg" />
+    <Resource Include="assets\Climat\4.jpg" />
+    <Resource Include="assets\Climat\40.jpg" />
+    <Resource Include="assets\Climat\41.jpg" />
+    <Resource Include="assets\Climat\42.jpg" />
+    <Resource Include="assets\Climat\43.jpg" />
+    <Resource Include="assets\Climat\44.jpg" />
+    <Resource Include="assets\Climat\45.jpg" />
+    <Resource Include="assets\Climat\46.jpg" />
+    <Resource Include="assets\Climat\47.jpg" />
+    <Resource Include="assets\Climat\48.jpg" />
+    <Resource Include="assets\Climat\5.jpg" />
+    <Resource Include="assets\Climat\6.jpg" />
+    <Resource Include="assets\Climat\7.jpg" />
+    <Resource Include="assets\Climat\8.jpg" />
+    <Resource Include="assets\Climat\9.jpg" />
+    <Resource Include="assets\Climat\Climat.txt" />
+    <Resource Include="assets\Climat\wilaya.txt" />
+    <Resource Include="assets\icons\cross.png" />
+    <Resource Include="assets\icons\white\cloud.png" />
+    <Resource Include="assets\icons\white\CloudQuestion.png" />
+    <Resource Include="assets\icons\white\directionWhite.png" />
+    <Resource Include="assets\icons\white\groundWhite.png" />
+    <Resource Include="assets\icons\white\heavyRain.png" />
+    <Resource Include="assets\icons\white\highTemp.png" />
+    <Resource Include="assets\icons\white\lowRainWhite.png" />
+    <Resource Include="assets\icons\white\lowtemp.png" />
+    <Resource Include="assets\icons\white\NA.png" />
+    <Resource Include="assets\icons\white\snow.png" />
+    <Resource Include="assets\icons\white\sunnyWhite.png" />
+    <Resource Include="assets\icons\white\sunnyWithCloudWhite.png" />
+    <Resource Include="assets\icons\white\wind.png" />
+    <Resource Include="assets\icons\white\windWhite.png" />
+    <Resource Include="assets\imgs\cloudy.jpg" />
+    <Resource Include="assets\imgs\cloudy.png" />
+    <Resource Include="assets\imgs\cloudy2.jpg" />
+    <Resource Include="assets\imgs\cloudy2.png" />
+    <Resource Include="assets\imgs\default.jpg" />
+    <Resource Include="assets\imgs\images.png" />
+    <Resource Include="assets\imgs\low_rain.jpg" />
+    <Resource Include="assets\imgs\low_rain.png" />
+    <Resource Include="assets\imgs\rain.jpg" />
+    <Resource Include="assets\imgs\rain.png" />
+    <Resource Include="assets\imgs\snowy1.jpg" />
+    <Resource Include="assets\imgs\snowy2.jpg" />
+    <Resource Include="assets\imgs\sunny.jpg" />
+    <Resource Include="assets\imgs\sunny.png" />
+    <Resource Include="assets\imgs\windy1.jpg" />
+    <Resource Include="assets\imgs\windy2.jpg" />
+    <Resource Include="assets\path1051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\logo.png" />
+    <Resource Include="assets\icons\white\drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\imgs\correcte.png" />
+    <Resource Include="assets\imgs\incorrecte.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\white\rain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\imgs\MainLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\white_cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\imgs\bestlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\imgs\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\imgs\windy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\icons\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

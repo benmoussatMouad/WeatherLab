@@ -1,0 +1,10 @@
+.idea/
+.idea\
+*.csv
+obj/
+.vs/
+Program.cs
+Weatheria/
+./.idea/
+.\.idea\
+WeatherLabSetup/

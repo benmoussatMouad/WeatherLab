@@ -1,0 +1,107 @@
+﻿<Page x:Class="WeatherLab.Synthése.Graphe"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WeatherLab.Synthése"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="Graphe">
+    <Page.Resources>
+        <local:FtConverter x:Key="size"/>
+    </Page.Resources>
+   <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <lvc:CartesianChart x:Name="Chart" Grid.Column="1" Grid.Row="1" Margin="35" Loaded="Chart_Loaded" >
+            <!--Bim Bam Boom-->
+            <lvc:CartesianChart.Series>
+                <lvc:LineSeries x:Name="X" Stroke="Chocolate"
+                                Fill="Transparent" LineSmoothness="1" PointGeometrySize="5" />
+            </lvc:CartesianChart.Series>
+
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis x:Name="axisX" IsMerged="True" >
+                    <lvc:Axis.Separator>
+                        <lvc:Separator StrokeThickness="1" StrokeDashArray="2" Width="1" >
+                            <lvc:Separator.Stroke>
+                                <SolidColorBrush Color="Transparent"/>
+                            </lvc:Separator.Stroke>
+                        </lvc:Separator>
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+            </lvc:CartesianChart.AxisX>
+
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis x:Name="Y" IsMerged="False" Foreground="Black">
+                    <lvc:Axis.Separator>
+                        <lvc:Separator StrokeThickness="1.5" StrokeDashArray="4">
+                            <lvc:Separator.Stroke>
+                                <SolidColorBrush Color="Transparent" />
+                            </lvc:Separator.Stroke>
+                        </lvc:Separator>
+                    </lvc:Axis.Separator>
+                </lvc:Axis>
+
+
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Center">
+            <Viewbox MaxHeight="30">
+                <Rectangle Height="21"/>
+            </Viewbox>
+                <!--Choix de la date-->
+           <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <!--Date de début-->
+                    <TextBlock Text="De :" Margin="15" VerticalAlignment="Center" Foreground="#556060"/>
+                    <DatePicker x:Name="date1" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date1_SelectedDateChanged" Foreground="#556060"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <!--Date de fin-->
+                    <TextBlock Text="À : " Margin="15" VerticalAlignment="Center" Foreground="#556060"/>
+                    <DatePicker x:Name="date2" Margin="10" VerticalAlignment="Center" SelectedDateChanged="Date2_SelectedDateChanged" Foreground="#556060" />
+                </StackPanel>
+            </StackPanel>
+            <Viewbox MaxHeight="50">
+                <Rectangle Height="21"/>
+            </Viewbox>
+            <StackPanel Orientation="Vertical">
+                <!--Choix des parametres-->
+                <TextBlock Text="Choix des paramétres :" FontSize="18" FontWeight ="DemiBold" Foreground="#556060" Margin="15,0,0,0"/>
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <CheckBox FontSize="16" x:Name="TemperatureCheckbox" Foreground="#556060" Content="Temperture" Checked="TemperatureCheckbox_Checked" Unchecked="TemperatureCheckbox_Unchecked_1" Background="#7B9EAE" />
+                    <CheckBox FontSize="16" x:Name="HumiditeCheckbox" Foreground="#556060" Content="Humidite" Checked="HumiditeCheckbox_Checked" Unchecked="HumiditeCheckbox_Unchecked" Background="#7B9EAE"/>
+                    <CheckBox FontSize="16" x:Name="VitesseVentCheckbox" Foreground="#556060" Content="Vitesse du vent" Checked="VitesseVentCheckbox_Checked" Unchecked="VitesseVentCheckbox_Unchecked" Background="#7B9EAE"/>
+                    <CheckBox FontSize="16" x:Name="DirectionVentCheckbox" Foreground="#556060" Content="Direction du vent" Checked="DirectionVentCheckbox_Checked" Unchecked="DirectionVentCheckbox_Unchecked" Background="#7B9EAE" />
+                    <CheckBox FontSize="16" x:Name="PrecipitationCheckbox" Foreground="#556060" Content="Précipitation" Checked="PrecipitationCheckbox_Checked" Unchecked="PrecipitationCheckbox_Unchecked" Background="#7B9EAE" />
+                    <CheckBox FontSize="16" x:Name="PressionCheckbox" Foreground="#556060" Content="Pression" Checked="PressionCheckbox_Checked" Unchecked="PressionCheckbox_Unchecked" Background="#7B9EAE"/>
+                </StackPanel>
+            </StackPanel>
+            <Viewbox MaxHeight="30">
+                <Rectangle Height="21"/>
+            </Viewbox>
+            <Border Margin="35" 
+                    CornerRadius="15" 
+                    Height="32" 
+                    Background="{StaticResource MainBlue}">
+                <Button 
+                        Background="Transparent" 
+                        Foreground="White" 
+                        FontSize="15" BorderThickness="0" Click="Button_Click"
+                        >Exporter les donnés</Button>
+            </Border>
+            <!--<Button Content="Exporter les donnés" Background="Transparent" BorderBrush="#222E31" BorderThickness="0" Margin="20" Click="Button_Click" Foreground="#556060" />
+        --></StackPanel>
+        <TextBlock x:Name="titre" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" FontWeight="SemiBold" Margin="10" Foreground="#556060" 
+                   FontSize="{Binding Path=ActualWidth,  ElementName=grid, Converter={StaticResource size} }" />
+    </Grid>
+</Page>

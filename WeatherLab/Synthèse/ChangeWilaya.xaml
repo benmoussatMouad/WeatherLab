@@ -1,0 +1,54 @@
+﻿<Window x:Class="WeatherLab.Synthèse.ChangeWilaya"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WeatherLab.Synthèse"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Height="190" Width="250"
+        AllowsTransparency="False"
+        Title="Choisir la wilaya" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" >
+
+    <Grid Background="{StaticResource BackgroundColor}">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2" Color="Gray"/>
+        </Grid.Effect>
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="auto"></RowDefinition>-->
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Margin="350,0,0,0" Background="White"
+                BorderThickness="0"
+                Foreground="Black"
+                Click="Button_Click"  >
+            <materialDesign:PackIcon Kind="Close" Background="White"/>
+        </Button>
+        <!--<TextBlock Foreground="Black" Margin="10" FontWeight="Regular" HorizontalAlignment="Center" > Veuillez choisir la wilaya  :</TextBlock>-->
+
+        <ComboBox x:Name="ListDeWilaya" Grid.Row="0" Margin="30" SelectedIndex="0">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Foreground="#556060" Text="{Binding wilaya}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Border       Width="130"
+                     Grid.Row="1"
+                    CornerRadius="15" 
+                    Height="32" 
+                    Background="{StaticResource MainBlue}">
+            <Button 
+                
+                        x:Name="ok"    
+                        Background="Transparent" 
+                        Foreground="White" 
+                        FontSize="15" BorderThickness="0" Click="Ok_Click"
+                        >Valider</Button>
+        </Border>
+    </Grid>
+</Window>

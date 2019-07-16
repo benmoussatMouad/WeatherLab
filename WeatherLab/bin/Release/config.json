@@ -1,0 +1,801 @@
+﻿{
+    "Adrar": {
+        "path": "",
+        "code": 1,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humiditéé": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilitéé": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RRR",
+            "Humidité": "U",
+            "Direction du vent": "DD",
+            "Vitesse du vent": "Ff",
+            "Nuage %": "N",
+            "Distance de visibilité": "VV",
+            "Etat du sol": "E'",
+            "Hauteur de neige": "sss"
+        }
+    },
+    "Chlef": {
+        "path": "",
+        "code": 2,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Laghouat": {
+        "path": "",
+        "code": 3,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Oum_El_Bouaghi": {
+        "path": "",
+        "code": 4,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Batna": {
+        "path": "",
+        "code": 5,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RRR",
+            "Direction du vent": "DD",
+            "Vitesse du vent": "Ff",
+            "Nuage %": "N",
+            "Distance de visibilité": "VV",
+            "Etat du sol": "E'",
+            "Hauteur de neige": "sss"
+        }
+    },
+    "Béjaia": {
+        "path": "",
+        "code": 6,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Biskra": {
+        "path": "",
+        "code": 7,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Béchar": {
+        "path": "",
+        "code": 8,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Blida": {
+        "path": "",
+        "code": 9,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Bouira": {
+        "path": "",
+        "code": 10,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tamanrasset": {
+        "path": "",
+        "code": 11,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tébessa": {
+        "path": "",
+        "code": 12,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RRR",
+            "Direction du vent": "DD",
+            "Vitesse du vent": "Ff",
+            "Nuage %": "N",
+            "Distance de visibilité": "VV",
+            "Etat du sol": "E'",
+            "Hauteur de neige": "sss"
+        }
+    },
+    "Tlemcen": {
+        "path": "",
+        "code": 13,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tiaret": {
+        "path": "",
+        "code": 14,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tizi_Ouzzou": {
+        "path": "",
+        "code": 15,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Alger": {
+        "path": "",
+        "code": 16,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RRR",
+            "Direction du vent": "DD",
+            "Vitesse du vent": "Ff",
+            "Nuage %": "N",
+            "Distance de visibilité": "VV",
+            "Etat du sol": "E'",
+            "Hauteur de neige": "sss"
+        }
+    },
+    "Djelfa": {
+        "path": "",
+        "code": 17,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Jijel": {
+        "path": "",
+        "code": 18,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Sétif": {
+        "path": "",
+        "code": 19,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Saida": {
+        "path": "",
+        "code": 20,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Skikda": {
+        "path": "",
+        "code": 21,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Sidi_Bel_Abbes": {
+        "path": "",
+        "code": 22,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Annaba": {
+        "path": "",
+        "code": 23,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Guelma": {
+        "path": "",
+        "code": 24,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Constantine": {
+        "path": "",
+        "code": 25,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Médéa": {
+        "path": "",
+        "code": 26,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Mostaganem": {
+        "path": "",
+        "code": 27,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Msila": {
+        "path": "",
+        "code": 28,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Mascara": {
+        "path": "",
+        "code": 29,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Ouargla": {
+        "path": "",
+        "code": 30,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Oran": {
+        "path": "",
+        "code": 31,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "El_Bayadh": {
+        "path": "",
+        "code": 32,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Illizi": {
+        "path": "",
+        "code": 33,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RRR",
+            "Direction du vent": "DD",
+            "Vitesse du vent": "Ff",
+            "Nuage %": "N",
+            "Distance de visibilité": "VV",
+            "Etat du sol": "E'",
+            "Hauteur de neige": "sss"
+        }
+    },
+    "Bordj_Bou_Arreridj": {
+        "path": "",
+        "code": 34,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Boumerdès": {
+        "path": "",
+        "code": 35,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "El_Taref": {
+        "path": "",
+        "code": 36,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tindouf": {
+        "path": "",
+        "code": 37,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tissemsilt": {
+        "path": "",
+        "code": 38,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "El_Oued": {
+        "path": "",
+        "code": 39,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Khenchela": {
+        "path": "",
+        "code": 40,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Souk_Ahras": {
+        "path": "",
+        "code": 41,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Tipaza": {
+        "path": "",
+        "code": 42,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Mila": {
+        "path": "",
+        "code": 43,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Ain_Defla": {
+        "path": "",
+        "code": 44,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Naama": {
+        "path": "",
+        "code": 45,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Ain_Temouchent": {
+        "path": "",
+        "code": 46,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Ghardaia": {
+        "path": "",
+        "code": 47,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    },
+    "Rélizane": {
+        "path": "",
+        "code": 48,
+        "attrs": {
+            "Température": "T",
+            "Pression": "P",
+            "Humidité": "U",
+            "direction du vent": "DD",
+            "vitesse du vent": "fF",
+            "nuage %": "N",
+            "distance de visibilité": "VV",
+            "etat du sol": "E'",
+            "hauteur de neige": "sss",
+            "Précipitation": "RR"
+        }
+    }
+}

@@ -1,0 +1,546 @@
+﻿<Window x:Class="WeatherLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:controlzex="urn:controlzex"
+        xmlns:Converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+        xmlns:local="clr-namespace:WeatherLab"
+        mc:Ignorable="d"
+        Title="WeatherLab"  MaxWidth="1920" MaxHeight="1080" MinHeight="600" MinWidth="1000"
+        WindowStartupLocation="CenterScreen"
+       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Icon="/assets/icons/icon.ico"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     >
+
+    <Window.Resources>
+
+        <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*" MinWidth="50" MaxWidth="80"></ColumnDefinition>
+            <ColumnDefinition Width="425*"></ColumnDefinition>
+            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Grid Name="BarGrid" Panel.ZIndex="2" Grid.Column="0" Background="{StaticResource BackgroundColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="6*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0"  
+                   Name="LogoImage"
+                   Source="pack://application:,,,/assets/imgs/bestLogo.png"
+                   Margin="5,0,5,0"/>
+            <Line Grid.Row="0"></Line>
+
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                <Viewbox MaxWidth="45" x:Name="vw">
+                    <Button x:Name="btn1"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                MaxWidth="30"
+                                MaxHeight="30"
+                                Background="White"
+                                BorderBrush="{StaticResource Gray}"
+                                Margin="0,5,0,5" Click="Btn1_Click" BorderThickness="0.5"
+                                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                        <!--<ContentControl Content="{StaticResource BlackCloud}"></ContentControl>-->
+
+                        <Image x:Name="cloudImage" Source="./assets/icons/cloud.png" Width="15" Height="15"/>
+                    </Button>
+                </Viewbox>
+
+                <Viewbox MaxHeight="15">
+                    <Rectangle Width="5" Height="5"></Rectangle>
+                </Viewbox>
+
+                <Viewbox MaxWidth="45">
+                    <Button x:Name="btn2"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                MaxWidth="30"
+                                MaxHeight="30"
+                                Background="White"
+                                BorderThickness=".5"
+                                BorderBrush="{StaticResource Gray}"
+                                Margin="0,5,0,5" Click="Btn2_Click"
+                            MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                        <ContentControl Content="{StaticResource BlackBarChart}"></ContentControl>
+                    </Button>
+                </Viewbox>
+
+                <Viewbox MaxHeight="15">
+                    <Rectangle Width="5" Height="5"></Rectangle>
+                </Viewbox>
+
+                <Viewbox MaxWidth="45">
+                    <Button x:Name="btn3"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                MaxWidth="30"
+                                MaxHeight="30"
+                                Background="White"
+                                BorderThickness=".5"
+                                BorderBrush="{StaticResource Gray}"
+                                Margin="0,5,0,5" Click="Btn3_Click"
+                                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                        <ContentControl Content="{StaticResource BlackMap}"></ContentControl>
+                    </Button>
+                </Viewbox>
+
+                <Viewbox MaxHeight="15">
+                    <Rectangle Width="5" Height="5"></Rectangle>
+                </Viewbox>
+
+                <Viewbox MaxWidth="45">
+                    <Button x:Name="btn4"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                MaxWidth="30"
+                                MaxHeight="30"
+                                Background="{StaticResource LockedBack}"
+                                BorderThickness=".5"
+                                BorderBrush="{StaticResource LockedFore}"
+                                Margin="0,5,0,5" Click="Btn4_Click"
+                                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+                        <ContentControl Content="{StaticResource LockedFileText}"></ContentControl>
+                    </Button>
+                </Viewbox>
+
+                <Viewbox MaxHeight="15">
+                    <Rectangle Width="5" Height="5"></Rectangle>
+                </Viewbox>
+
+                <Viewbox MaxWidth="45">
+
+                    <Button x:Name="btn5"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                MaxWidth="30"
+                                MaxHeight="30"
+                                Background="White"
+                                BorderThickness=".5"
+                                BorderBrush="{StaticResource Gray}"
+                                Margin="0,5,0,5" Click="Btn5_Click"
+                                MouseEnter="Btn_MouseEnter" MouseLeave="Btn_MouseLeave">
+
+                        <ContentControl Content="{StaticResource BlackLock}"></ContentControl>
+                    </Button>
+                </Viewbox>
+            </StackPanel>
+
+
+        </Grid>
+        <Grid Name="Principal" Background="white" Grid.Column="1" Panel.ZIndex="1" Grid.ColumnSpan="3">
+            <Frame Name="main" Navigated="Main_Navigated"  NavigationUIVisibility="Hidden" Panel.ZIndex="1">
+
+            </Frame>
+            <Grid Name="transparent" Panel.ZIndex="0" Background="Transparent"/>
+            <Grid ShowGridLines="False"  Panel.ZIndex="2" Visibility="Visible" Background="#FF7B9EAE" HorizontalAlignment="Left" Name="myGrid" MaxWidth="400" RenderTransformOrigin="0.5,0.5" Margin="0,0,0,0.333"  >
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform x:Name="flyoutTranslate" X="-800"/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0*" />
+                    <ColumnDefinition Width="79*"/>
+                    <ColumnDefinition Width="68*" />
+                    <ColumnDefinition Width="134*" />
+                    <ColumnDefinition Width="57*" />
+                    <ColumnDefinition Width="63*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="69*"/>
+                    <RowDefinition Height="25*"/>
+                    <RowDefinition Height="36*"/>
+                    <RowDefinition Height="17*"/>
+                    <RowDefinition Height="41*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="45*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="45*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="44*"/>
+                    <RowDefinition Height="7*"/>
+                    <RowDefinition Height="50*"/>
+                    <RowDefinition Height="43*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="0" Grid.ColumnSpan="3"  StretchDirection="Both" Margin="30,18,30,10" RenderTransformOrigin="0.662,-0.848" Grid.Column="2"    >
+                    <TextBlock TextAlignment="Center" Text="Prédiction"  Foreground="#FFFBF5F5" FontSize="6" Width="57" Height="10" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS"   />
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" StretchDirection="Both" Margin="30,18,30,5" RenderTransformOrigin="0.662,-0.848" Grid.Column="2"    >
+                    <TextBlock TextAlignment="Center" Text="__________"  Foreground="#FFFBF5F5" FontSize="9" Width="52" Height="14" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS"   />
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="2" VerticalAlignment="Bottom" Grid.Column="1"  StretchDirection="Both" Margin="35,0,24,0" RenderTransformOrigin="0.662,-0.848" Grid.ColumnSpan="2" Height="18"    >
+                    <TextBlock TextAlignment="Left" Text="Wilaya"  Foreground="#FFFBF5F5" FontSize="9" Width="47" Height="11" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS"   />
+                </Viewbox>
+                <Viewbox MaxHeight="150" MinWidth="40"  Grid.Row="2" Grid.Column="2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" StretchDirection="Both" Margin="35,0,0,0" Height="35"    >
+                    <ComboBox Name="comboWilaya" HorizontalContentAlignment="Center" Background="#FFFBFBFB" MinWidth="193" MinHeight="20" Width="181" Height="29" FontSize="14" FontFamily="Trebuchet MS" Foreground="Black"  >
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Adrar"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Chlef"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Laghouat"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Oum_El_Bouaghi"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Batna"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Béjaia"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Biskra"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Béchar"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Blida"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Bouira"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tamanrasset"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tébessa"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tlemcen"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tiaret"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tizi_Ouzzou"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Alger"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Djelfa"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Jijel"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Sétif"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Saida"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Skikda"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Sidi_Bel_Abbes"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Annaba"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Guelma"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Constantine"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Médéa"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Mostaganem"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Msila"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Mascara"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Ouargla"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Oran"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="El_Bayadh"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Illizi"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Bordj_Bou_Arreridj"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Boumerdès"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="El_Taref"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tindouf"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tissemsilt"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="El_Oued"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Khenchela"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Souk_Ahras"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Tipaza"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Mila"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Ain_Defla"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Naama"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Ain_Temouchent"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Ghardaia"  />
+                        <ComboBoxItem HorizontalAlignment="Center" Content="Rélizane"  />
+                    </ComboBox>
+
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="4" VerticalAlignment="Bottom" Grid.Column="1"  StretchDirection="Both" Margin="35,0,2,0" RenderTransformOrigin="0.662,-0.848" Grid.ColumnSpan="2" Height="18"    >
+                    <TextBlock TextAlignment="Left" Text="Météo Du Jour"  Foreground="#FFFBF5F5" FontSize="9"  RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Width="57"   />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="40" Grid.Row="5" Grid.Column="1"  StretchDirection="Both" Margin="28,0,19,0" Grid.ColumnSpan="2"    >
+                    <Grid x:Name="Layer_1" Width="72" Height="68" >
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path1" Fill="#ffffff">
+                            <Path.Data>
+                                <PathGeometry Figures="m 30.999 49.997 c -4.418 0 -7.998 -3.58 -7.998 -7.998 0 -2.025 0.758 -3.869 2 -5.279 V 20.002 c 0 -3.313 2.686 -5.999 5.998 -5.999 3.314 0 6 2.686 6 5.999 V 36.72 c 1.24 1.41 2 3.254 2 5.279 0 4.418 -3.582 7.998 -8 7.998 z m 2 -11.443 v -4.293 -10.26 -3.999 c 0 -1.104 -0.895 -2 -2 -2 -1.104 0 -2 0.896 -2 2 v 3.999 10.26 4.293 c -1.189 0.693 -1.998 1.969 -1.998 3.445 0 2.209 1.789 3.998 3.998 3.998 2.209 0 4 -1.789 4 -3.998 0 -1.476 -0.809 -2.752 -2 -3.445 z m -2 6.445 c -1.656 0 -2.998 -1.344 -2.998 -3 0 -1.305 0.836 -2.402 1.998 -2.816 v -5.184 h 2 v 5.184 c 1.162 0.414 2 1.512 2 2.816 0 1.656 -1.344 3 -3 3 z" FillRule="EvenOdd"/>
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="5"  Grid.Column="2"  StretchDirection="Both" RenderTransformOrigin="0.662,-0.848" Margin="0,10,0,0"      >
+                    <TextBlock TextAlignment="Center" Text="Temp"  Foreground="#FFFBF5F5" FontSize="16" Width="108" Height="28" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Name="Temp"/>
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="5"  Grid.Column="3"  StretchDirection="Both" Margin="20,5,20,0"     >
+                    <Slider x:Name="sliderTemp" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="23" Width="124" ValueChanged="SliderTemp_ValueChanged" Maximum="50"/>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="5" Margin="0,12,42,5" Grid.Column="4"  StretchDirection="Both" Grid.ColumnSpan="2"   >
+                    <TextBlock Text="0" Name="textblockTemp" Width="43"  Height="13" FontSize="6" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="5"  Grid.Column="5"  StretchDirection="Both" Margin="39,5,-18,2"     >
+                    <ToggleButton x:Name="switchTemp" Height="10406" Width="21334" BorderBrush="White" Foreground="#FFFFFDFD" Background="White" Checked="switchTemp_Checked" RenderTransformOrigin="1.403,0.455" IsChecked="True" Style="{DynamicResource ToggleButtonStyle1}" Unchecked="switchTemp_Unchecked" Margin="268,137,6,27" Grid.RowSpan="2">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.99"/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                </Viewbox>
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+                <Viewbox MaxHeight="120" MinWidth="40" Grid.Row="6" Grid.Column="1"  StretchDirection="Both" Margin="25,0,22,0" Grid.ColumnSpan="2"    >
+                    <Grid x:Name="Layer_2" Width="128" Height="91" >
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="39.455" Width="53" x:Name="path2" Fill="White" Stretch="Fill"  RenderTransformOrigin="0.155,0.646">
+                            <Path.Data>
+                                <PathGeometry Figures="M65.999 52L65.999 52h-3c-1.105 0-2-0.895-2-1.999s0.895-2 2-2h3  c1.104 0 2-0.896 2-1.999c0-1.105-0.896-2-2-2c-1.105 0-2-0.896-2-2s0.895-2 2-2c0.137 0 0.271 0.014 0.402 0.041  c3.121 0.211 5.596 2.783 5.596 5.959C71.997 49.314 69.312 52 65.999 52z M55.999 48.001h-2h-6.998H34.002  c-1.104 0-1.999 0.896-1.999 2S32.898 52 34.002 52h2h3.999h3h4h3h3.998h2c3.314 0 6 2.687 6 6c0 3.176-2.475 5.748-5.596 5.959  C56.272 63.986 56.138 64 55.999 64c-1.104 0-2-0.896-2-2c0-1.105 0.896-2 2-2c1.105 0 2-0.896 2-2s-0.895-2-2-2h-2h-3.998h-3h-4h-3  h-3.999h-2c-3.313 0-5.999-2.686-5.999-5.999c0-3.175 2.475-5.747 5.596-5.959c0.131-0.026 0.266-0.04 0.403-0.04l0 0h12.999h6.998  h2c1.105 0 2-0.896 2-2s-0.895-2-2-2c-1.104 0-2-0.895-2-2c0-1.104 0.896-2 2-2c0.139 0 0.273 0.015 0.404 0.041  c3.121 0.211 5.596 2.783 5.596 5.959C61.999 45.314 59.313 48.001 55.999 48.001z" FillRule="EvenOdd"/>
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="6"  Grid.Column="2"  StretchDirection="Both" RenderTransformOrigin="0.662,-0.848" Margin="0,10,0,0"   >
+                    <TextBlock TextAlignment="Center" Text="Vent"  Foreground="#FFFBF5F5" FontSize="16" Width="108" Height="26" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Name="Vent"/>
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="6"  Grid.Column="3"  StretchDirection="Both" Margin="20,5,20,0"    >
+                    <Slider x:Name="sliderVent" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="23" Width="124" ValueChanged="SliderVent_ValueChanged" Maximum="20"/>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="6" Margin="0,12,32,5" Grid.Column="4"  StretchDirection="Both" Grid.ColumnSpan="2"   >
+                    <TextBlock Text="0" Name="textblockVent" Width="43"  Height="14" FontSize="6" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="6"  Grid.Column="5"  StretchDirection="Both" Margin="39,5,-18,2"    >
+                    <ToggleButton x:Name="switchVent" Height="10406" Width="22042" BorderBrush="White" Foreground="#FFFFFDFD" Background="White" Checked="switchVent_Checked" RenderTransformOrigin="1.403,0.455" IsChecked="True" Style="{DynamicResource ToggleButtonStyle1}" Unchecked="switchVent_Unchecked" Margin="268,137,6,27" Grid.RowSpan="2">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.99"/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                </Viewbox>
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+                <Viewbox MaxHeight="120" MinWidth="40" Grid.Row="7" Grid.Column="1"  StretchDirection="Both" Margin="25,0,22,0" Grid.ColumnSpan="2"    >
+                    <Grid x:Name="Layer_3" Width="131" Height="73" >
+                        <Canvas Name="Layersds_1" Width="46" Height="48" Canvas.Left="-5" Canvas.Top="0">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="0"/>
+                            </Canvas.RenderTransform>
+                            <Canvas.Resources/>
+                            <!--<Canvas.Effect>
+                                <DropShadowEffect BlurRadius="8" Color="#FF9E9393"/>
+                            </Canvas.Effect>-->
+                            <!--Unknown tag: metadata-->
+                            <!--Unknown tag: sodipodi:namedview-->
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path3" Fill="#ffffff">
+                                <Path.Data>
+                                    <PathGeometry Figures="m 38.519271 33.279983 v -4.381 c 2.389 -1.383 4 -3.961 4 -6.92 0 -4.417 -3.582 -7.999 -8 -7.999 -1.6 0 -3.082 0.48 -4.333 1.291 -1.231 -5.317 -5.974 -9.29 -11.665 -9.29 -6.626 0 -11.9979998 5.372 -11.9979998 11.998 0 3.55 1.551 6.728 3.9999998 8.925 v 4.916 c -4.7769998 -2.768 -7.9999998 -7.922 -7.9999998 -13.841 0 -8.835 7.163 -15.997 15.9979998 -15.997 6.004 0 11.229 3.311 13.965 8.203 0.664 -0.113 1.338 -0.205 2.033 -0.205 6.627 0 11.999 5.372 11.999 11.999 0 5.223 -3.341 9.653 -7.999 11.301 z m -21.997 -11.3 c 1.104 0 1.999 0.896 1.999 2 v 15.998 c 0 1.105 -0.895 2 -1.999 2 -1.104 0 -2 -0.895 -2 -2 v -15.998 c 0 -1.104 0.896 -2 2 -2 z m 7.999 4 c 1.104 0 2 0.895 2 2 v 15.998 c 0 1.104 -0.896 2 -2 2 -1.104 0 -2 -0.896 -2 -2 v -15.998 c 0 -1.106 0.896 -2 2 -2 z m 7.999 -4 c 1.104 0 1.999 0.896 1.999 2 v 15.998 c 0 1.105 -0.895 2 -1.999 2 -1.104 0 -2 -0.895 -2 -2 v -15.998 c 0 -1.104 0.896 -2 2 -2 z" FillRule="EvenOdd"/>
+                                </Path.Data>
+                            </Path>
+                        </Canvas>
+                    </Grid>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="7"  Grid.Column="2"  StretchDirection="Both" RenderTransformOrigin="0.662,-0.848" Margin="0,10,0,0"    >
+                    <TextBlock TextAlignment="Center" Text="Précip."  Foreground="#FFFBF5F5" FontSize="16" Width="110" Height="26" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Name="Precip"/>
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="7"  Grid.Column="3"  StretchDirection="Both" Margin="20,0,20,0"    >
+                    <Slider x:Name="sliderPrecip" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="23" Width="124" ValueChanged="SliderPrecip_ValueChanged" Maximum="100"/>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="7" Margin="0,12,32,5" Grid.Column="4"  StretchDirection="Both" Grid.ColumnSpan="2"   >
+                    <TextBlock Text="0" Name="textblockPrecip" Width="43"  Height="14" FontSize="6" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="7"  Grid.Column="5"  StretchDirection="Both" Margin="39,5,-18,2"    >
+                    <ToggleButton x:Name="switchPrecip" Height="10406" Width="21012" BorderBrush="White" Foreground="#FFFFFDFD" Background="White" Checked="switchPrecip_Checked" RenderTransformOrigin="1.403,0.455" IsChecked="True" Style="{DynamicResource ToggleButtonStyle1}" Unchecked="switchPrecip_Unchecked" Margin="268,137,6,27" Grid.RowSpan="2">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.99"/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                </Viewbox>
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+                <Viewbox MaxHeight="120" MinWidth="40" Grid.Row="8" Grid.Column="1"  StretchDirection="Both" Margin="25,0,22,0" Grid.ColumnSpan="2"    >
+                    <Grid x:Name="Layer_4" Width="117" Height="82" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="97*"/>
+                        </Grid.ColumnDefinitions>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4" Fill="White" Height="40" Stretch="Fill" Width="40" Grid.Column="1" Margin="18.456,21,38.5,21" >
+                            <Path.Data>
+                                <PathGeometry Figures="M69.998 65.641H30.003c-1.104 0-2-0.896-2-2c0-1.105 0.896-2 2-2h39.995  c1.104 0 2 0.895 2 2C71.998 64.744 71.103 65.641 69.998 65.641z M69.998 57.641H30.003c-1.104 0-2-0.895-2-2c0-1.104 0.896-2 2-2  h39.995c1.104 0 2 0.896 2 2C71.998 56.746 71.103 57.641 69.998 57.641z M59.999 45.643c-1.601 0-3.083 0.48-4.333 1.291  c-1.232-5.317-5.974-9.291-11.665-9.291c-6.626 0-11.998 5.373-11.998 12h-4c0-8.835 7.163-15.999 15.998-15.999  c6.004 0 11.229 3.312 13.965 8.204c0.664-0.113 1.337-0.205 2.033-0.205c5.222 0 9.652 3.342 11.301 8h-4.381  C65.535 47.253 62.958 45.643 59.999 45.643z M30.003 69.639h39.995c1.104 0 2 0.896 2 2c0 1.105-0.896 2-2 2H30.003  c-1.104 0-2-0.895-2-2C28.003 70.535 28.898 69.639 30.003 69.639z" FillRule="EvenOdd"/>
+                            </Path.Data>
+                        </Path>
+                    </Grid>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="8"  Grid.Column="2"  StretchDirection="Both" RenderTransformOrigin="0.662,-0.848" Margin="0,10,0,0"   >
+                    <TextBlock TextAlignment="Center" Text="Nuage"  Foreground="#FFFBF5F5" FontSize="16" Width="110" Height="26" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Name="Nuage"/>
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="8" Grid.Column="3"  StretchDirection="Both" Margin="20,0,20,0"    >
+                    <Slider x:Name="sliderNuage" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="23" Width="124" ValueChanged="SliderNuage_ValueChanged" Maximum="100"/>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="8" Margin="0,12,32,5" Grid.Column="4"  StretchDirection="Both" Grid.ColumnSpan="2"   >
+                    <TextBlock Text="0" Name="textblockNuage" Width="43"  Height="14" FontSize="6" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="8"  Grid.Column="5"  StretchDirection="Both" Margin="39,5,-18,2"    >
+                    <ToggleButton x:Name="switchNuage" Height="10406" Width="21335" BorderBrush="White" Foreground="#FFFFFDFD" Background="White" Checked="switchNuage_Checked" RenderTransformOrigin="1.403,0.455" IsChecked="True" Style="{DynamicResource ToggleButtonStyle1}" Unchecked="switchNuage_Unchecked" Margin="268,137,6,27" Grid.RowSpan="2">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.99"/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                </Viewbox>
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+                <Viewbox MaxHeight="24" MinWidth="60" Grid.Row="9" Grid.Column="1"  StretchDirection="Both" Margin="25,0,22,0" Grid.ColumnSpan="2"    >
+                    <!--<Grid x:Name="Layer_5" Width="120" Height="120" >-->
+                        <!--<Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path5" Fill="White" Height="40" Stretch="Fill" Margin="39,12" >
+                            <Path.Data>
+                                <PathGeometry Figures="m 21 32.9985 c -7.732 0 -13.998 -6.268 -13.998 -13.999 0 -7.73 6.266 -13.998 13.998 -13.998 7.73 0 13.998 6.268 13.998 13.998 0 7.731 -6.268 13.999 -13.998 13.999 z m 0 -23.997 c -5.523 0 -10 4.477 -10 9.998 0 5.522 4.477 9.999 10 9.999 5.521 0 9.998 -4.477 9.998 -9.999 0 -5.521 -4.477 -9.998 -9.998 -9.998 z m 3.119 12.469 c -0.096 0.139 -0.193 0.259 -0.291 0.357 -0.1 0.099 -0.221 0.196 -0.359 0.293 -0.428 0.34 -0.906 0.579 -1.41 0.718 -2.6 1.062 -6.715 1.817 -6.715 1.817 0 0 0.754 -4.114 1.816 -6.715 0.139 -0.505 0.379 -0.982 0.719 -1.411 0.096 -0.139 0.193 -0.26 0.293 -0.358 0.098 -0.099 0.219 -0.196 0.357 -0.292 0.43 -0.34 0.906 -0.58 1.412 -0.719 2.6 -1.062 6.715 -1.817 6.715 -1.817 0 0 -0.756 4.115 -1.818 6.716 -0.139 0.504 -0.379 0.981 -0.719 1.411 z m -2.412 -3.178 c -0.391 -0.391 -1.023 -0.391 -1.414 0 -0.391 0.391 -0.391 1.023 0 1.414 0.391 0.391 1.023 0.391 1.414 0 0.391 -0.391 0.391 -1.023 0 -1.414 z" FillRule="EvenOdd"/>
+                            </Path.Data>
+                        </Path>-->
+                    <Canvas Name="svg8" Width="2.9104166" Height="3.5718752">
+                        <Canvas.RenderTransform>
+                            <TranslateTransform X="0" Y="0"/>
+                        </Canvas.RenderTransform>
+                        <Canvas.Resources/>
+                        <!--Unknown tag: sodipodi:namedview-->
+                        <!--Unknown tag: metadata-->
+                        <Canvas Name="layer1">
+                            <Canvas.RenderTransform>
+                                <TranslateTransform X="0" Y="-293.42805"/>
+                            </Canvas.RenderTransform>
+                            <Canvas Name="text827" Opacity="1">
+                                <Canvas.RenderTransform>
+                                    <MatrixTransform Matrix="0.13183952 0 0 0.13183952 -16.096783 286.93179"/>
+                                </Canvas.RenderTransform>
+                                <Canvas Name="g853">
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="goutte1" StrokeThickness="0.35" Stroke="#FF000000">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 3.7043462 291.59462 0.93531 0.9353 c 0.5162 0.51673 0.5162 1.35414 0 1.8706 -0.51673 0.51673 -1.35441 0.51673 -1.87061 0 -0.51673 -0.51646 -0.51673 -1.35387 0 -1.8706 z" FillRule="EvenOdd"/>
+                                        </Path.Data>
+                                        <Path.RenderTransform>
+                                            <MatrixTransform Matrix="7.5849792 0 0 7.5849792 105.08667 -2160.7825"/>
+                                        </Path.RenderTransform>
+                                    </Path>
+                                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="goutte2" Fill="#FF000000" StrokeThickness="0.5">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 132.71502 62.505491 q 0 0.408244 -0.093 0.738973 -0.0879 0.325561 -0.27905 0.558105 -0.19121 0.232544 -0.49093 0.361735 -0.29456 0.129191 -0.70797 0.129191 -0.43925 0 -0.7338 -0.129191 -0.29456 -0.129191 -0.47026 -0.356567 -0.1757 -0.232544 -0.24804 -0.552938 -0.0724 -0.320394 -0.0724 -0.707967 0 -0.387573 0.0879 -0.707967 0.0879 -0.325562 0.27388 -0.563273 0.19121 -0.237712 0.48576 -0.366903 0.29973 -0.134359 0.7183 -0.134359 0.45992 0 0.75448 0.139527 0.29972 0.139526 0.47026 0.377238 0.17053 0.237711 0.23771 0.552937 0.0672 0.315227 0.0672 0.661459 z m -1.0232 0.03617 q 0 -0.28422 -0.031 -0.480591 -0.031 -0.201538 -0.093 -0.325561 -0.062 -0.124023 -0.16536 -0.180868 -0.10336 -0.05684 -0.24288 -0.05684 -0.1292 0 -0.22738 0.05684 -0.0982 0.05168 -0.16536 0.1757 -0.062 0.118856 -0.093 0.315227 -0.031 0.191202 -0.031 0.470255 0 0.320394 0.0362 0.5271 0.0362 0.201538 0.10335 0.320394 0.0672 0.113688 0.16536 0.160196 0.0982 0.04134 0.22738 0.04134 0.14986 0 0.24805 -0.05684 0.0982 -0.06201 0.15503 -0.186036 0.062 -0.124023 0.0879 -0.315226 0.0258 -0.19637 0.0258 -0.465088 z m 5.05396 3.307292 q 0 0.408244 -0.093 0.738973 -0.0879 0.325561 -0.27905 0.558105 -0.1912 0.232544 -0.49093 0.361735 -0.29455 0.129191 -0.70797 0.129191 -0.43924 0 -0.7338 -0.129191 -0.29456 -0.129191 -0.47026 -0.356567 -0.1757 -0.232544 -0.24804 -0.552938 -0.0724 -0.320394 -0.0724 -0.707967 0 -0.387573 0.0879 -0.707967 0.0879 -0.325562 0.27388 -0.563273 0.19121 -0.237712 0.48576 -0.366903 0.29973 -0.134359 0.71831 -0.134359 0.45992 0 0.75447 0.139527 0.29973 0.139526 0.47026 0.377238 0.17053 0.237711 0.23771 0.552938 0.0672 0.315226 0.0672 0.661458 z m -1.0232 0.03617 q 0 -0.28422 -0.031 -0.48059 -0.031 -0.201539 -0.093 -0.325562 -0.062 -0.124023 -0.16536 -0.180867 -0.10336 -0.05684 -0.24288 -0.05684 -0.12919 0 -0.22738 0.05684 -0.0982 0.05168 -0.16536 0.175699 -0.062 0.118856 -0.093 0.315227 -0.031 0.191202 -0.031 0.470255 0 0.320394 0.0362 0.5271 0.0362 0.201538 0.10335 0.320394 0.0672 0.113688 0.16536 0.160197 0.0982 0.04134 0.22738 0.04134 0.14986 0 0.24805 -0.05684 0.0982 -0.06201 0.15503 -0.186036 0.062 -0.124023 0.0879 -0.315226 0.0258 -0.19637 0.0258 -0.465088 z m -4.41833 1.627808 q -0.0465 0.06201 -0.0982 0.09819 -0.0465 0.04134 -0.11885 0.06718 -0.0724 0.02584 -0.1757 0.03617 -0.10335 0.01034 -0.25322 0.01034 -0.17053 0 -0.27388 -0.02067 -0.0982 -0.02067 -0.14469 -0.06201 -0.0413 -0.04134 -0.0362 -0.09302 0.0103 -0.05684 0.0672 -0.134358 l 4.76457 -6.526734 q 0.0465 -0.05684 0.093 -0.09819 0.0465 -0.04134 0.11885 -0.06718 0.0775 -0.02584 0.18087 -0.03617 0.10335 -0.01034 0.25321 -0.01034 0.17054 0 0.26872 0.02067 0.10335 0.02067 0.1447 0.06201 0.0465 0.04134 0.0362 0.09819 -0.0103 0.05684 -0.062 0.129191 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Canvas>
+                        </Canvas>
+                    </Canvas>
+                    <!--</Grid>-->
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="9"  Grid.Column="2"  StretchDirection="Both" RenderTransformOrigin="0.662,-0.848" Margin="0,10,0,0"     >
+                    <TextBlock TextAlignment="Center" Text="Humid"  Foreground="#FFFBF5F5" FontSize="16" Width="113" Height="26" RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Name="Humid"/>
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="9"  Grid.Column="3"  StretchDirection="Both" Margin="20,0,20,0"    >
+                    <Slider x:Name="sliderHumid" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="23" Width="124" ValueChanged="SliderHumid_ValueChanged" Maximum="100"/>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="9" Margin="00,12,32,5" Grid.Column="4"  StretchDirection="Both" Grid.ColumnSpan="2"   >
+                    <TextBlock Text="0" Name="textblockHumid" Width="43"  Height="14" FontSize="6" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+                <Viewbox MaxHeight="120" MinWidth="20" Grid.Row="9"  Grid.Column="5"  StretchDirection="Both" Margin="39,5,-18,2"    >
+                    <ToggleButton x:Name="switchHumid" Height="10406" Width="20352" BorderBrush="White" Foreground="#FFFFFDFD" Background="White" Checked="switchHumid_Checked" RenderTransformOrigin="1.403,0.455" IsChecked="True" Style="{DynamicResource ToggleButtonStyle1}" Unchecked="switchHumid_Unchecked" Margin="268,137,6,27" Grid.RowSpan="2">
+                        <ToggleButton.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1" ScaleX="2"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform Y="0.99"/>
+                            </TransformGroup>
+                        </ToggleButton.RenderTransform>
+                    </ToggleButton>
+                </Viewbox>
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+
+                <Viewbox MaxHeight="30" MinWidth="50"  Grid.Row="14" Grid.ColumnSpan="4" Grid.Column="1"  StretchDirection="Both" Margin="55,0,0,0"   >
+                    <Button Name="buttonValider"  Width="682" Height="64" FontSize="30" Style="{DynamicResource ButtonStyle2}" Click="buttonValider_Click" BorderBrush="#FF7B9EAE" FontFamily="Trebuchet MS" Foreground="#ffffff">
+                        <Button.Background >
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFF3EF04" Offset="0.004"/>
+                                <GradientStop Color="#FFFFFF0D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,40,0" x:Name="ValidationIcon"
+            Kind="Check"
+            Height="50"
+            Width="50" Foreground="#DDFFFFFF" />
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Valider l'observation"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </Viewbox>
+
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+
+                <Viewbox MaxHeight="30" MinWidth="50"  Grid.Row="11" Grid.ColumnSpan="4" Grid.Column="1"  StretchDirection="Both" Margin="55,0,5,0"   >
+                    <Button Name="buttonEnrichir"  Width="682" Height="64" FontSize="30" Style="{DynamicResource ButtonStyle2}"  BorderBrush="#FF7B9EAE" FontFamily="Trebuchet MS" Foreground="#ffffff" Click="ButtonEnrichir_Click">
+                        <Button.Background >
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFF3EF04" Offset="0.004"/>
+                                <GradientStop Color="#FFFFFF0D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,0,55,0" x:Name="returnIcon"
+            Kind="Plus"
+            Height="50"
+            Width="50" Foreground="#DDFFFFFF" />
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Enrichir Dataset"/>
+                            </StackPanel>
+                        </Button.Content>
+
+                    </Button>
+                </Viewbox>
+
+                <!--____________________________________________________________________________________________________________________________________________________________________________________________-->
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="13" VerticalAlignment="Top" Grid.Column="1"  StretchDirection="Both" Margin="35,0,2,0" RenderTransformOrigin="0.662,-0.848" Grid.ColumnSpan="2" Height="18"    >
+                    <TextBlock TextAlignment="Left" Text="Délai"  Foreground="#FFFBF5F5" FontSize="9"  RenderTransformOrigin="0.548,-0.068" FontFamily="Trebuchet MS" Width="57"   />
+                </Viewbox>
+                <Viewbox MaxHeight="20" MinWidth="50" Grid.Row="13" Grid.ColumnSpan="4" Grid.Column="1"  StretchDirection="Both"  Margin="35,15,0,0"  >
+                    <Slider x:Name="sliderDelai" Style="{DynamicResource SliderStyle1}" Foreground="#FFFBFBFB" Height="24" Width="320" RenderTransformOrigin="0.5,0.5" ValueChanged="SliderDelai_ValueChanged" Maximum="15" Minimum="1" Value="1">
+                        <Slider.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Slider.RenderTransform>
+                    </Slider>
+                </Viewbox>
+                <Viewbox MaxHeight="180" MinWidth="40" Grid.Row="13" Margin="20,15,-19,0" Grid.Column="5"  StretchDirection="Both"   >
+                    <TextBlock Text="1 j" Name="textblockDelai" Width="43"  Height="22" FontSize="12" FontWeight="Bold"  Grid.Row="1" Foreground="White" />
+                </Viewbox>
+            </Grid>
+        </Grid>
+
+
+        <Popup x:Name="popup1" Placement="Left" AllowsTransparency="True"
+               PopupAnimation="Fade" Visibility="Hidden"
+               HorizontalOffset="-30">
+            <Border Name="popup1Template"  Width="200"  Background="{StaticResource BackgroundColor}" BorderThickness="0,0.2,0.6,1" BorderBrush="Black">
+
+                <Border.Clip>
+                    <CombinedGeometry GeometryCombineMode="Exclude">
+                        <CombinedGeometry.Geometry1>
+                            <RectangleGeometry Rect="0,0,300,200"/>
+                        </CombinedGeometry.Geometry1>
+                        <CombinedGeometry.Geometry2>
+                            <EllipseGeometry x:Name="popup1holl"/>
+
+                        </CombinedGeometry.Geometry2>
+                    </CombinedGeometry>
+                </Border.Clip>
+                <Label Name="popup1Content" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"></Label>
+            </Border>
+        </Popup>
+    </Grid>
+
+</Window>
