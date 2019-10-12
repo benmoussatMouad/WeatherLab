@@ -14,7 +14,7 @@ Made By :
   * Amine Raiah : ha_raiah@esi.dz
   * Abdennour Benantar : ha_benantar@esi.dz
   * Mouad Benmoussat : hm_benmoussat@esi.dz
-  * Nassim Meridja : hn_meridja@esi.dz
+  * Nassim Meridja : ha_meridja@esi.dz
   * Nassim Sehdi : hm_sehdi@esi.dz
 
 For an academic project. 
