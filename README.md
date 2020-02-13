@@ -11,7 +11,7 @@ Weather is aimed for Algerian weather studies only.
 
 ## Credits
 Made By :
-  * Amine Raiah : ha_raiah@esi.dz
+  * Amine Raiah : hm_raiah@esi.dz
   * Abdennour Benantar : ha_benantar@esi.dz
   * Mouad Benmoussat : hm_benmoussat@esi.dz
   * Nassim Meridja : ha_meridja@esi.dz
